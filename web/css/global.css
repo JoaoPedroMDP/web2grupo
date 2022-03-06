@@ -1,0 +1,25 @@
+/* Tudo que tiver em mais de uma página é bom colocar aqui */
+:root {
+  --green-pantone: #2fab44;
+  --red-salsa: #f8333c;
+  --kelly-green: #67c71e;
+  --medium-spring-green: #26eb85;
+  --aquamarine: #8df7c0;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap");
+
+.page-title {
+  font-size: 72px;
+  font-family: "Montserrat", sans-serif;
+  font-style: italic;
+}
+
+.page-title-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.roundy {
+  border-radius: 10px;
+}

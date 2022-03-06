@@ -1,0 +1,30 @@
+.report-box {
+  max-width: 30vw;
+  min-width: fit-content;
+  background-color: var(--aquamarine);
+  padding: 20px;
+}
+
+.box-header {
+  background-color: white;
+}
+
+.box-title {
+  margin: 20px;
+}
+
+#report-selection {
+  background-color: var(--aquamarine);
+  border: none !important;
+  border-radius: 10px;
+  color: black;
+  margin: 20px;
+}
+
+#select-action {
+  background-color: white;
+  border: none !important;
+  border-radius: 10px;
+  color: black;
+  margin: 20px;
+}
