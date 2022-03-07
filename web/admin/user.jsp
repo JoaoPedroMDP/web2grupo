@@ -118,7 +118,7 @@
                 <div class="form-group row">
                   <label for="inputLogin" class="col-sm-2 col-form-label">Login</label>
                   <div class="col-sm-10">
-                    <input type="login" class="form-control" placeholder="" id="inputLogin">
+                    <input type="text" class="form-control" placeholder="" id="inputLogin">
                   </div>
                 </div>
                 <div class="form-group row">
@@ -130,55 +130,55 @@
                 <div class="form-group row">
                     <label for="inputName" class="col-sm-2 col-form-label">Nome completo</label>
                     <div class="col-sm-10">
-                      <input type="password" class="form-control" placeholder="" id="inputName">
+                      <input type="text" class="form-control" placeholder="" id="inputName">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
                     <div class="col-sm-10">
-                      <input type="password" class="form-control" placeholder="" id="inputEmail">
+                      <input type="text" class="form-control" placeholder="" id="inputEmail">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="inputCpf" class="col-sm-2 col-form-label">Cpf</label>
                     <div class="col-sm-10">
-                      <input type="password" class="form-control" placeholder="" id="inputCpf">
+                      <input type="text" class="form-control" placeholder="" id="inputCpf">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="inputAddress" class="col-sm-2 col-form-label">Endereço</label>
                     <div class="col-sm-10">
-                      <input type="password" class="form-control" placeholder="" id="inputAddress">
+                      <input type="text" class="form-control" placeholder="" id="inputAddress">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="inputDistrict" class="col-sm-2 col-form-label">Bairro</label>
                     <div class="col-sm-10">
-                      <input type="password" class="form-control" placeholder="" id="inputDistrict">
+                      <input type="text" class="form-control" placeholder="" id="inputDistrict">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="inputCity" class="col-sm-2 col-form-label">Cidade</label>
                     <div class="col-sm-10">
-                      <input type="password" class="form-control" placeholder="" id="inputCity">
+                      <input type="text" class="form-control" placeholder="" id="inputCity">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="inputState" class="col-sm-2 col-form-label">Estado</label>
                     <div class="col-sm-10">
-                      <input type="password" class="form-control" placeholder="" id="inputState">
+                      <input type="text" class="form-control" placeholder="" id="inputState">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="inputTelephone" class="col-sm-2 col-form-label">Telefone</label>
                     <div class="col-sm-10">
-                      <input type="password" class="form-control" placeholder="" id="inputTelephone">
+                      <input type="text" class="form-control" placeholder="" id="inputTelephone">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="inputCep" class="col-sm-2 col-form-label">CEP</label>
                     <div class="col-sm-10">
-                      <input type="password" class="form-control" placeholder="" id="inputCep">
+                      <input type="text" class="form-control" placeholder="" id="inputCep">
                     </div>
                 </div>
                 <div class="d-flex justify-content-between">
