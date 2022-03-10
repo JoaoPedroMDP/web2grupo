@@ -1,7 +1,7 @@
 build
 .idea
 .vscode
-
+nbproject
 # Compiled class file
 *.class
 
