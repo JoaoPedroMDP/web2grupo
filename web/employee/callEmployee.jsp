@@ -43,12 +43,12 @@
           >
           <a
             class="list-group-item list-group-item-action list-group-item-light-personalized p-3 border-bottom"
-            href="category.jsp"
+            href="categoryList.jsp"
             >Categorias</a
           >
           <a
             class="list-group-item list-group-item-action list-group-item-light-personalized p-3 border-bottom"
-            href="product.jsp"
+            href="productList.jsp"
             >Produtos</a
           >
         </div>
