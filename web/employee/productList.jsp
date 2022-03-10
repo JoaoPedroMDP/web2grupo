@@ -37,22 +37,17 @@
         <div class="list-group list-group-flush">
           <a
             class="list-group-item list-group-item-action list-group-item-light-personalized p-3 border-bottom"
-            href="profile.jsp"
-            >Perfil</a
-          >
-          <a
-            class="list-group-item list-group-item-action list-group-item-light-personalized p-3 border-bottom"
             href="callListEmployee.jsp"
             >Atendimentos</a
           >
           <a
             class="list-group-item list-group-item-action list-group-item-light-personalized p-3 border-bottom"
-            href="category.jsp"
+            href="categoryList.jsp"
             >Categorias</a
           >
           <a
             class="list-group-item list-group-item-action list-group-item-light-personalized p-3 border-bottom"
-            href="product.jsp"
+            href="productList.jsp"
             >Produtos</a
           >
         </div>

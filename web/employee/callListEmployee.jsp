@@ -3,14 +3,20 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
     <meta name="description" content="" />
     <meta name="author" content="" />
     <title>Atendimentos</title>
 
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    />
 
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="../css/styles.css" rel="stylesheet" />
@@ -29,28 +35,65 @@
 
         <!-- INSIRA NA DIV ABAIXO OS ITENS DE MENU DA TELA -->
         <div class="list-group list-group-flush">
-          <a class="list-group-item list-group-item-action list-group-item-light-personalized p-3 border-bottom" href="profile.jsp">Perfil</a>
-          <a class="list-group-item list-group-item-action list-group-item-light-personalized p-3 border-bottom" href="callListEmployee.jsp">Atendimentos</a>
-          <a class="list-group-item list-group-item-action list-group-item-light-personalized p-3 border-bottom" href="category.jsp">Categorias</a>
-          <a class="list-group-item list-group-item-action list-group-item-light-personalized p-3 border-bottom" href="product.jsp">Produtos</a>
+          <a
+            class="list-group-item list-group-item-action list-group-item-light-personalized p-3 border-bottom"
+            href="callListEmployee.jsp"
+            >Atendimentos</a
+          >
+          <a
+            class="list-group-item list-group-item-action list-group-item-light-personalized p-3 border-bottom"
+            href="category.jsp"
+            >Categorias</a
+          >
+          <a
+            class="list-group-item list-group-item-action list-group-item-light-personalized p-3 border-bottom"
+            href="product.jsp"
+            >Produtos</a
+          >
         </div>
 
-        <div class="sidebar-footer sidebar-personalized" style="text-align: justify;">
-          <a class="list-group-item-light-personalized-2" href="#!">BEIBE - Beauty Embuste Indústria de Beleza e Estética Rua do Embuste, nº 1212 Curitiba-PR, CEP 12122-123 Tel.: (41) 91212-1212</a>
+        <div
+          class="sidebar-footer sidebar-personalized"
+          style="text-align: justify"
+        >
+          <a class="list-group-item-light-personalized-2" href="#!"
+            >BEIBE - Beauty Embuste Indústria de Beleza e Estética Rua do
+            Embuste, nº 1212 Curitiba-PR, CEP 12122-123 Tel.: (41) 91212-1212</a
+          >
         </div>
       </div>
 
       <!-- Page content wrapper-->
       <div id="page-content-wrapper">
         <!-- Top navigation-->
-        <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+        <nav
+          class="navbar navbar-expand-lg navbar-light bg-light border-bottom"
+        >
           <div class="container-fluid">
-            <button class="btn" id="sidebarToggle"><span class="material-icons">reorder</span></button>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <button class="btn" id="sidebarToggle">
+              <span class="material-icons">reorder</span>
+            </button>
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
-                <li class="nav-item"><a class="nav-link" href="#!">[User]</a></li>
-                <li class="nav-item"><a class="nav-link" href="#!"><span class="material-icons">logout</span></a></li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#!">[User]</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#!"
+                    ><span class="material-icons">logout</span></a
+                  >
+                </li>
               </ul>
             </div>
           </div>
@@ -60,7 +103,7 @@
         <div class="container-fluid">
           <div class="row">
             <div class="col-10 offset-1">
-              <h1 style="text-align:center;margin:20px;">Atendimentos</h1>
+              <h1 style="text-align: center; margin: 20px">Atendimentos</h1>
               <table class="table table-striped table-bordered">
                 <thead class="table-light text-center">
                   <tr>
@@ -80,8 +123,16 @@
                     <td class="text-center">Pendente</td>
                     <td class="text-center">- / -</td>
                     <td class="text-center">
-                      <a href="call.jsp" class="btn btn-primary btn-sm"><span class="material-icons m-sm-0">edit</span></a>
-                      <a href="call.jsp" class="btn btn-danger btn-sm"><span class="material-icons m-sm-0">delete</span></a>
+                      <a
+                        href="../customer/call.jsp"
+                        class="btn btn-primary btn-sm"
+                        ><span class="material-icons m-sm-0">edit</span></a
+                      >
+                      <a
+                        href="../customer/call.jsp"
+                        class="btn btn-danger btn-sm"
+                        ><span class="material-icons m-sm-0">delete</span></a
+                      >
                     </td>
                   </tr>
                   <tr class="align-text-bottom">
@@ -91,8 +142,16 @@
                     <td class="text-center">Aberto</td>
                     <td class="text-center">- / -</td>
                     <td class="text-center">
-                      <a href="call.jsp" class="btn btn-primary btn-sm"><span class="material-icons m-sm-0">edit</span></a>
-                      <a href="call.jsp" class="btn btn-danger btn-sm"><span class="material-icons m-sm-0">delete</span></a>
+                      <a
+                        href="../customer/call.jsp"
+                        class="btn btn-primary btn-sm"
+                        ><span class="material-icons m-sm-0">edit</span></a
+                      >
+                      <a
+                        href="../customer/call.jsp"
+                        class="btn btn-danger btn-sm"
+                        ><span class="material-icons m-sm-0">delete</span></a
+                      >
                     </td>
                   </tr>
                   <tr class="align-text-bottom">
@@ -102,7 +161,13 @@
                     <td class="text-center">Resolvido</td>
                     <td class="text-center">9,5/10</td>
                     <td class="col-1 text-center">
-                      <a href="call.jsp" class="btn btn-secondary btn-sm"><span class="material-icons m-sm-0">visibility</span></a>
+                      <a
+                        href="../customer/call.jsp"
+                        class="btn btn-secondary btn-sm"
+                        ><span class="material-icons m-sm-0"
+                          >visibility</span
+                        ></a
+                      >
                       <!--<button type="button" class="btn btn-primary btn-sm"><span class="material-icons m-sm-0">edit</span></button>
                       <button type="button" class="btn btn-danger btn-sm"><span class="material-icons m-sm-0">delete</span></button>-->
                     </td>
@@ -114,8 +179,16 @@
                     <td class="text-center">Aberto</td>
                     <td class="text-center">- / -</td>
                     <td class="col-1 text-center">
-                      <a href="call.jsp" class="btn btn-primary btn-sm"><span class="material-icons m-sm-0">edit</span></a>
-                      <a href="call.jsp" class="btn btn-danger btn-sm"><span class="material-icons m-sm-0">delete</span></a>
+                      <a
+                        href="../customer/call.jsp"
+                        class="btn btn-primary btn-sm"
+                        ><span class="material-icons m-sm-0">edit</span></a
+                      >
+                      <a
+                        href="../customer/call.jsp"
+                        class="btn btn-danger btn-sm"
+                        ><span class="material-icons m-sm-0">delete</span></a
+                      >
                     </td>
                   </tr>
                   <tr class="align-text-bottom">
@@ -125,8 +198,16 @@
                     <td class="text-center">Pendente</td>
                     <td class="text-center">- / -</td>
                     <td class="col-1 text-center">
-                      <a href="call.jsp" class="btn btn-primary btn-sm"><span class="material-icons m-sm-0">edit</span></a>
-                      <a href="call.jsp" class="btn btn-danger btn-sm"><span class="material-icons m-sm-0">delete</span></a>
+                      <a
+                        href="../customer/call.jsp"
+                        class="btn btn-primary btn-sm"
+                        ><span class="material-icons m-sm-0">edit</span></a
+                      >
+                      <a
+                        href="../customer/call.jsp"
+                        class="btn btn-danger btn-sm"
+                        ><span class="material-icons m-sm-0">delete</span></a
+                      >
                     </td>
                   </tr>
                 </tbody>
