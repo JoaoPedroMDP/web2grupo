@@ -4561,8 +4561,8 @@ textarea.form-control-lg {
 .card-header {
   padding: 0.5rem 1rem;
   margin-bottom: 0;
-  background-color: rgba(38, 235, 133, 1.0);/*rgba(0,0,0,0.03)*/
-  border-bottom: 1px solid rgba(0, 0, 0, 0.125);/*rgba(0,0,0,0.125)*/
+  background-color: rgba(0, 0, 0, 0.03);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
 }
 .card-header:first-child {
   border-radius: calc(0.25rem - 1px) calc(0.25rem - 1px) 0 0;
@@ -11379,3 +11379,4 @@ form input[type=text], form input[type=password]{
 #back-green {
   color: #000;
 }
+
