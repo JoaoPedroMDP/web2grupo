@@ -12,7 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Categoria</title>
+    <title>Produtos</title>
 
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
@@ -80,7 +80,7 @@
           </div>
           <!-- Conteúdo da Página -->
         <div class="page-title-wrapper">
-          <h1 class="page-title">ADICIONAR CATEGORIA</h1>
+          <h1 class="page-title">EDITAR PRODUTO</h1>
         </div>
           <div class="container-fluid d-flex justify-content-center">
               <div class="report-box roundy d-flex flex-column align-items-center">
@@ -88,7 +88,11 @@
                         <tbody>
                         <form action="#!"method="POST">
                             <tr><td><h3>Nome:</h3></td>
-                            <td><input class="input-group-text alert-light" placeholder="Praia" type="text" /></td>
+                            <td><input class="input-group-text alert-light" placeholder="Shampoo Embuste" type="text" /></td>
+                            <tr><td><h3>Categoria:</h3></td>
+                            <td><input class="input-group-text alert-light" placeholder="Shampoo" type="text" /></td>
+                            <tr><td><h3>Peso: </h3></td>
+                            <td><input class="input-group-text alert-light"placeholder="300 g" type="text" /></td>
                             <tr><td><h3>Descrição: </h3></td><tr>
                             <tr>
                                 <td colspan="3"><textarea rows="6" cols="45" class="input-group-text alert-light"type="text" >Lorem ipsum dolor sit amet,consectetur </textarea></td>

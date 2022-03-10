@@ -80,7 +80,7 @@
           </div>
           <!-- Conteúdo da Página -->
         <div class="page-title-wrapper">
-          <h1 class="page-title">ADICIONAR CATEGORIA</h1>
+          <h1 class="page-title">EDITAR CATEGORIA</h1>
         </div>
           <div class="container-fluid d-flex justify-content-center">
               <div class="report-box roundy d-flex flex-column align-items-center">
