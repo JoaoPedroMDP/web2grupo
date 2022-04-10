@@ -12,13 +12,27 @@ import Exceptions.DAOException;
 import Exceptions.NotFound;
 import Interfaces.Mappable;
 import Interfaces.Bean;
+import Interfaces.DAO;
 import Utils.QueryFactory;
 
-public abstract class BaseDAO <T extends Mappable & Bean> extends QueryFactory{
+public abstract class BaseDAO <T extends Mappable & Bean> extends QueryFactory implements DAO<T>{
     protected Connection con;
     protected String tableName;
     protected ArrayList<String> columns;
     protected String subject;
+
+    public void finalize(){
+        this.closeConnection();
+    }
+
+    @Override
+    public void closeConnection() {
+        try {
+            this.con.close();
+        } catch (SQLException e) {
+            System.out.println("Erro ao fechar conexão (BaseDAO): " + e.getMessage());
+        }
+    }
 
     public final T get(int id) throws DAOException, NotFound {
         LinkedHashMap<String, String> filters = new LinkedHashMap<String, String>();
@@ -133,7 +147,16 @@ public abstract class BaseDAO <T extends Mappable & Bean> extends QueryFactory{
         }
     }
 
+    protected int configureStatement(PreparedStatement stmt, int nextReplacement, LinkedHashMap<String, String> data) throws SQLException {
+        Object keys[] = data.keySet().toArray();
+        for( int i = 0; i < data.size(); i++){
+            stmt.setString(nextReplacement, data.get(keys[i]));
+            nextReplacement++;
+        }
+        
+        return nextReplacement;
+    }
+
     protected abstract void configureStatement(PreparedStatement stmt, T t) throws SQLException;
-    protected abstract int configureStatement(PreparedStatement stmt, int nextReplacement,LinkedHashMap<String, String> data) throws SQLException;
     protected abstract T fillFromResultSet(ResultSet rs) throws SQLException;
 }

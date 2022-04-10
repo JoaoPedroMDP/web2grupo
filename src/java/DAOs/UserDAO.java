@@ -5,13 +5,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 
 import Beans.User;
 import Exceptions.DAOException;
-import Interfaces.DAO;
 
-public class UserDAO extends BaseDAO<User> implements DAO<User> {
+public class UserDAO extends BaseDAO<User> {
 
     public UserDAO(Connection con) throws DAOException {
         if(con == null){
@@ -31,15 +29,6 @@ public class UserDAO extends BaseDAO<User> implements DAO<User> {
             add("role");
             add("address_id");
         }};
-    }
-
-    @Override
-    public void closeConnection() {
-        try {
-            this.con.close();
-        } catch (SQLException e) {
-            System.out.println("Erro ao fechar conexão (UserDAO): " + e.getMessage());
-        }
     }
 
     @Override
@@ -73,17 +62,5 @@ public class UserDAO extends BaseDAO<User> implements DAO<User> {
         user.setAddress_id(rs.getString("address_id"));
 
         return user;
-    }
-
-    @Override
-    protected int configureStatement(PreparedStatement stmt, int nextReplacement, LinkedHashMap<String, String> data) throws SQLException {
-        Object keys[] = data.keySet().toArray();
-        System.out.println(data.size());
-        for( int i = 0; i < data.size(); i++){
-            stmt.setString(nextReplacement, data.get(keys[i]));
-            nextReplacement++;
-        }
-        
-        return nextReplacement;
     }
 }
