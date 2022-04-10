@@ -2,9 +2,10 @@ package Beans;
 
 import java.util.LinkedHashMap;
 
+import Interfaces.Bean;
 import Interfaces.Mappable;
 
-public class User implements Mappable{
+public class User implements Mappable, Bean{
     private int id;
     private String name;
     private String surname;
@@ -52,19 +53,6 @@ public class User implements Mappable{
     }
 
     public LinkedHashMap<String, String> toMap() {
-        LinkedHashMap<String, String> data = new LinkedHashMap<String, String>();
-        data.put("name", this.getName());
-        data.put("surname", this.getSurname());
-        data.put("email", this.getEmail());
-        data.put("password", this.getPassword());
-        data.put("cpf", this.getCpf());
-        data.put("phone", this.getPhone());
-        data.put("role", this.getRole());
-        data.put("address_id", String.valueOf(this.getAddress_id()));
-        return data;
-    }
-
-    public LinkedHashMap<String, String> toMap(Boolean allString) {
         LinkedHashMap<String, String> data = new LinkedHashMap<String, String>();
         data.put("name", this.getName());
         data.put("surname", this.getSurname());

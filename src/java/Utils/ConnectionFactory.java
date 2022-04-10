@@ -25,6 +25,8 @@ public class ConnectionFactory implements AutoCloseable {
                 throw new DAOException("Erro ao carregar o driver", e);
             } catch (SQLException e) {
                 throw new DAOException("Erro ao conectar no Banco de Dados: " + e.getMessage(), e);
+            } catch (Exception e) {
+                throw new DAOException("Erro inesperado ao conectar no Banco de Dados: " + e.getMessage(), e);
             }
         }
 

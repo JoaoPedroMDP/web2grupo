@@ -31,7 +31,7 @@ public class TestServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, Exception {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             out.println("<!DOCTYPE html>");
@@ -43,11 +43,13 @@ public class TestServlet extends HttpServlet {
             out.println("<h1>Servlet TestServlet at " + request.getContextPath() + "</h1>");
             try{
                 TestUser test = new TestUser();
-                // test.testInsertion();
+                test.testInsertion();
                 test.testGet();
                 test.testIndex();
+                // test.testDeletion();
             }catch(Exception e){
-                System.out.println(e.getMessage());
+                out.println("<p>Erro: " + e.getMessage() + "</p>");
+                throw e;
             }
             out.println("</body>");
             out.println("</html>");

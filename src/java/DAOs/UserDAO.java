@@ -16,10 +16,6 @@ import Interfaces.DAO;
 
 public class UserDAO extends BaseDAO<User> implements DAO<User> {
 
-    private Connection con;
-    private final String tableName;
-    private ArrayList<String> columns;
-
     public UserDAO(Connection con) throws DAOException {
         if(con == null){
             throw new DAOException("Conexão nula ao criar UserDAO");
@@ -27,6 +23,7 @@ public class UserDAO extends BaseDAO<User> implements DAO<User> {
         
         this.con = con;
         this.tableName = "users";
+        this.subject = "usuário";
         this.columns = new ArrayList<String>(){{
             add("name");
             add("surname");
@@ -37,58 +34,6 @@ public class UserDAO extends BaseDAO<User> implements DAO<User> {
             add("role");
             add("address_id");
         }};
-    }
-
-    @Override
-    public User get(int id) throws DAOException, NotFound {
-        LinkedHashMap<String, String> filters = new LinkedHashMap<String, String>();
-        filters.put("id", String.valueOf(id));
-        String query = mount_select(tableName, filters);
-        try(PreparedStatement stmt = con.prepareStatement(query)){
-            stmt.setInt(1, id);
-            ResultSet rs = stmt.executeQuery();
-
-            if(rs.next()){
-                User user = new User();
-                user = this.fillFromResultSet(rs, user);
-                return user;
-            }else{
-                throw new UserNotFound();
-            }
-        }catch(SQLException e){
-            throw new DAOException("Erro ao buscar usuário " + id +": " + e.getMessage(), e);
-        }
-    }
-
-    @Override
-    public List<User> getAll() throws DAOException {
-        List<User> results = new ArrayList<>();
-        String query = mount_select(tableName);
-        try(PreparedStatement stmt = con.prepareStatement(query)){
-            ResultSet rs = stmt.executeQuery();
-
-            while(rs.next()){
-                User user = new User();
-                user = this.fillFromResultSet(rs, user);
-                results.add(user);
-            }
-        }catch(SQLException e){
-            throw new DAOException("Erro ao buscar todos os usuários: "+ e.getMessage(), e);
-        }
-
-        return results;
-    }
-
-    @Override
-    public void insert(User user) throws DAOException {
-        String query = mount_insert(tableName, columns);
-
-        try (PreparedStatement stmt = con.prepareStatement(query)){
-            this.configureStatement(stmt, user);
-            stmt.executeUpdate();
-        }catch(SQLException e){
-            throw new DAOException("Erro ao inserir usuário: " + e.getMessage(), e);
-        }
     }
 
     @Override
@@ -155,7 +100,9 @@ public class UserDAO extends BaseDAO<User> implements DAO<User> {
     }
 
     @Override
-    protected User fillFromResultSet(ResultSet rs,  User user) throws SQLException {
+    protected User fillFromResultSet(ResultSet rs)
+     throws SQLException {
+         User user = new User();
         user.setName(rs.getString("name"));
         user.setSurname(rs.getString("surname"));
         user.setEmail(rs.getString("email"));
