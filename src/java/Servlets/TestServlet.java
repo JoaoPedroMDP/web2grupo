@@ -46,7 +46,8 @@ public class TestServlet extends HttpServlet {
                 test.testInsertion();
                 test.testGet();
                 test.testIndex();
-                // test.testDeletion();
+                test.testDeletion();
+                test.testUpdate();
             }catch(Exception e){
                 out.println("<p>Erro: " + e.getMessage() + "</p>");
                 throw e;
