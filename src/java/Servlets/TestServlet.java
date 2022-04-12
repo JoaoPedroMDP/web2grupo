@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import Tests.TestAddress;
 import Tests.TestUser;
 
 /**
@@ -20,6 +21,34 @@ import Tests.TestUser;
  */
 @WebServlet(name = "TestServlet", urlPatterns = {"/TestServlet"})
 public class TestServlet extends HttpServlet {
+
+    private void testUser(PrintWriter out){
+        try{
+            TestUser test = new TestUser();
+            test.testInsertion();
+            test.testGet();
+            test.testIndex();
+            test.testDeletion();
+            test.testUpdate();
+        }catch(Exception e){
+            out.println("<p>Erro USER: " + e.getMessage() + "</p>");
+            throw e;
+        }
+    }
+
+    private void testAddress(PrintWriter out){
+        try{
+            TestAddress test = new TestAddress();
+            test.testInsertion();
+            test.testGet();
+            test.testIndex();
+            test.testDeletion();
+            test.testUpdate();
+        }catch(Exception e){
+            out.println("<p>Erro ADDRESS: " + e.getMessage() + "</p>");
+            throw e;
+        }
+    }
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,17 +70,8 @@ public class TestServlet extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet TestServlet at " + request.getContextPath() + "</h1>");
-            try{
-                TestUser test = new TestUser();
-                test.testInsertion();
-                test.testGet();
-                test.testIndex();
-                test.testDeletion();
-                test.testUpdate();
-            }catch(Exception e){
-                out.println("<p>Erro: " + e.getMessage() + "</p>");
-                throw e;
-            }
+            this.testUser(out);
+            this.testAddress(out);
             out.println("</body>");
             out.println("</html>");
         }

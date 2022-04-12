@@ -101,7 +101,6 @@ public abstract class BaseDAO <T extends Mappable & Bean> extends QueryFactory i
     public void update(LinkedHashMap<String, String> filters, LinkedHashMap<String, String> newData) throws DAOException {
         String query = mount_update(tableName, newData, filters);
         try (PreparedStatement stmt = con.prepareStatement(query)){
-            System.out.println(query);
             int nextReplacement = 1;
             nextReplacement = this.configureStatement(stmt, nextReplacement, newData);
             nextReplacement = this.configureStatement(stmt, nextReplacement, filters);
