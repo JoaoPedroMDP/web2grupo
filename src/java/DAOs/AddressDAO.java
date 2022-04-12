@@ -17,6 +17,7 @@ public class AddressDAO extends BaseDAO<Address>{
         
         this.con = con;
         this.tableName = "addresses";
+        this.subject = "endereço";
         this.columns = new ArrayList<String>(){{
             add("street");
             add("number");

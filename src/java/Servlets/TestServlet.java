@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import Tests.TestAddress;
+import Tests.TestCategory;
 import Tests.TestUser;
 
 /**
@@ -22,7 +23,7 @@ import Tests.TestUser;
 @WebServlet(name = "TestServlet", urlPatterns = {"/TestServlet"})
 public class TestServlet extends HttpServlet {
 
-    private void testUser(PrintWriter out){
+    private void testUser(PrintWriter out) throws Exception{
         try{
             TestUser test = new TestUser();
             test.testInsertion();
@@ -36,7 +37,7 @@ public class TestServlet extends HttpServlet {
         }
     }
 
-    private void testAddress(PrintWriter out){
+    private void testAddress(PrintWriter out) throws Exception{
         try{
             TestAddress test = new TestAddress();
             test.testInsertion();
@@ -46,6 +47,20 @@ public class TestServlet extends HttpServlet {
             test.testUpdate();
         }catch(Exception e){
             out.println("<p>Erro ADDRESS: " + e.getMessage() + "</p>");
+            throw e;
+        }
+    }
+
+    private void testCategory(PrintWriter out) throws Exception{
+        try{
+            TestCategory test = new TestCategory();
+            test.testInsertion();
+            test.testGet();
+            test.testIndex();
+            test.testDeletion();
+            test.testUpdate();
+        }catch(Exception e){
+            out.println("<p>Erro CATEGORY: " + e.getMessage() + "</p>");
             throw e;
         }
     }
@@ -70,8 +85,11 @@ public class TestServlet extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet TestServlet at " + request.getContextPath() + "</h1>");
+
             this.testUser(out);
             this.testAddress(out);
+            this.testCategory(out);
+            
             out.println("</body>");
             out.println("</html>");
         }
