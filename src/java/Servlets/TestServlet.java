@@ -12,6 +12,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import Tests.TestAddress;
+import Tests.TestCategory;
+import Tests.TestProduct;
+import Tests.TestTicket;
+import Tests.TestType;
 import Tests.TestUser;
 
 /**
@@ -20,6 +25,90 @@ import Tests.TestUser;
  */
 @WebServlet(name = "TestServlet", urlPatterns = {"/TestServlet"})
 public class TestServlet extends HttpServlet {
+
+    private void testUser(PrintWriter out) throws Exception{
+        try{
+            TestUser test = new TestUser();
+            test.testInsertion();
+            test.testGet();
+            test.testIndex();
+            test.testDeletion();
+            test.testUpdate();
+        }catch(Exception e){
+            out.println("<p>Erro USER: " + e.getMessage() + "</p>");
+            throw e;
+        }
+    }
+
+    private void testAddress(PrintWriter out) throws Exception{
+        try{
+            TestAddress test = new TestAddress();
+            test.testInsertion();
+            test.testGet();
+            test.testIndex();
+            test.testDeletion();
+            test.testUpdate();
+        }catch(Exception e){
+            out.println("<p>Erro ADDRESS: " + e.getMessage() + "</p>");
+            throw e;
+        }
+    }
+
+    private void testCategory(PrintWriter out) throws Exception{
+        try{
+            TestCategory test = new TestCategory();
+            test.testInsertion();
+            test.testGet();
+            test.testIndex();
+            test.testDeletion();
+            test.testUpdate();
+        }catch(Exception e){
+            out.println("<p>Erro CATEGORY: " + e.getMessage() + "</p>");
+            throw e;
+        }
+    }
+
+    private void testType(PrintWriter out) throws Exception{
+        try{
+            TestType test = new TestType();
+            test.testInsertion();
+            test.testGet();
+            test.testIndex();
+            test.testDeletion();
+            test.testUpdate();
+        }catch(Exception e){
+            out.println("<p>Erro TYPE: " + e.getMessage() + "</p>");
+            throw e;
+        }
+    }
+
+    private void testProduct(PrintWriter out) throws Exception{
+        try{
+            TestProduct test = new TestProduct();
+            test.testInsertion();
+            test.testGet();
+            test.testIndex();
+            test.testDeletion();
+            test.testUpdate();
+        }catch(Exception e){
+            out.println("<p>Erro PRODUCT: " + e.getMessage() + "</p>");
+            throw e;
+        }
+    }
+
+    private void testTicket(PrintWriter out) throws Exception{
+        try{
+            TestTicket test = new TestTicket();
+            test.testInsertion();
+            test.testGet();
+            test.testIndex();
+            test.testDeletion();
+            test.testUpdate();
+        }catch(Exception e){
+            out.println("<p>Erro TICKET: " + e.getMessage() + "</p>");
+            throw e;
+        }
+    }
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,7 +120,7 @@ public class TestServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, Exception {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             out.println("<!DOCTYPE html>");
@@ -40,15 +129,15 @@ public class TestServlet extends HttpServlet {
             out.println("<title>Servlet TestServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet TestServlet at " + request.getContextPath() + "</h1>");
-            try{
-                TestUser test = new TestUser();
-                // test.testInsertion();
-                test.testGet();
-                test.testIndex();
-            }catch(Exception e){
-                System.out.println(e.getMessage());
-            }
+            out.println("<h1>Testando</h1>");
+
+            this.testType(out);
+            this.testCategory(out);
+            this.testProduct(out);
+            this.testAddress(out);
+            this.testUser(out);
+            this.testTicket(out);
+            
             out.println("</body>");
             out.println("</html>");
         }

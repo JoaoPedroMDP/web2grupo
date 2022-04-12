@@ -29,15 +29,28 @@ public class QueryFactory {
     }
 
     public String mount_insert(String tableName, ArrayList<String> columns) {
-        return INSERT.replace("@", tableName).replace("#", String.join(", ", columns)).replace("$", this.generateQuestionMarkSequence(columns.size()));
+        String questionMarks = this.generateQuestionMarkSequence(columns.size());
+
+        return INSERT.replace("@", tableName).replace("#", String.join(", ", columns)).replace("$", questionMarks);
     }
 
     public String mount_delete(String tableName, LinkedHashMap<String, String> columns) {
-        return DELETE.replace("@", tableName).replace("#", this.generateColumnAndPlaceholderString(this.extractKeysFromMapInOrder(columns), ", AND"));
+        List<String> keys = this.extractKeysFromMapInOrder(columns);
+        String toDeletePlaceholder = this.generateColumnAndPlaceholderString(keys, ", AND");
+        
+        return DELETE.replace("@", tableName).replace("#", toDeletePlaceholder);
     }
 
     public String mount_update(String tableName, LinkedHashMap<String, String> data, LinkedHashMap<String, String> filters) {
-        return UPDATE.replace("@", tableName).replace("#", this.generateColumnAndPlaceholderString(this.extractKeysFromMapInOrder(data), ",")).replace("$", this.generateColumnAndPlaceholderString(this.extractKeysFromMapInOrder(filters), ", AND"));
+        List<String> keys = this.extractKeysFromMapInOrder(data);
+        String toUpdatePlaceholder = this.generateColumnAndPlaceholderString(keys, ",");
+
+        List<String> filtersKeys = this.extractKeysFromMapInOrder(filters);
+        String filtersPlaceholder = this.generateColumnAndPlaceholderString( filtersKeys, ", AND");
+
+        return UPDATE.replace("@", tableName)
+            .replace("#", toUpdatePlaceholder)
+            .replace("$", filtersPlaceholder);
     }
 
     public String mount_select(String tableName) {
@@ -45,19 +58,29 @@ public class QueryFactory {
     }
 
     public String mount_select(String tableName, LinkedHashMap<String, String> filters) {
-        return SELECT.replace("@", "*").replace("#", tableName).replace("$", this.generateColumnAndPlaceholderString(this.extractKeysFromMapInOrder(filters), ","));
+        List<String> filtersKeys = this.extractKeysFromMapInOrder(filters);
+        String filtersPlaceholder = this.generateColumnAndPlaceholderString( filtersKeys, ", AND");
+
+        return SELECT.replace("@", "*").replace("#", tableName).replace("$", filtersPlaceholder);
     }
 
     public String mount_select(String tableName, LinkedHashMap<String, String> filters, ArrayList<String> columns) {
-        return SELECT.replace("@", String.join(", ", (CharSequence)columns)).replace("#", tableName).replace("$", this.generateColumnAndPlaceholderString(this.extractKeysFromMapInOrder(filters), ","));
+        List<String> filtersKeys = this.extractKeysFromMapInOrder(filters);
+        String filtersPlaceholder = this.generateColumnAndPlaceholderString( filtersKeys, ", AND");
+
+        String selectedColumns = String.join(", ", (CharSequence)columns);
+
+        return SELECT.replace("@", selectedColumns)
+            .replace("#", tableName)
+            .replace("$", filtersPlaceholder);
     }
 
     private String generateColumnAndPlaceholderString(List<String> columns, String connector) {
         List<String> pairs = new ArrayList<String>();
-        Iterator var4 = columns.iterator();
+        Iterator columnIter = columns.iterator();
 
-        while(var4.hasNext()) {
-            String column = (String)var4.next();
+        while(columnIter.hasNext()) {
+            String column = (String)columnIter.next();
             pairs.add(column + "=?");
         }
 
@@ -66,6 +89,9 @@ public class QueryFactory {
 
     private String generateQuestionMarkSequence(int size) {
         String seq = "?";
-        return seq.concat((new String(new char[size - 1])).replace("\u0000", ", ?"));
+        
+        return seq.concat(
+            new String(new char[size - 1]).replace("\u0000", ", ?")
+        );
     }
 }
