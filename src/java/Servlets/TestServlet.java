@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import Tests.TestAddress;
 import Tests.TestCategory;
 import Tests.TestProduct;
+import Tests.TestTicket;
 import Tests.TestType;
 import Tests.TestUser;
 
@@ -95,6 +96,20 @@ public class TestServlet extends HttpServlet {
         }
     }
 
+    private void testTicket(PrintWriter out) throws Exception{
+        try{
+            TestTicket test = new TestTicket();
+            test.testInsertion();
+            test.testGet();
+            test.testIndex();
+            test.testDeletion();
+            test.testUpdate();
+        }catch(Exception e){
+            out.println("<p>Erro TICKET: " + e.getMessage() + "</p>");
+            throw e;
+        }
+    }
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -114,13 +129,14 @@ public class TestServlet extends HttpServlet {
             out.println("<title>Servlet TestServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet TestServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Testando</h1>");
 
-            this.testUser(out);
-            this.testAddress(out);
-            this.testCategory(out);
             this.testType(out);
+            this.testCategory(out);
             this.testProduct(out);
+            this.testAddress(out);
+            this.testUser(out);
+            this.testTicket(out);
             
             out.println("</body>");
             out.println("</html>");

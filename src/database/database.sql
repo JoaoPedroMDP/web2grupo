@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS tickets(
     id INTEGER UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT,
     description VARCHAR(500) NOT NULL,
     state VARCHAR(30) NOT NULL,
-    solution VARCHAR(500), # Pode ser null pois se for um elogio, não existe solução
+    solution VARCHAR(500), -- Pode ser null pois se for um elogio, não existe solução
     product_id INTEGER UNSIGNED NOT NULL,
     FOREIGN KEY(product_id) REFERENCES products(id) ON DELETE CASCADE,
     type_id INTEGER UNSIGNED NOT NULL,
