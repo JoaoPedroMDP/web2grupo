@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import Tests.TestAddress;
 import Tests.TestCategory;
+import Tests.TestProduct;
 import Tests.TestType;
 import Tests.TestUser;
 
@@ -80,6 +81,20 @@ public class TestServlet extends HttpServlet {
         }
     }
 
+    private void testProduct(PrintWriter out) throws Exception{
+        try{
+            TestProduct test = new TestProduct();
+            test.testInsertion();
+            test.testGet();
+            test.testIndex();
+            test.testDeletion();
+            test.testUpdate();
+        }catch(Exception e){
+            out.println("<p>Erro PRODUCT: " + e.getMessage() + "</p>");
+            throw e;
+        }
+    }
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -105,6 +120,7 @@ public class TestServlet extends HttpServlet {
             this.testAddress(out);
             this.testCategory(out);
             this.testType(out);
+            this.testProduct(out);
             
             out.println("</body>");
             out.println("</html>");
