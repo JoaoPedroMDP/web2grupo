@@ -3,6 +3,7 @@ build
 .vscode
 nbproject
 build.xml
+Config.java
 
 # Compiled class file
 *.class

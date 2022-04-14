@@ -7,13 +7,17 @@ import java.sql.SQLException;
 import Exceptions.DAOException;
 
 public class ConnectionFactory implements AutoCloseable {
-    private static String DRIVER = "com.mysql.cj.jdbc.Driver";
-    private static String URL = "jdbc:mysql://localhost:3306/web2?useSSL=false";
-    private static String LOGIN = "joao";
-    private static String PASSWORD = "4521563";
+    private String DRIVER = "com.mysql.cj.jdbc.Driver";
+    private String URL;
+    private String LOGIN;
+    private String PASSWORD;
     private Connection con = null;
 
     public ConnectionFactory() {
+        Config config = new Config();
+        this.URL = "jdbc:mysql://" + config.host + ":" + config.port + "/" + config.database + "?useSSL=false";
+        this.LOGIN = config.user;
+        this.PASSWORD = config.password;
     }
 
     public Connection getConnection() throws DAOException {
