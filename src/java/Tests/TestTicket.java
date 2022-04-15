@@ -54,10 +54,10 @@ public class TestTicket {
     public void testUpdate() throws DAOException, NotFound {
         TicketDAO dao = new TicketDAO(new ConnectionFactory().getConnection());
 
-        LinkedHashMap<String, String> filters = new LinkedHashMap<String, String>();
+        LinkedHashMap<String, Object> filters = new LinkedHashMap<String, Object>();
         filters.put("description", "Ticket 0");
 
-        LinkedHashMap<String, String> newData = new LinkedHashMap<String, String>();
+        LinkedHashMap<String, Object> newData = new LinkedHashMap<String, Object>();
         newData.put("description", "Ticket Alterado");
         dao.update(filters, newData);
 

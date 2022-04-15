@@ -30,16 +30,16 @@ public class Product implements Mappable, Bean{
     }
 
     @Override
-    public void fromMap(LinkedHashMap<String, String> data) {
+    public void fromMap(LinkedHashMap<String, Object> data) {
         this.setName((String) data.get("name"));
         this.setImage((String) data.get("image"));
-        this.setWeight(Float.parseFloat(data.get("weight")));
-        this.setCategory_id(Integer.parseInt(data.get("category_id")));
+        this.setWeight(Float.parseFloat( (String) data.get("weight")));
+        this.setCategory_id(Integer.parseInt( (String) data.get("category_id")));
     }
 
     @Override
-    public LinkedHashMap<String, String> toMap() {
-        LinkedHashMap<String, String> data = new LinkedHashMap<String, String>();
+    public LinkedHashMap<String, Object> toMap() {
+        LinkedHashMap<String, Object> data = new LinkedHashMap<String, Object>();
         data.put("name", this.getName());
         data.put("image", this.getImage());
         data.put("weight", String.valueOf(this.getWeight()));

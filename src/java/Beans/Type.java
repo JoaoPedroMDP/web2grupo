@@ -21,14 +21,14 @@ public class Type implements Mappable, Bean{
     }
 
     @Override
-    public void fromMap(LinkedHashMap<String, String> data) {
+    public void fromMap(LinkedHashMap<String, Object> data) {
         this.setName((String) data.get("name"));
         
     }
 
     @Override
-    public LinkedHashMap<String, String> toMap() {
-        LinkedHashMap<String, String> data = new LinkedHashMap<String, String>();
+    public LinkedHashMap<String, Object> toMap() {
+        LinkedHashMap<String, Object> data = new LinkedHashMap<String, Object>();
         data.put("name", this.getName());
 
         return data;

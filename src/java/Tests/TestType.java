@@ -49,10 +49,10 @@ public class TestType {
     public void testUpdate() throws DAOException, NotFound {
         TypeDAO dao = new TypeDAO(new ConnectionFactory().getConnection());
 
-        LinkedHashMap<String, String> filters = new LinkedHashMap<String, String>();
+        LinkedHashMap<String, Object> filters = new LinkedHashMap<String, Object>();
         filters.put("name", "Tipo 0");
 
-        LinkedHashMap<String, String> newData = new LinkedHashMap<String, String>();
+        LinkedHashMap<String, Object> newData = new LinkedHashMap<String, Object>();
         newData.put("name", "Tipo Alterado");
         dao.update(filters, newData);
 

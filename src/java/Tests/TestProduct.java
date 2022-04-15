@@ -52,10 +52,10 @@ public class TestProduct {
     public void testUpdate() throws DAOException, NotFound {
         ProductDAO dao = new ProductDAO(new ConnectionFactory().getConnection());
 
-        LinkedHashMap<String, String> filters = new LinkedHashMap<String, String>();
+        LinkedHashMap<String, Object> filters = new LinkedHashMap<String, Object>();
         filters.put("name", "Produto 0");
 
-        LinkedHashMap<String, String> newData = new LinkedHashMap<String, String>();
+        LinkedHashMap<String, Object> newData = new LinkedHashMap<String, Object>();
         newData.put("name", "Produto Alterado");
         dao.update(filters, newData);
 

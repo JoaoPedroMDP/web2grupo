@@ -16,12 +16,12 @@ public class QueryFactory {
     public QueryFactory() {
     }
 
-    private List<String> extractKeysFromMapInOrder(LinkedHashMap<String, String> map) {
+    private List<String> extractKeysFromMapInOrder(LinkedHashMap<String, Object> map) {
         List<String> keys = new ArrayList<String>();
         Iterator columns = map.entrySet().iterator();
 
         while(columns.hasNext()) {
-            Entry<String, String> entry = (Entry<String, String>) columns.next();
+            Entry<String, Object> entry = (Entry<String, Object>) columns.next();
             keys.add(entry.getKey());
         }
 
@@ -34,14 +34,14 @@ public class QueryFactory {
         return INSERT.replace("@", tableName).replace("#", String.join(", ", columns)).replace("$", questionMarks);
     }
 
-    public String mount_delete(String tableName, LinkedHashMap<String, String> columns) {
+    public String mount_delete(String tableName, LinkedHashMap<String, Object> columns) {
         List<String> keys = this.extractKeysFromMapInOrder(columns);
         String toDeletePlaceholder = this.generateColumnAndPlaceholderString(keys, ", AND");
         
         return DELETE.replace("@", tableName).replace("#", toDeletePlaceholder);
     }
 
-    public String mount_update(String tableName, LinkedHashMap<String, String> data, LinkedHashMap<String, String> filters) {
+    public String mount_update(String tableName, LinkedHashMap<String, Object> data, LinkedHashMap<String, Object> filters) {
         List<String> keys = this.extractKeysFromMapInOrder(data);
         String toUpdatePlaceholder = this.generateColumnAndPlaceholderString(keys, ",");
 
@@ -57,14 +57,14 @@ public class QueryFactory {
         return SIMPLE_SELECT.replace("@", "*").replace("#", tableName);
     }
 
-    public String mount_select(String tableName, LinkedHashMap<String, String> filters) {
+    public String mount_select(String tableName, LinkedHashMap<String, Object> filters) {
         List<String> filtersKeys = this.extractKeysFromMapInOrder(filters);
         String filtersPlaceholder = this.generateColumnAndPlaceholderString( filtersKeys, ", AND");
 
         return SELECT.replace("@", "*").replace("#", tableName).replace("$", filtersPlaceholder);
     }
 
-    public String mount_select(String tableName, LinkedHashMap<String, String> filters, ArrayList<String> columns) {
+    public String mount_select(String tableName, LinkedHashMap<String, Object> filters, ArrayList<String> columns) {
         List<String> filtersKeys = this.extractKeysFromMapInOrder(filters);
         String filtersPlaceholder = this.generateColumnAndPlaceholderString( filtersKeys, ", AND");
 

@@ -41,7 +41,7 @@ public class User implements Mappable, Bean{
         this.address_id = address_id;
     }
 
-    public void fromMap(LinkedHashMap<String, String> data){
+    public void fromMap(LinkedHashMap<String, Object> data){
         this.setName((String) data.get("name"));
         this.setSurname((String) data.get("surname"));
         this.setEmail((String) data.get("email"));
@@ -49,11 +49,11 @@ public class User implements Mappable, Bean{
         this.setCpf((String) data.get("cpf"));
         this.setPhone((String) data.get("phone"));
         this.setRole((String) data.get("role"));
-        this.setAddress_id(Integer.parseInt(data.get("address_id")));
+        this.setAddress_id(Integer.parseInt( (String) data.get("address_id")));
     }
 
-    public LinkedHashMap<String, String> toMap() {
-        LinkedHashMap<String, String> data = new LinkedHashMap<String, String>();
+    public LinkedHashMap<String, Object> toMap() {
+        LinkedHashMap<String, Object> data = new LinkedHashMap<String, Object>();
         data.put("name", this.getName());
         data.put("surname", this.getSurname());
         data.put("email", this.getEmail());

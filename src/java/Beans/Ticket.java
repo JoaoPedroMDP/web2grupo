@@ -38,18 +38,18 @@ public class Ticket implements Mappable, Bean{
     }  
 
     @Override
-    public void fromMap(LinkedHashMap<String, String> data) {
-        this.setDescription(data.get("description"));
-        this.setState(data.get("state"));
-        this.setSolution(data.get("solution"));
-        this.setProduct_id(Integer.parseInt(data.get("product_id")));
-        this.setType_id(Integer.parseInt(data.get("type_id")));
-        this.setUser_id(Integer.parseInt(data.get("user_id")));
+    public void fromMap(LinkedHashMap<String, Object> data) {
+        this.setDescription( (String) data.get("description"));
+        this.setState( (String) data.get("state"));
+        this.setSolution( (String) data.get("solution"));
+        this.setProduct_id(Integer.parseInt( (String) data.get("product_id")));
+        this.setType_id(Integer.parseInt( (String) data.get("type_id")));
+        this.setUser_id(Integer.parseInt( (String) data.get("user_id")));
     }
 
     @Override
-    public LinkedHashMap<String, String> toMap() {
-        LinkedHashMap<String, String> data = new LinkedHashMap<String, String>();
+    public LinkedHashMap<String, Object> toMap() {
+        LinkedHashMap<String, Object> data = new LinkedHashMap<String, Object>();
         data.put("description", this.getDescription());
         data.put("state", this.getState());
         data.put("solution", this.getSolution());

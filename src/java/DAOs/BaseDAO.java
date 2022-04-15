@@ -35,7 +35,7 @@ public abstract class BaseDAO <T extends Mappable & Bean> extends QueryFactory i
     }
 
     public final T get(int id) throws DAOException, NotFound {
-        LinkedHashMap<String, String> filters = new LinkedHashMap<String, String>();
+        LinkedHashMap<String, Object> filters = new LinkedHashMap<String, Object>();
         filters.put("id", String.valueOf(id));
         String query = mount_select(tableName, filters);
         try(PreparedStatement stmt = con.prepareStatement(query)){
@@ -80,7 +80,7 @@ public abstract class BaseDAO <T extends Mappable & Bean> extends QueryFactory i
     }
 
     public void update(T t) throws DAOException {
-        LinkedHashMap<String, String> filters = new LinkedHashMap<String, String>() {
+        LinkedHashMap<String, Object> filters = new LinkedHashMap<String, Object>() {
             {
                 this.put("id", String.valueOf(t.getId()));
             }
@@ -98,7 +98,7 @@ public abstract class BaseDAO <T extends Mappable & Bean> extends QueryFactory i
         }
     }
 
-    public void update(LinkedHashMap<String, String> filters, LinkedHashMap<String, String> newData) throws DAOException {
+    public void update(LinkedHashMap<String, Object> filters, LinkedHashMap<String, Object> newData) throws DAOException {
         String query = mount_update(tableName, newData, filters);
         try (PreparedStatement stmt = con.prepareStatement(query)){
             int nextReplacement = 1;
@@ -112,7 +112,7 @@ public abstract class BaseDAO <T extends Mappable & Bean> extends QueryFactory i
 
     public void delete(T t) throws DAOException {
         String id = String.valueOf(t.getId());
-        LinkedHashMap<String, String> filter = new LinkedHashMap<String, String>() {
+        LinkedHashMap<String, Object> filter = new LinkedHashMap<String, Object>() {
             {
                 this.put("id", id);
             }
@@ -130,7 +130,7 @@ public abstract class BaseDAO <T extends Mappable & Bean> extends QueryFactory i
 
     public void delete(int id) throws DAOException {
         String stringifiedId = String.valueOf(id);
-        LinkedHashMap<String, String> filter = new LinkedHashMap<String, String>() {
+        LinkedHashMap<String, Object> filter = new LinkedHashMap<String, Object>() {
             {
                 this.put("id", stringifiedId);
             }

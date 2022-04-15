@@ -39,19 +39,19 @@ public class Address implements Mappable, Bean{
     }
 
     @Override
-    public void fromMap(LinkedHashMap<String, String> data) {
-        this.setStreet(data.get("street"));
-        this.setNumber(data.get("number"));
-        this.setComplement(data.get("complement"));
-        this.setDistrict(data.get("district"));
-        this.setZip_code(Integer.parseInt(data.get("zip_code")));
-        this.setCity(data.get("city"));
-        this.setState(data.get("state"));
+    public void fromMap(LinkedHashMap<String, Object> data) {
+        this.setStreet( (String) data.get("street"));
+        this.setNumber( (String) data.get("number"));
+        this.setComplement( (String) data.get("complement"));
+        this.setDistrict( (String) data.get("district"));
+        this.setZip_code( Integer.parseInt( (String) data.get("zip_code")));
+        this.setCity( (String) data.get("city"));
+        this.setState( (String) data.get("state"));
     }
 
     @Override
-    public LinkedHashMap<String, String> toMap() {
-        LinkedHashMap<String, String> data = new LinkedHashMap<String, String>();
+    public LinkedHashMap<String, Object> toMap() {
+        LinkedHashMap<String, Object> data = new LinkedHashMap<String, Object>();
         data.put("street", this.getStreet());
         data.put("number", this.getNumber());
         data.put("complement", this.getComplement());
