@@ -146,14 +146,35 @@ public abstract class BaseDAO <T extends Mappable & Bean> extends QueryFactory i
         }
     }
 
-    protected int configureStatement(PreparedStatement stmt, int nextReplacement, LinkedHashMap<String, String> data) throws SQLException {
+    protected int configureStatement(PreparedStatement stmt, int nextReplacement, LinkedHashMap<String, Object> data) throws DAOException {
         Object keys[] = data.keySet().toArray();
         for( int i = 0; i < data.size(); i++){
-            stmt.setString(nextReplacement, data.get(keys[i]));
+            Object item = data.get(keys[i]);
+
+            try{
+                this.setStatementBasedOnType(stmt, item, nextReplacement);
+            }catch(SQLException e){
+                throw new DAOException(e.getMessage(), e);
+            }
+
             nextReplacement++;
         }
         
         return nextReplacement;
+    }
+
+    protected void setStatementBasedOnType(PreparedStatement stmt, Object item, int replacementePosition) throws SQLException, DAOException{
+        if(item instanceof java.util.Date){
+            stmt.setDate(replacementePosition, (java.sql.Date) item);
+        }else if (item instanceof Integer){
+            stmt.setInt(replacementePosition, (Integer) item);
+        }else if(item instanceof String){
+            stmt.setString(replacementePosition, (String) item);
+        }else if(item instanceof Float){
+            stmt.setFloat(replacementePosition, (Float) item);
+        }else {
+            throw new DAOException("Tipo não suportado: " + item.getClass().getName());
+        }
     }
 
     protected abstract void configureStatement(PreparedStatement stmt, T t) throws SQLException;
