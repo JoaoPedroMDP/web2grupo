@@ -3,20 +3,20 @@ package Tests;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-import Beans.Type;
-import DAOs.TypeDAO;
+import Beans.City;
+import DAOs.CityDAO;
 import Exceptions.DAOException;
 import Exceptions.NotFound;
 import Interfaces.Tests;
 import Utils.ConnectionFactory;
 
-public class TestType implements Tests{
+public class TestCity implements Tests{
     private Integer idToRetrieve;
     private Integer idToDelete;
     private Integer idToUpdate;
     private Integer generationAmount;
 
-    public TestType(){
+    public TestCity(){
         this.idToRetrieve = 1;
         this.idToUpdate = 2;
         this.idToDelete = 3;
@@ -24,46 +24,47 @@ public class TestType implements Tests{
     }
 
     public void testInsertion() throws DAOException{
-        TypeDAO dao = new TypeDAO(new ConnectionFactory().getConnection());
+        CityDAO dao = new CityDAO(new ConnectionFactory().getConnection());
         for( Integer i = 0; i < this.generationAmount; i++){
-            Type type = new Type();
-            type.setName("Tipo " + i);
+            City city = new City();
+            city.setName("Cidade " + i);
+            city.setState_id(1);
 
-            dao.insert(type);
+            dao.insert(city);
         }
     }
 
     public void testGet() throws DAOException, NotFound {
-        Type type = new TypeDAO(new ConnectionFactory().getConnection()).get(this.idToRetrieve);
+        City city = new CityDAO(new ConnectionFactory().getConnection()).get(this.idToRetrieve);
 
-        System.out.println(type.getName());
+        System.out.println(city.getName());
     }
 
     public void testIndex() throws DAOException {
-        List<Type> types = new TypeDAO(new ConnectionFactory().getConnection()).getAll();
+        List<City> citys = new CityDAO(new ConnectionFactory().getConnection()).getAll();
 
-        for(Type type : types){
-            System.out.println(type.getName());
+        for(City city : citys){
+            System.out.println(city.getName());
         }
     }
 
     public void testUpdate() throws DAOException, NotFound {
-        TypeDAO dao = new TypeDAO(new ConnectionFactory().getConnection());
+        CityDAO dao = new CityDAO(new ConnectionFactory().getConnection());
 
         LinkedHashMap<String, Object> filters = new LinkedHashMap<String, Object>();
-        filters.put("name", "Tipo 0");
+        filters.put("name", "Cidade 0");
 
         LinkedHashMap<String, Object> newData = new LinkedHashMap<String, Object>();
-        newData.put("name", "Tipo Alterado");
+        newData.put("name", "Cidade Alterada");
         dao.update(filters, newData);
 
-        Type type = dao.get(this.idToUpdate);
-        type.setName("Tambem funfa");
-        dao.update(type);
+        City city = dao.get(this.idToUpdate);
+        city.setName("Tambem funfa");
+        dao.update(city);
     }
 
     public void testDeletion() throws DAOException, NotFound {
-        TypeDAO dao = new TypeDAO(new ConnectionFactory().getConnection());
+        CityDAO dao = new CityDAO(new ConnectionFactory().getConnection());
         dao.delete(idToDelete);
     }
 }

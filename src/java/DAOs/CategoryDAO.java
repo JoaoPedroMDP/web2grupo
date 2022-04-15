@@ -33,7 +33,7 @@ public class CategoryDAO extends BaseDAO<Category>{
     protected Category fillFromResultSet(ResultSet rs)
      throws SQLException {
         Category category = new Category();
-        int id = rs.getInt("id");
+        Integer id = rs.getInt("id");
         if(id != 0){
             category.setId(id);
         }

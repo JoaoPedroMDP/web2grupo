@@ -7,13 +7,14 @@ import Beans.Address;
 import DAOs.AddressDAO;
 import Exceptions.DAOException;
 import Exceptions.NotFound;
+import Interfaces.Tests;
 import Utils.ConnectionFactory;
 
-public class TestAddress {
-    private int idToRetrieve;
-    private int idToDelete;
-    private int idToUpdate;
-    private int generationAmount;
+public class TestAddress implements Tests{
+    private Integer idToRetrieve;
+    private Integer idToDelete;
+    private Integer idToUpdate;
+    private Integer generationAmount;
 
     public TestAddress(){
         this.idToRetrieve = 1;
@@ -24,15 +25,14 @@ public class TestAddress {
 
     public void testInsertion() throws DAOException{
         AddressDAO dao = new AddressDAO(new ConnectionFactory().getConnection());
-        for( int i = 0; i < this.generationAmount; i++){
+        for( Integer i = 0; i < this.generationAmount; i++){
             Address address = new Address();
             address.setStreet("Rua");
             address.setNumber("Número");
             address.setComplement("Complemento");
             address.setDistrict("Bairro");
             address.setZip_code(8170160);
-            address.setCity("Cidade");
-            address.setState("Estado");
+            address.setCity_id(1);
 
             dao.insert(address);
         }
@@ -55,11 +55,11 @@ public class TestAddress {
     public void testUpdate() throws DAOException, NotFound {
         AddressDAO dao = new AddressDAO(new ConnectionFactory().getConnection());
 
-        LinkedHashMap<String, String> filters = new LinkedHashMap<String, String>();
+        LinkedHashMap<String, Object> filters = new LinkedHashMap<String, Object>();
         filters.put("street", "Rua 0");
 
-        LinkedHashMap<String, String> newData = new LinkedHashMap<String, String>();
-        newData.put("street", "RUA alterada");
+        LinkedHashMap<String, Object> newData = new LinkedHashMap<String, Object>();
+        newData.put("street", "Rua alterada");
         dao.update(filters, newData);
 
         Address address = dao.get(this.idToUpdate);

@@ -3,20 +3,20 @@ package Tests;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-import Beans.Type;
-import DAOs.TypeDAO;
+import Beans.State;
+import DAOs.StateDAO;
 import Exceptions.DAOException;
 import Exceptions.NotFound;
 import Interfaces.Tests;
 import Utils.ConnectionFactory;
 
-public class TestType implements Tests{
+public class TestState implements Tests{
     private Integer idToRetrieve;
     private Integer idToDelete;
     private Integer idToUpdate;
     private Integer generationAmount;
 
-    public TestType(){
+    public TestState(){
         this.idToRetrieve = 1;
         this.idToUpdate = 2;
         this.idToDelete = 3;
@@ -24,46 +24,46 @@ public class TestType implements Tests{
     }
 
     public void testInsertion() throws DAOException{
-        TypeDAO dao = new TypeDAO(new ConnectionFactory().getConnection());
+        StateDAO dao = new StateDAO(new ConnectionFactory().getConnection());
         for( Integer i = 0; i < this.generationAmount; i++){
-            Type type = new Type();
-            type.setName("Tipo " + i);
+            State state = new State();
+            state.setName("Estado " + i);
 
-            dao.insert(type);
+            dao.insert(state);
         }
     }
 
     public void testGet() throws DAOException, NotFound {
-        Type type = new TypeDAO(new ConnectionFactory().getConnection()).get(this.idToRetrieve);
+        State state = new StateDAO(new ConnectionFactory().getConnection()).get(this.idToRetrieve);
 
-        System.out.println(type.getName());
+        System.out.println(state.getName());
     }
 
     public void testIndex() throws DAOException {
-        List<Type> types = new TypeDAO(new ConnectionFactory().getConnection()).getAll();
+        List<State> states = new StateDAO(new ConnectionFactory().getConnection()).getAll();
 
-        for(Type type : types){
-            System.out.println(type.getName());
+        for(State state : states){
+            System.out.println(state.getName());
         }
     }
 
     public void testUpdate() throws DAOException, NotFound {
-        TypeDAO dao = new TypeDAO(new ConnectionFactory().getConnection());
+        StateDAO dao = new StateDAO(new ConnectionFactory().getConnection());
 
         LinkedHashMap<String, Object> filters = new LinkedHashMap<String, Object>();
-        filters.put("name", "Tipo 0");
+        filters.put("name", "Estado 0");
 
         LinkedHashMap<String, Object> newData = new LinkedHashMap<String, Object>();
-        newData.put("name", "Tipo Alterado");
+        newData.put("name", "Estado Alterado");
         dao.update(filters, newData);
 
-        Type type = dao.get(this.idToUpdate);
-        type.setName("Tambem funfa");
-        dao.update(type);
+        State state = dao.get(this.idToUpdate);
+        state.setName("Tambem funfa");
+        dao.update(state);
     }
 
     public void testDeletion() throws DAOException, NotFound {
-        TypeDAO dao = new TypeDAO(new ConnectionFactory().getConnection());
+        StateDAO dao = new StateDAO(new ConnectionFactory().getConnection());
         dao.delete(idToDelete);
     }
 }

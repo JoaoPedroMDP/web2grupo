@@ -42,7 +42,7 @@ public class TicketDAO extends BaseDAO<Ticket>{
     @Override
     protected Ticket fillFromResultSet(ResultSet rs) throws SQLException {
         Ticket ticket = new Ticket();
-        int id = rs.getInt("id");
+        Integer id = rs.getInt("id");
         if(id != 0){
             ticket.setId(id);
         }

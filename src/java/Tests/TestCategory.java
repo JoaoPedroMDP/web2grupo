@@ -7,13 +7,14 @@ import Beans.Category;
 import DAOs.CategoryDAO;
 import Exceptions.DAOException;
 import Exceptions.NotFound;
+import Interfaces.Tests;
 import Utils.ConnectionFactory;
 
-public class TestCategory {
-    private int idToRetrieve;
-    private int idToDelete;
-    private int idToUpdate;
-    private int generationAmount;
+public class TestCategory implements Tests{
+    private Integer idToRetrieve;
+    private Integer idToDelete;
+    private Integer idToUpdate;
+    private Integer generationAmount;
 
     public TestCategory(){
         this.idToRetrieve = 1;
@@ -24,7 +25,7 @@ public class TestCategory {
 
     public void testInsertion() throws DAOException{
         CategoryDAO dao = new CategoryDAO(new ConnectionFactory().getConnection());
-        for( int i = 0; i < this.generationAmount; i++){
+        for( Integer i = 0; i < this.generationAmount; i++){
             Category category = new Category();
             category.setName("Categoria " + i);
 
@@ -49,10 +50,10 @@ public class TestCategory {
     public void testUpdate() throws DAOException, NotFound {
         CategoryDAO dao = new CategoryDAO(new ConnectionFactory().getConnection());
 
-        LinkedHashMap<String, String> filters = new LinkedHashMap<String, String>();
+        LinkedHashMap<String, Object> filters = new LinkedHashMap<String, Object>();
         filters.put("name", "Categoria 0");
 
-        LinkedHashMap<String, String> newData = new LinkedHashMap<String, String>();
+        LinkedHashMap<String, Object> newData = new LinkedHashMap<String, Object>();
         newData.put("name", "Categoria Alterado");
         dao.update(filters, newData);
 

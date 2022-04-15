@@ -7,13 +7,14 @@ import Beans.Ticket;
 import DAOs.TicketDAO;
 import Exceptions.DAOException;
 import Exceptions.NotFound;
+import Interfaces.Tests;
 import Utils.ConnectionFactory;
 
-public class TestTicket {
-    private int idToRetrieve;
-    private int idToDelete;
-    private int idToUpdate;
-    private int generationAmount;
+public class TestTicket implements Tests{
+    private Integer idToRetrieve;
+    private Integer idToDelete;
+    private Integer idToUpdate;
+    private Integer generationAmount;
 
     public TestTicket(){
         this.idToRetrieve = 1;
@@ -24,7 +25,7 @@ public class TestTicket {
 
     public void testInsertion() throws DAOException{
         TicketDAO dao = new TicketDAO(new ConnectionFactory().getConnection());
-        for( int i = 0; i < this.generationAmount; i++){
+        for( Integer i = 0; i < this.generationAmount; i++){
             Ticket ticket = new Ticket();
             ticket.setDescription("Ticket " + i);
             ticket.setState("open");
@@ -54,10 +55,10 @@ public class TestTicket {
     public void testUpdate() throws DAOException, NotFound {
         TicketDAO dao = new TicketDAO(new ConnectionFactory().getConnection());
 
-        LinkedHashMap<String, String> filters = new LinkedHashMap<String, String>();
+        LinkedHashMap<String, Object> filters = new LinkedHashMap<String, Object>();
         filters.put("description", "Ticket 0");
 
-        LinkedHashMap<String, String> newData = new LinkedHashMap<String, String>();
+        LinkedHashMap<String, Object> newData = new LinkedHashMap<String, Object>();
         newData.put("description", "Ticket Alterado");
         dao.update(filters, newData);
 

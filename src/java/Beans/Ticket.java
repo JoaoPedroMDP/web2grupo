@@ -6,18 +6,18 @@ import Interfaces.Bean;
 import Interfaces.Mappable;
 
 public class Ticket implements Mappable, Bean{
-    private int id;
+    private Integer id;
     private String description;
     private String state;
     private String solution;
-    private int product_id;
-    private int type_id;
-    private int user_id;
+    private Integer product_id;
+    private Integer type_id;
+    private Integer user_id;
     
     public Ticket() {}
 
-    public Ticket(int id, String description, String state, String solution, int product_id, int type_id,
-            int user_id) {
+    public Ticket(Integer id, String description, String state, String solution, Integer product_id, Integer type_id,
+            Integer user_id) {
         this.setId(id);
         this.setDescription(description);
         this.setState(state);
@@ -27,8 +27,8 @@ public class Ticket implements Mappable, Bean{
         this.setUser_id(user_id);
     }
 
-    public Ticket(String description, String state, String solution, int product_id, int type_id,
-            int user_id) {
+    public Ticket(String description, String state, String solution, Integer product_id, Integer type_id,
+            Integer user_id) {
         this.setDescription(description);
         this.setState(state);
         this.setSolution(solution);
@@ -38,18 +38,18 @@ public class Ticket implements Mappable, Bean{
     }  
 
     @Override
-    public void fromMap(LinkedHashMap<String, String> data) {
-        this.setDescription(data.get("description"));
-        this.setState(data.get("state"));
-        this.setSolution(data.get("solution"));
-        this.setProduct_id(Integer.parseInt(data.get("product_id")));
-        this.setType_id(Integer.parseInt(data.get("type_id")));
-        this.setUser_id(Integer.parseInt(data.get("user_id")));
+    public void fromMap(LinkedHashMap<String, Object> data) {
+        this.setDescription( (String) data.get("description"));
+        this.setState( (String) data.get("state"));
+        this.setSolution( (String) data.get("solution"));
+        this.setProduct_id(Integer.parseInt( (String) data.get("product_id")));
+        this.setType_id(Integer.parseInt( (String) data.get("type_id")));
+        this.setUser_id(Integer.parseInt( (String) data.get("user_id")));
     }
 
     @Override
-    public LinkedHashMap<String, String> toMap() {
-        LinkedHashMap<String, String> data = new LinkedHashMap<String, String>();
+    public LinkedHashMap<String, Object> toMap() {
+        LinkedHashMap<String, Object> data = new LinkedHashMap<String, Object>();
         data.put("description", this.getDescription());
         data.put("state", this.getState());
         data.put("solution", this.getSolution());
@@ -60,11 +60,11 @@ public class Ticket implements Mappable, Bean{
         return data;
     }
 
-    public int getUser_id() {
+    public Integer getUser_id() {
         return user_id;
     }
 
-    public void setUser_id(int user_id) {
+    public void setUser_id(Integer user_id) {
         this.user_id = user_id;
     }
 
@@ -72,11 +72,11 @@ public class Ticket implements Mappable, Bean{
         this.user_id = Integer.valueOf(user_id);
     }
 
-    public int getType_id() {
+    public Integer getType_id() {
         return type_id;
     }
 
-    public void setType_id(int type_id) {
+    public void setType_id(Integer type_id) {
         this.type_id = type_id;
     }
 
@@ -84,11 +84,11 @@ public class Ticket implements Mappable, Bean{
         this.type_id = Integer.valueOf(type_id);
     }
 
-    public int getProduct_id() {
+    public Integer getProduct_id() {
         return product_id;
     }
 
-    public void setProduct_id(int product_id) {
+    public void setProduct_id(Integer product_id) {
         this.product_id = product_id;
     }
 
@@ -120,11 +120,11 @@ public class Ticket implements Mappable, Bean{
         this.description = description;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

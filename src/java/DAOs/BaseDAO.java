@@ -34,8 +34,8 @@ public abstract class BaseDAO <T extends Mappable & Bean> extends QueryFactory i
         }
     }
 
-    public final T get(int id) throws DAOException, NotFound {
-        LinkedHashMap<String, String> filters = new LinkedHashMap<String, String>();
+    public final T get(Integer id) throws DAOException, NotFound {
+        LinkedHashMap<String, Object> filters = new LinkedHashMap<String, Object>();
         filters.put("id", String.valueOf(id));
         String query = mount_select(tableName, filters);
         try(PreparedStatement stmt = con.prepareStatement(query)){
@@ -80,7 +80,7 @@ public abstract class BaseDAO <T extends Mappable & Bean> extends QueryFactory i
     }
 
     public void update(T t) throws DAOException {
-        LinkedHashMap<String, String> filters = new LinkedHashMap<String, String>() {
+        LinkedHashMap<String, Object> filters = new LinkedHashMap<String, Object>() {
             {
                 this.put("id", String.valueOf(t.getId()));
             }
@@ -88,7 +88,7 @@ public abstract class BaseDAO <T extends Mappable & Bean> extends QueryFactory i
 
         String query = mount_update(tableName, t.toMap(), filters);
         try (PreparedStatement stmt = con.prepareStatement(query)){
-            int nextReplacement = 1;
+            Integer nextReplacement = 1;
             nextReplacement = this.configureStatement(stmt, nextReplacement, t.toMap());
             nextReplacement = this.configureStatement(stmt, nextReplacement, filters);
 
@@ -98,10 +98,10 @@ public abstract class BaseDAO <T extends Mappable & Bean> extends QueryFactory i
         }
     }
 
-    public void update(LinkedHashMap<String, String> filters, LinkedHashMap<String, String> newData) throws DAOException {
+    public void update(LinkedHashMap<String, Object> filters, LinkedHashMap<String, Object> newData) throws DAOException {
         String query = mount_update(tableName, newData, filters);
         try (PreparedStatement stmt = con.prepareStatement(query)){
-            int nextReplacement = 1;
+            Integer nextReplacement = 1;
             nextReplacement = this.configureStatement(stmt, nextReplacement, newData);
             nextReplacement = this.configureStatement(stmt, nextReplacement, filters);
             stmt.executeUpdate();
@@ -112,7 +112,7 @@ public abstract class BaseDAO <T extends Mappable & Bean> extends QueryFactory i
 
     public void delete(T t) throws DAOException {
         String id = String.valueOf(t.getId());
-        LinkedHashMap<String, String> filter = new LinkedHashMap<String, String>() {
+        LinkedHashMap<String, Object> filter = new LinkedHashMap<String, Object>() {
             {
                 this.put("id", id);
             }
@@ -128,9 +128,9 @@ public abstract class BaseDAO <T extends Mappable & Bean> extends QueryFactory i
         }
     }
 
-    public void delete(int id) throws DAOException {
+    public void delete(Integer id) throws DAOException {
         String stringifiedId = String.valueOf(id);
-        LinkedHashMap<String, String> filter = new LinkedHashMap<String, String>() {
+        LinkedHashMap<String, Object> filter = new LinkedHashMap<String, Object>() {
             {
                 this.put("id", stringifiedId);
             }
@@ -146,14 +146,35 @@ public abstract class BaseDAO <T extends Mappable & Bean> extends QueryFactory i
         }
     }
 
-    protected int configureStatement(PreparedStatement stmt, int nextReplacement, LinkedHashMap<String, String> data) throws SQLException {
+    protected Integer configureStatement(PreparedStatement stmt, Integer nextReplacement, LinkedHashMap<String, Object> data) throws DAOException {
         Object keys[] = data.keySet().toArray();
-        for( int i = 0; i < data.size(); i++){
-            stmt.setString(nextReplacement, data.get(keys[i]));
+        for( Integer i = 0; i < data.size(); i++){
+            Object item = data.get(keys[i]);
+
+            try{
+                this.setStatementBasedOnType(stmt, item, nextReplacement);
+            }catch(SQLException e){
+                throw new DAOException(e.getMessage(), e);
+            }
+
             nextReplacement++;
         }
         
         return nextReplacement;
+    }
+
+    protected void setStatementBasedOnType(PreparedStatement stmt, Object item, Integer replacementePosition) throws SQLException, DAOException{
+        if(item instanceof java.util.Date){
+            stmt.setDate(replacementePosition, (java.sql.Date) item);
+        }else if (item instanceof Integer){
+            stmt.setInt(replacementePosition, (Integer) item);
+        }else if(item instanceof String){
+            stmt.setString(replacementePosition, (String) item);
+        }else if(item instanceof Float){
+            stmt.setFloat(replacementePosition, (Float) item);
+        }else {
+            throw new DAOException("Tipo não suportado: " + item.getClass().getName());
+        }
     }
 
     protected abstract void configureStatement(PreparedStatement stmt, T t) throws SQLException;

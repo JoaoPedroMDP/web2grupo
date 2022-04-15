@@ -6,67 +6,62 @@ import Interfaces.Bean;
 import Interfaces.Mappable;
 
 public class Address implements Mappable, Bean{
-    private int id;
+    private Integer id;
     private String street;
     private String number;
     private String complement;
     private String district;
-    private int zip_code;
-    private String city;
-    private String state;
+    private Integer zip_code;
+    private Integer city_id;
 
     public Address() {}
 
-    public Address(int id, String street, String number, String complement, String district, int zip_code, String city, String state) {
+    public Address(Integer id, String street, String number, String complement, String district, Integer zip_code, Integer city_id) {
         this.id = id;
         this.street = street;
         this.number = number;
         this.complement = complement;
         this.district = district;
         this.zip_code = zip_code;
-        this.city = city;
-        this.state = state;
+        this.city_id = city_id;
     }
 
-    public Address(String street, String number, String complement, String district, int zip_code, String city, String state) {
+    public Address(String street, String number, String complement, String district, Integer zip_code, Integer city_id) {
         this.street = street;
         this.number = number;
         this.complement = complement;
         this.district = district;
         this.zip_code = zip_code;
-        this.city = city;
-        this.state = state;
+        this.city_id = city_id;
     }
 
     @Override
-    public void fromMap(LinkedHashMap<String, String> data) {
-        this.setStreet(data.get("street"));
-        this.setNumber(data.get("number"));
-        this.setComplement(data.get("complement"));
-        this.setDistrict(data.get("district"));
-        this.setZip_code(Integer.parseInt(data.get("zip_code")));
-        this.setCity(data.get("city"));
-        this.setState(data.get("state"));
+    public void fromMap(LinkedHashMap<String, Object> data) {
+        this.setStreet( (String) data.get("street"));
+        this.setNumber( (String) data.get("number"));
+        this.setComplement( (String) data.get("complement"));
+        this.setDistrict( (String) data.get("district"));
+        this.setZip_code( (Integer) data.get("zip_code"));
+        this.setCity_id( (Integer) data.get("city_id"));
     }
 
     @Override
-    public LinkedHashMap<String, String> toMap() {
-        LinkedHashMap<String, String> data = new LinkedHashMap<String, String>();
+    public LinkedHashMap<String, Object> toMap() {
+        LinkedHashMap<String, Object> data = new LinkedHashMap<String, Object>();
         data.put("street", this.getStreet());
         data.put("number", this.getNumber());
         data.put("complement", this.getComplement());
         data.put("district", this.getDistrict());
         data.put("zip_code", String.valueOf(this.getZip_code()));
-        data.put("city", this.getCity());
-        data.put("state", this.getState());
+        data.put("city_id", this.getCity_id());
         return data;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -102,7 +97,7 @@ public class Address implements Mappable, Bean{
         this.district = district;
     }
 
-    public int getZip_code() {
+    public Integer getZip_code() {
         return zip_code;
     }
 
@@ -110,23 +105,19 @@ public class Address implements Mappable, Bean{
         this.zip_code = Integer.parseInt(zip_code);
     }
 
-    public void setZip_code(int zip_code) {
+    public void setZip_code(Integer zip_code) {
         this.zip_code = zip_code;
     }
 
-    public String getCity() {
-        return city;
+    public Integer getCity_id() {
+        return city_id;
     }
 
-    public void setCity(String city) {
-        this.city = city;
+    public void setCity_id(Integer city_id) {
+        this.city_id = city_id;
     }
 
-    public String getState() {
-        return state;
-    }
-
-    public void setState(String state) {
-        this.state = state;
+    public void setCity_id(String city_id) {
+        this.city_id = Integer.parseInt(city_id);
     }
 }

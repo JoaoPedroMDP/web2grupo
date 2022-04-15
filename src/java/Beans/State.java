@@ -5,18 +5,18 @@ import java.util.LinkedHashMap;
 import Interfaces.Bean;
 import Interfaces.Mappable;
 
-public class Category implements Mappable, Bean{
+public class State implements Mappable, Bean{
     private Integer id;
     private String name;
 
-    public Category() {}
+    public State() {}
 
-    public Category(Integer id, String name) {
+    public State(Integer id, String name) {
         this.setId(id);
         this.setName(name);
     }
 
-    public Category(String name) {
+    public State(String name) {
         this.setName(name);
     }
 

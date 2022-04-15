@@ -7,13 +7,14 @@ import Beans.Product;
 import DAOs.ProductDAO;
 import Exceptions.DAOException;
 import Exceptions.NotFound;
+import Interfaces.Tests;
 import Utils.ConnectionFactory;
 
-public class TestProduct {
-    private int idToRetrieve;
-    private int idToDelete;
-    private int idToUpdate;
-    private int generationAmount;
+public class TestProduct implements Tests{
+    private Integer idToRetrieve;
+    private Integer idToDelete;
+    private Integer idToUpdate;
+    private Integer generationAmount;
 
     public TestProduct(){
         this.idToRetrieve = 1;
@@ -24,7 +25,7 @@ public class TestProduct {
 
     public void testInsertion() throws DAOException{
         ProductDAO dao = new ProductDAO(new ConnectionFactory().getConnection());
-        for( int i = 0; i < this.generationAmount; i++){
+        for( Integer i = 0; i < this.generationAmount; i++){
             Product product = new Product();
             product.setName("Produto " + i);
             product.setImage("Imagem");
@@ -52,10 +53,10 @@ public class TestProduct {
     public void testUpdate() throws DAOException, NotFound {
         ProductDAO dao = new ProductDAO(new ConnectionFactory().getConnection());
 
-        LinkedHashMap<String, String> filters = new LinkedHashMap<String, String>();
+        LinkedHashMap<String, Object> filters = new LinkedHashMap<String, Object>();
         filters.put("name", "Produto 0");
 
-        LinkedHashMap<String, String> newData = new LinkedHashMap<String, String>();
+        LinkedHashMap<String, Object> newData = new LinkedHashMap<String, Object>();
         newData.put("name", "Produto Alterado");
         dao.update(filters, newData);
 

@@ -24,8 +24,7 @@ public class AddressDAO extends BaseDAO<Address>{
             add("complement");
             add("district");
             add("zip_code");
-            add("city");
-            add("state");
+            add("city_id");
         }};
     }
 
@@ -35,15 +34,14 @@ public class AddressDAO extends BaseDAO<Address>{
         stmt.setString(2, address.getNumber());
         stmt.setString(3, address.getComplement());
         stmt.setString(4, address.getDistrict());
-        stmt.setString(5, String.valueOf(address.getZip_code()));
-        stmt.setString(6, address.getCity());
-        stmt.setString(7, address.getState());
+        stmt.setInt(5, address.getZip_code());
+        stmt.setInt(6, address.getCity_id());
     }
 
     @Override
     protected Address fillFromResultSet(ResultSet rs) throws SQLException {
         Address address = new Address();
-        int id = rs.getInt("id");
+        Integer id = rs.getInt("id");
         if(id != 0){
             address.setId(id);
         }
@@ -53,9 +51,7 @@ public class AddressDAO extends BaseDAO<Address>{
         address.setComplement(rs.getString("complement"));
         address.setDistrict(rs.getString("district"));
         address.setZip_code(rs.getString("zip_code"));
-        address.setCity(rs.getString("city"));
-        address.setState(rs.getString("state"));
-
+        address.setCity_id(rs.getString("city_id"));
         return address;
     }
 }

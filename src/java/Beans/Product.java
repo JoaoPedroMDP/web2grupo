@@ -6,15 +6,15 @@ import Interfaces.Bean;
 import Interfaces.Mappable;
 
 public class Product implements Mappable, Bean{
-    private int id;
+    private Integer id;
     private String name;
     private String image;
     private Float weight;
-    private int category_id;
+    private Integer category_id;
 
     public Product() {}
 
-    public Product(int id, String name, String image, Float weight, int category_id) {
+    public Product(Integer id, String name, String image, Float weight, Integer category_id) {
         this.id = id;
         this.name = name;
         this.image = image;
@@ -22,7 +22,7 @@ public class Product implements Mappable, Bean{
         this.category_id = category_id;
     }
 
-    public Product(String name, String image, Float weight, int category_id) {
+    public Product(String name, String image, Float weight, Integer category_id) {
         this.name = name;
         this.image = image;
         this.weight = weight;
@@ -30,16 +30,16 @@ public class Product implements Mappable, Bean{
     }
 
     @Override
-    public void fromMap(LinkedHashMap<String, String> data) {
+    public void fromMap(LinkedHashMap<String, Object> data) {
         this.setName((String) data.get("name"));
         this.setImage((String) data.get("image"));
-        this.setWeight(Float.parseFloat(data.get("weight")));
-        this.setCategory_id(Integer.parseInt(data.get("category_id")));
+        this.setWeight(Float.parseFloat( (String) data.get("weight")));
+        this.setCategory_id(Integer.parseInt( (String) data.get("category_id")));
     }
 
     @Override
-    public LinkedHashMap<String, String> toMap() {
-        LinkedHashMap<String, String> data = new LinkedHashMap<String, String>();
+    public LinkedHashMap<String, Object> toMap() {
+        LinkedHashMap<String, Object> data = new LinkedHashMap<String, Object>();
         data.put("name", this.getName());
         data.put("image", this.getImage());
         data.put("weight", String.valueOf(this.getWeight()));
@@ -47,11 +47,11 @@ public class Product implements Mappable, Bean{
         return data;
     }
 
-    public int getCategory_id() {
+    public Integer getCategory_id() {
         return category_id;
     }
 
-    public void setCategory_id(int category_id) {
+    public void setCategory_id(Integer category_id) {
         this.category_id = category_id;
     }
 
@@ -87,11 +87,11 @@ public class Product implements Mappable, Bean{
         this.name = name;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 }

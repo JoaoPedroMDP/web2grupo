@@ -12,9 +12,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import Interfaces.Tests;
 import Tests.TestAddress;
 import Tests.TestCategory;
+import Tests.TestCity;
 import Tests.TestProduct;
+import Tests.TestState;
 import Tests.TestTicket;
 import Tests.TestType;
 import Tests.TestUser;
@@ -26,86 +29,15 @@ import Tests.TestUser;
 @WebServlet(name = "TestServlet", urlPatterns = {"/TestServlet"})
 public class TestServlet extends HttpServlet {
 
-    private void testUser(PrintWriter out) throws Exception{
+    private void test(PrintWriter out, Tests testSubject, String subject) throws Exception{
         try{
-            TestUser test = new TestUser();
-            test.testInsertion();
-            test.testGet();
-            test.testIndex();
-            test.testDeletion();
-            test.testUpdate();
+            testSubject.testInsertion();
+            testSubject.testGet();
+            testSubject.testIndex();
+            testSubject.testDeletion();
+            testSubject.testUpdate();
         }catch(Exception e){
-            out.println("<p>Erro USER: " + e.getMessage() + "</p>");
-            throw e;
-        }
-    }
-
-    private void testAddress(PrintWriter out) throws Exception{
-        try{
-            TestAddress test = new TestAddress();
-            test.testInsertion();
-            test.testGet();
-            test.testIndex();
-            test.testDeletion();
-            test.testUpdate();
-        }catch(Exception e){
-            out.println("<p>Erro ADDRESS: " + e.getMessage() + "</p>");
-            throw e;
-        }
-    }
-
-    private void testCategory(PrintWriter out) throws Exception{
-        try{
-            TestCategory test = new TestCategory();
-            test.testInsertion();
-            test.testGet();
-            test.testIndex();
-            test.testDeletion();
-            test.testUpdate();
-        }catch(Exception e){
-            out.println("<p>Erro CATEGORY: " + e.getMessage() + "</p>");
-            throw e;
-        }
-    }
-
-    private void testType(PrintWriter out) throws Exception{
-        try{
-            TestType test = new TestType();
-            test.testInsertion();
-            test.testGet();
-            test.testIndex();
-            test.testDeletion();
-            test.testUpdate();
-        }catch(Exception e){
-            out.println("<p>Erro TYPE: " + e.getMessage() + "</p>");
-            throw e;
-        }
-    }
-
-    private void testProduct(PrintWriter out) throws Exception{
-        try{
-            TestProduct test = new TestProduct();
-            test.testInsertion();
-            test.testGet();
-            test.testIndex();
-            test.testDeletion();
-            test.testUpdate();
-        }catch(Exception e){
-            out.println("<p>Erro PRODUCT: " + e.getMessage() + "</p>");
-            throw e;
-        }
-    }
-
-    private void testTicket(PrintWriter out) throws Exception{
-        try{
-            TestTicket test = new TestTicket();
-            test.testInsertion();
-            test.testGet();
-            test.testIndex();
-            test.testDeletion();
-            test.testUpdate();
-        }catch(Exception e){
-            out.println("<p>Erro TICKET: " + e.getMessage() + "</p>");
+            out.println("<p>Erro " + subject + ": " + e.getMessage() + "</p>");
             throw e;
         }
     }
@@ -131,12 +63,22 @@ public class TestServlet extends HttpServlet {
             out.println("<body>");
             out.println("<h1>Testando</h1>");
 
-            this.testType(out);
-            this.testCategory(out);
-            this.testProduct(out);
-            this.testAddress(out);
-            this.testUser(out);
-            this.testTicket(out);
+            TestType testType = new TestType();
+            this.test(out, testType, "Type");
+            TestCategory testCategory = new TestCategory();
+            this.test(out, testCategory, "Category");
+            TestProduct testProduct = new TestProduct();
+            this.test(out, testProduct, "Product");
+            TestState testState = new TestState();
+            this.test(out, testState, "State");
+            TestCity testCity = new TestCity();
+            this.test(out, testCity, "City");
+            TestAddress testAddress = new TestAddress();
+            this.test(out, testAddress, "Address");
+            TestUser testUser = new TestUser();
+            this.test(out, testUser, "User");
+            TestTicket testTicket = new TestTicket();
+            this.test(out, testTicket, "Ticket");
             
             out.println("</body>");
             out.println("</html>");
