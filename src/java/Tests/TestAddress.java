@@ -7,9 +7,10 @@ import Beans.Address;
 import DAOs.AddressDAO;
 import Exceptions.DAOException;
 import Exceptions.NotFound;
+import Interfaces.Tests;
 import Utils.ConnectionFactory;
 
-public class TestAddress {
+public class TestAddress implements Tests{
     private int idToRetrieve;
     private int idToDelete;
     private int idToUpdate;
@@ -31,8 +32,7 @@ public class TestAddress {
             address.setComplement("Complemento");
             address.setDistrict("Bairro");
             address.setZip_code(8170160);
-            address.setCity("Cidade");
-            address.setState("Estado");
+            address.setCity_id(1);
 
             dao.insert(address);
         }
@@ -59,7 +59,7 @@ public class TestAddress {
         filters.put("street", "Rua 0");
 
         LinkedHashMap<String, Object> newData = new LinkedHashMap<String, Object>();
-        newData.put("street", "RUA alterada");
+        newData.put("street", "Rua alterada");
         dao.update(filters, newData);
 
         Address address = dao.get(this.idToUpdate);

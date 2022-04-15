@@ -12,30 +12,27 @@ public class Address implements Mappable, Bean{
     private String complement;
     private String district;
     private int zip_code;
-    private String city;
-    private String state;
+    private int city_id;
 
     public Address() {}
 
-    public Address(int id, String street, String number, String complement, String district, int zip_code, String city, String state) {
+    public Address(int id, String street, String number, String complement, String district, int zip_code, int city_id) {
         this.id = id;
         this.street = street;
         this.number = number;
         this.complement = complement;
         this.district = district;
         this.zip_code = zip_code;
-        this.city = city;
-        this.state = state;
+        this.city_id = city_id;
     }
 
-    public Address(String street, String number, String complement, String district, int zip_code, String city, String state) {
+    public Address(String street, String number, String complement, String district, int zip_code, int city_id) {
         this.street = street;
         this.number = number;
         this.complement = complement;
         this.district = district;
         this.zip_code = zip_code;
-        this.city = city;
-        this.state = state;
+        this.city_id = city_id;
     }
 
     @Override
@@ -44,9 +41,8 @@ public class Address implements Mappable, Bean{
         this.setNumber( (String) data.get("number"));
         this.setComplement( (String) data.get("complement"));
         this.setDistrict( (String) data.get("district"));
-        this.setZip_code( Integer.parseInt( (String) data.get("zip_code")));
-        this.setCity( (String) data.get("city"));
-        this.setState( (String) data.get("state"));
+        this.setZip_code( (Integer) data.get("zip_code"));
+        this.setCity_id( (Integer) data.get("city_id"));
     }
 
     @Override
@@ -57,8 +53,7 @@ public class Address implements Mappable, Bean{
         data.put("complement", this.getComplement());
         data.put("district", this.getDistrict());
         data.put("zip_code", String.valueOf(this.getZip_code()));
-        data.put("city", this.getCity());
-        data.put("state", this.getState());
+        data.put("city_id", this.getCity_id());
         return data;
     }
 
@@ -114,19 +109,15 @@ public class Address implements Mappable, Bean{
         this.zip_code = zip_code;
     }
 
-    public String getCity() {
-        return city;
+    public int getCity_id() {
+        return city_id;
     }
 
-    public void setCity(String city) {
-        this.city = city;
+    public void setCity_id(int city_id) {
+        this.city_id = city_id;
     }
 
-    public String getState() {
-        return state;
-    }
-
-    public void setState(String state) {
-        this.state = state;
+    public void setCity_id(String city_id) {
+        this.city_id = Integer.parseInt(city_id);
     }
 }

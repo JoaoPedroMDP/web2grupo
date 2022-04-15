@@ -7,9 +7,10 @@ import Beans.Ticket;
 import DAOs.TicketDAO;
 import Exceptions.DAOException;
 import Exceptions.NotFound;
+import Interfaces.Tests;
 import Utils.ConnectionFactory;
 
-public class TestTicket {
+public class TestTicket implements Tests{
     private int idToRetrieve;
     private int idToDelete;
     private int idToUpdate;

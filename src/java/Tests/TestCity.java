@@ -3,20 +3,20 @@ package Tests;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-import Beans.Category;
-import DAOs.CategoryDAO;
+import Beans.City;
+import DAOs.CityDAO;
 import Exceptions.DAOException;
 import Exceptions.NotFound;
 import Interfaces.Tests;
 import Utils.ConnectionFactory;
 
-public class TestCategory implements Tests{
+public class TestCity implements Tests{
     private int idToRetrieve;
     private int idToDelete;
     private int idToUpdate;
     private int generationAmount;
 
-    public TestCategory(){
+    public TestCity(){
         this.idToRetrieve = 1;
         this.idToUpdate = 2;
         this.idToDelete = 3;
@@ -24,46 +24,47 @@ public class TestCategory implements Tests{
     }
 
     public void testInsertion() throws DAOException{
-        CategoryDAO dao = new CategoryDAO(new ConnectionFactory().getConnection());
+        CityDAO dao = new CityDAO(new ConnectionFactory().getConnection());
         for( int i = 0; i < this.generationAmount; i++){
-            Category category = new Category();
-            category.setName("Categoria " + i);
+            City city = new City();
+            city.setName("Cidade " + i);
+            city.setState_id(1);
 
-            dao.insert(category);
+            dao.insert(city);
         }
     }
 
     public void testGet() throws DAOException, NotFound {
-        Category category = new CategoryDAO(new ConnectionFactory().getConnection()).get(this.idToRetrieve);
+        City city = new CityDAO(new ConnectionFactory().getConnection()).get(this.idToRetrieve);
 
-        System.out.println(category.getName());
+        System.out.println(city.getName());
     }
 
     public void testIndex() throws DAOException {
-        List<Category> categorys = new CategoryDAO(new ConnectionFactory().getConnection()).getAll();
+        List<City> citys = new CityDAO(new ConnectionFactory().getConnection()).getAll();
 
-        for(Category category : categorys){
-            System.out.println(category.getName());
+        for(City city : citys){
+            System.out.println(city.getName());
         }
     }
 
     public void testUpdate() throws DAOException, NotFound {
-        CategoryDAO dao = new CategoryDAO(new ConnectionFactory().getConnection());
+        CityDAO dao = new CityDAO(new ConnectionFactory().getConnection());
 
         LinkedHashMap<String, Object> filters = new LinkedHashMap<String, Object>();
-        filters.put("name", "Categoria 0");
+        filters.put("name", "Cidade 0");
 
         LinkedHashMap<String, Object> newData = new LinkedHashMap<String, Object>();
-        newData.put("name", "Categoria Alterado");
+        newData.put("name", "Cidade Alterada");
         dao.update(filters, newData);
 
-        Category category = dao.get(this.idToUpdate);
-        category.setName("Tambem funfa");
-        dao.update(category);
+        City city = dao.get(this.idToUpdate);
+        city.setName("Tambem funfa");
+        dao.update(city);
     }
 
     public void testDeletion() throws DAOException, NotFound {
-        CategoryDAO dao = new CategoryDAO(new ConnectionFactory().getConnection());
+        CityDAO dao = new CityDAO(new ConnectionFactory().getConnection());
         dao.delete(idToDelete);
     }
 }

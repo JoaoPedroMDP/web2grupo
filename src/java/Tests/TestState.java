@@ -3,20 +3,20 @@ package Tests;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-import Beans.Category;
-import DAOs.CategoryDAO;
+import Beans.State;
+import DAOs.StateDAO;
 import Exceptions.DAOException;
 import Exceptions.NotFound;
 import Interfaces.Tests;
 import Utils.ConnectionFactory;
 
-public class TestCategory implements Tests{
+public class TestState implements Tests{
     private int idToRetrieve;
     private int idToDelete;
     private int idToUpdate;
     private int generationAmount;
 
-    public TestCategory(){
+    public TestState(){
         this.idToRetrieve = 1;
         this.idToUpdate = 2;
         this.idToDelete = 3;
@@ -24,46 +24,46 @@ public class TestCategory implements Tests{
     }
 
     public void testInsertion() throws DAOException{
-        CategoryDAO dao = new CategoryDAO(new ConnectionFactory().getConnection());
+        StateDAO dao = new StateDAO(new ConnectionFactory().getConnection());
         for( int i = 0; i < this.generationAmount; i++){
-            Category category = new Category();
-            category.setName("Categoria " + i);
+            State state = new State();
+            state.setName("Estado " + i);
 
-            dao.insert(category);
+            dao.insert(state);
         }
     }
 
     public void testGet() throws DAOException, NotFound {
-        Category category = new CategoryDAO(new ConnectionFactory().getConnection()).get(this.idToRetrieve);
+        State state = new StateDAO(new ConnectionFactory().getConnection()).get(this.idToRetrieve);
 
-        System.out.println(category.getName());
+        System.out.println(state.getName());
     }
 
     public void testIndex() throws DAOException {
-        List<Category> categorys = new CategoryDAO(new ConnectionFactory().getConnection()).getAll();
+        List<State> states = new StateDAO(new ConnectionFactory().getConnection()).getAll();
 
-        for(Category category : categorys){
-            System.out.println(category.getName());
+        for(State state : states){
+            System.out.println(state.getName());
         }
     }
 
     public void testUpdate() throws DAOException, NotFound {
-        CategoryDAO dao = new CategoryDAO(new ConnectionFactory().getConnection());
+        StateDAO dao = new StateDAO(new ConnectionFactory().getConnection());
 
         LinkedHashMap<String, Object> filters = new LinkedHashMap<String, Object>();
-        filters.put("name", "Categoria 0");
+        filters.put("name", "Estado 0");
 
         LinkedHashMap<String, Object> newData = new LinkedHashMap<String, Object>();
-        newData.put("name", "Categoria Alterado");
+        newData.put("name", "Estado Alterado");
         dao.update(filters, newData);
 
-        Category category = dao.get(this.idToUpdate);
-        category.setName("Tambem funfa");
-        dao.update(category);
+        State state = dao.get(this.idToUpdate);
+        state.setName("Tambem funfa");
+        dao.update(state);
     }
 
     public void testDeletion() throws DAOException, NotFound {
-        CategoryDAO dao = new CategoryDAO(new ConnectionFactory().getConnection());
+        StateDAO dao = new StateDAO(new ConnectionFactory().getConnection());
         dao.delete(idToDelete);
     }
 }

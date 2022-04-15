@@ -7,9 +7,10 @@ import Beans.User;
 import DAOs.UserDAO;
 import Exceptions.DAOException;
 import Exceptions.NotFound;
+import Interfaces.Tests;
 import Utils.ConnectionFactory;
 
-public class TestUser {
+public class TestUser implements Tests {
     private int idToRetrieve;
     private int idToDelete;
     private int idToUpdate;
