@@ -1,3 +1,28 @@
 #!/bin/bash
 
-mysql -u [database_username] -p [database_password] -D [database_name] -e "source src/database/database.sql"
+NOME_DO_DATABASE="NOME_AQUI_NOME_AQUI"
+DB_USER="USER_AQUI_USER_AQUI"
+DB_PASSWORD="SENHA_AQUI_SENHA_AQUI"
+
+createDB="CREATE DATABASE $NOME_DO_DATABASE;"
+createTables="src/database/database.sql"
+delete="DROP DATABASE IF EXISTS $NOME_DO_DATABASE;"
+
+function execute() {
+    if [ "$1" = 'create' ]; then
+        echo "Criando"
+        mysql -u $DB_USER -p$DB_PASSWORD -e "$createDB"
+        mysql -u $DB_USER -p$DB_PASSWORD -D $NOME_DO_DATABASE -e "source $createTables"
+    elif [ "$1" = 'delete' ]; then
+        echo "Deletando"
+        mysql -u $DB_USER -p$DB_PASSWORD -D $NOME_DO_DATABASE -e "$delete"
+    else
+        echo "Se chegou aqui é porque o comando especificado nao existe, meu/minha chapa :/"
+    fi
+}
+
+if [ $# == 0 ]; then
+    echo "Voce precisa especificar a acao. 'create' para criar, 'delete' para deletar o banco de dados"
+else
+    execute $1
+fi
