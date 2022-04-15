@@ -41,7 +41,7 @@ public class AddressDAO extends BaseDAO<Address>{
     @Override
     protected Address fillFromResultSet(ResultSet rs) throws SQLException {
         Address address = new Address();
-        int id = rs.getInt("id");
+        Integer id = rs.getInt("id");
         if(id != 0){
             address.setId(id);
         }

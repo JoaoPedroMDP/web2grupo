@@ -35,7 +35,7 @@ public class CityDAO extends BaseDAO<City>{
     protected City fillFromResultSet(ResultSet rs)
      throws SQLException {
         City city = new City();
-        int id = rs.getInt("id");
+        Integer id = rs.getInt("id");
         if(id != 0){
             city.setId(id);
         }

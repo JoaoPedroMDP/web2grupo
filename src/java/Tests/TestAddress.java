@@ -11,10 +11,10 @@ import Interfaces.Tests;
 import Utils.ConnectionFactory;
 
 public class TestAddress implements Tests{
-    private int idToRetrieve;
-    private int idToDelete;
-    private int idToUpdate;
-    private int generationAmount;
+    private Integer idToRetrieve;
+    private Integer idToDelete;
+    private Integer idToUpdate;
+    private Integer generationAmount;
 
     public TestAddress(){
         this.idToRetrieve = 1;
@@ -25,7 +25,7 @@ public class TestAddress implements Tests{
 
     public void testInsertion() throws DAOException{
         AddressDAO dao = new AddressDAO(new ConnectionFactory().getConnection());
-        for( int i = 0; i < this.generationAmount; i++){
+        for( Integer i = 0; i < this.generationAmount; i++){
             Address address = new Address();
             address.setStreet("Rua");
             address.setNumber("Número");

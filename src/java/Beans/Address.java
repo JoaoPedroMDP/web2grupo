@@ -6,17 +6,17 @@ import Interfaces.Bean;
 import Interfaces.Mappable;
 
 public class Address implements Mappable, Bean{
-    private int id;
+    private Integer id;
     private String street;
     private String number;
     private String complement;
     private String district;
-    private int zip_code;
-    private int city_id;
+    private Integer zip_code;
+    private Integer city_id;
 
     public Address() {}
 
-    public Address(int id, String street, String number, String complement, String district, int zip_code, int city_id) {
+    public Address(Integer id, String street, String number, String complement, String district, Integer zip_code, Integer city_id) {
         this.id = id;
         this.street = street;
         this.number = number;
@@ -26,7 +26,7 @@ public class Address implements Mappable, Bean{
         this.city_id = city_id;
     }
 
-    public Address(String street, String number, String complement, String district, int zip_code, int city_id) {
+    public Address(String street, String number, String complement, String district, Integer zip_code, Integer city_id) {
         this.street = street;
         this.number = number;
         this.complement = complement;
@@ -57,11 +57,11 @@ public class Address implements Mappable, Bean{
         return data;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -97,7 +97,7 @@ public class Address implements Mappable, Bean{
         this.district = district;
     }
 
-    public int getZip_code() {
+    public Integer getZip_code() {
         return zip_code;
     }
 
@@ -105,15 +105,15 @@ public class Address implements Mappable, Bean{
         this.zip_code = Integer.parseInt(zip_code);
     }
 
-    public void setZip_code(int zip_code) {
+    public void setZip_code(Integer zip_code) {
         this.zip_code = zip_code;
     }
 
-    public int getCity_id() {
+    public Integer getCity_id() {
         return city_id;
     }
 
-    public void setCity_id(int city_id) {
+    public void setCity_id(Integer city_id) {
         this.city_id = city_id;
     }
 

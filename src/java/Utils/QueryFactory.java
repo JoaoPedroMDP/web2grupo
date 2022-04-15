@@ -87,7 +87,7 @@ public class QueryFactory {
         return String.join(connector + " ", pairs);
     }
 
-    private String generateQuestionMarkSequence(int size) {
+    private String generateQuestionMarkSequence(Integer size) {
         String seq = "?";
         
         return seq.concat(

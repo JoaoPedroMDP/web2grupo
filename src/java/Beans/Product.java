@@ -6,15 +6,15 @@ import Interfaces.Bean;
 import Interfaces.Mappable;
 
 public class Product implements Mappable, Bean{
-    private int id;
+    private Integer id;
     private String name;
     private String image;
     private Float weight;
-    private int category_id;
+    private Integer category_id;
 
     public Product() {}
 
-    public Product(int id, String name, String image, Float weight, int category_id) {
+    public Product(Integer id, String name, String image, Float weight, Integer category_id) {
         this.id = id;
         this.name = name;
         this.image = image;
@@ -22,7 +22,7 @@ public class Product implements Mappable, Bean{
         this.category_id = category_id;
     }
 
-    public Product(String name, String image, Float weight, int category_id) {
+    public Product(String name, String image, Float weight, Integer category_id) {
         this.name = name;
         this.image = image;
         this.weight = weight;
@@ -47,11 +47,11 @@ public class Product implements Mappable, Bean{
         return data;
     }
 
-    public int getCategory_id() {
+    public Integer getCategory_id() {
         return category_id;
     }
 
-    public void setCategory_id(int category_id) {
+    public void setCategory_id(Integer category_id) {
         this.category_id = category_id;
     }
 
@@ -87,11 +87,11 @@ public class Product implements Mappable, Bean{
         this.name = name;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 }

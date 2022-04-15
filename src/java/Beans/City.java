@@ -6,19 +6,19 @@ import Interfaces.Bean;
 import Interfaces.Mappable;
 
 public class City implements Mappable, Bean{
-    private int id;
+    private Integer id;
     private String name;
-    private int state_id;
+    private Integer state_id;
 
     public City() {}
 
-    public City(int id, String name, int state_id) {
+    public City(Integer id, String name, Integer state_id) {
         this.setId(id);
         this.setName(name);
         this.setState_id(state_id);
     }
 
-    public City(String name, int state_id) {
+    public City(String name, Integer state_id) {
         this.setName(name);
         this.setState_id(state_id);
     }
@@ -37,11 +37,11 @@ public class City implements Mappable, Bean{
         return data;
     }
 
-    public int getState_id() {
+    public Integer getState_id() {
         return state_id;
     }
 
-    public void setState_id(int state_id) {
+    public void setState_id(Integer state_id) {
         this.state_id = state_id;
     }
 
@@ -57,11 +57,11 @@ public class City implements Mappable, Bean{
         this.name = name;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 }

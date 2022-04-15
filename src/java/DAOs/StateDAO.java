@@ -33,7 +33,7 @@ public class StateDAO extends BaseDAO<State>{
     protected State fillFromResultSet(ResultSet rs)
      throws SQLException {
         State state = new State();
-        int id = rs.getInt("id");
+        Integer id = rs.getInt("id");
         if(id != 0){
             state.setId(id);
         }

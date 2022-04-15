@@ -11,10 +11,10 @@ import Interfaces.Tests;
 import Utils.ConnectionFactory;
 
 public class TestProduct implements Tests{
-    private int idToRetrieve;
-    private int idToDelete;
-    private int idToUpdate;
-    private int generationAmount;
+    private Integer idToRetrieve;
+    private Integer idToDelete;
+    private Integer idToUpdate;
+    private Integer generationAmount;
 
     public TestProduct(){
         this.idToRetrieve = 1;
@@ -25,7 +25,7 @@ public class TestProduct implements Tests{
 
     public void testInsertion() throws DAOException{
         ProductDAO dao = new ProductDAO(new ConnectionFactory().getConnection());
-        for( int i = 0; i < this.generationAmount; i++){
+        for( Integer i = 0; i < this.generationAmount; i++){
             Product product = new Product();
             product.setName("Produto " + i);
             product.setImage("Imagem");

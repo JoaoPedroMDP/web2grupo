@@ -11,10 +11,10 @@ import Interfaces.Tests;
 import Utils.ConnectionFactory;
 
 public class TestUser implements Tests {
-    private int idToRetrieve;
-    private int idToDelete;
-    private int idToUpdate;
-    private int generationAmount;
+    private Integer idToRetrieve;
+    private Integer idToDelete;
+    private Integer idToUpdate;
+    private Integer generationAmount;
 
     public TestUser(){
         this.idToRetrieve = 1;
@@ -25,7 +25,7 @@ public class TestUser implements Tests {
 
     public void testInsertion() throws DAOException{
         UserDAO dao = new UserDAO(new ConnectionFactory().getConnection());
-        for( int i = 0; i < this.generationAmount; i++){
+        for( Integer i = 0; i < this.generationAmount; i++){
             User user = new User();
             user.setName("Nome " + i);
             user.setAddress_id(1);

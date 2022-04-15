@@ -34,7 +34,7 @@ public abstract class BaseDAO <T extends Mappable & Bean> extends QueryFactory i
         }
     }
 
-    public final T get(int id) throws DAOException, NotFound {
+    public final T get(Integer id) throws DAOException, NotFound {
         LinkedHashMap<String, Object> filters = new LinkedHashMap<String, Object>();
         filters.put("id", String.valueOf(id));
         String query = mount_select(tableName, filters);
@@ -88,7 +88,7 @@ public abstract class BaseDAO <T extends Mappable & Bean> extends QueryFactory i
 
         String query = mount_update(tableName, t.toMap(), filters);
         try (PreparedStatement stmt = con.prepareStatement(query)){
-            int nextReplacement = 1;
+            Integer nextReplacement = 1;
             nextReplacement = this.configureStatement(stmt, nextReplacement, t.toMap());
             nextReplacement = this.configureStatement(stmt, nextReplacement, filters);
 
@@ -101,7 +101,7 @@ public abstract class BaseDAO <T extends Mappable & Bean> extends QueryFactory i
     public void update(LinkedHashMap<String, Object> filters, LinkedHashMap<String, Object> newData) throws DAOException {
         String query = mount_update(tableName, newData, filters);
         try (PreparedStatement stmt = con.prepareStatement(query)){
-            int nextReplacement = 1;
+            Integer nextReplacement = 1;
             nextReplacement = this.configureStatement(stmt, nextReplacement, newData);
             nextReplacement = this.configureStatement(stmt, nextReplacement, filters);
             stmt.executeUpdate();
@@ -128,7 +128,7 @@ public abstract class BaseDAO <T extends Mappable & Bean> extends QueryFactory i
         }
     }
 
-    public void delete(int id) throws DAOException {
+    public void delete(Integer id) throws DAOException {
         String stringifiedId = String.valueOf(id);
         LinkedHashMap<String, Object> filter = new LinkedHashMap<String, Object>() {
             {
@@ -146,9 +146,9 @@ public abstract class BaseDAO <T extends Mappable & Bean> extends QueryFactory i
         }
     }
 
-    protected int configureStatement(PreparedStatement stmt, int nextReplacement, LinkedHashMap<String, Object> data) throws DAOException {
+    protected Integer configureStatement(PreparedStatement stmt, Integer nextReplacement, LinkedHashMap<String, Object> data) throws DAOException {
         Object keys[] = data.keySet().toArray();
-        for( int i = 0; i < data.size(); i++){
+        for( Integer i = 0; i < data.size(); i++){
             Object item = data.get(keys[i]);
 
             try{
@@ -163,7 +163,7 @@ public abstract class BaseDAO <T extends Mappable & Bean> extends QueryFactory i
         return nextReplacement;
     }
 
-    protected void setStatementBasedOnType(PreparedStatement stmt, Object item, int replacementePosition) throws SQLException, DAOException{
+    protected void setStatementBasedOnType(PreparedStatement stmt, Object item, Integer replacementePosition) throws SQLException, DAOException{
         if(item instanceof java.util.Date){
             stmt.setDate(replacementePosition, (java.sql.Date) item);
         }else if (item instanceof Integer){

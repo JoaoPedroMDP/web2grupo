@@ -39,7 +39,7 @@ public class ProductDAO extends BaseDAO<Product>{
     protected Product fillFromResultSet(ResultSet rs)
      throws SQLException {
         Product product = new Product();
-        int id = rs.getInt("id");
+        Integer id = rs.getInt("id");
         if(id != 0){
             product.setId(id);
         }

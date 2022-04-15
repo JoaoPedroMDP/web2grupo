@@ -33,7 +33,7 @@ public class TypeDAO extends BaseDAO<Type>{
     protected Type fillFromResultSet(ResultSet rs)
      throws SQLException {
         Type type = new Type();
-        int id = rs.getInt("id");
+        Integer id = rs.getInt("id");
         if(id != 0){
             type.setId(id);
         }

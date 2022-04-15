@@ -47,7 +47,7 @@ public class UserDAO extends BaseDAO<User> {
     protected User fillFromResultSet(ResultSet rs)
      throws SQLException {
         User user = new User();
-        int id = rs.getInt("id");
+        Integer id = rs.getInt("id");
         if(id != 0){
             user.setId(id);
         }

@@ -6,12 +6,12 @@ import Interfaces.Bean;
 import Interfaces.Mappable;
 
 public class State implements Mappable, Bean{
-    private int id;
+    private Integer id;
     private String name;
 
     public State() {}
 
-    public State(int id, String name) {
+    public State(Integer id, String name) {
         this.setId(id);
         this.setName(name);
     }
@@ -42,11 +42,11 @@ public class State implements Mappable, Bean{
         this.name = name;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 }
