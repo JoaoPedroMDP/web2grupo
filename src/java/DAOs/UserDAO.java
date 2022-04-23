@@ -8,27 +8,34 @@ import java.util.ArrayList;
 
 import Beans.User;
 import Exceptions.DAOException;
+import Utils.ConnectionFactory;
+import Utils.Security;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class UserDAO extends BaseDAO<User> {
 
     public UserDAO(Connection con) throws DAOException {
-        if(con == null){
+        if (con == null) {
             throw new DAOException("Conexão nula ao criar UserDAO");
         }
-        
+
         this.con = con;
         this.tableName = "users";
         this.subject = "usuário";
-        this.columns = new ArrayList<String>(){{
-            add("name");
-            add("surname");
-            add("email");
-            add("password");
-            add("cpf");
-            add("phone");
-            add("role");
-            add("address_id");
-        }};
+        this.columns = new ArrayList<String>() {
+            {
+                add("name");
+                add("surname");
+                add("email");
+                add("password");
+                add("cpf");
+                add("phone");
+                add("role");
+                add("address_id");
+            }
+        };
     }
 
     @Override
@@ -40,15 +47,15 @@ public class UserDAO extends BaseDAO<User> {
         stmt.setString(5, user.getCpf());
         stmt.setString(6, user.getPhone());
         stmt.setString(7, user.getRole());
-        stmt.setString(8, String.valueOf(user.getAddress_id()));    
+        stmt.setString(8, String.valueOf(user.getAddress_id()));
     }
 
     @Override
     protected User fillFromResultSet(ResultSet rs)
-     throws SQLException {
+            throws SQLException {
         User user = new User();
         Integer id = rs.getInt("id");
-        if(id != 0){
+        if (id != 0) {
             user.setId(id);
         }
 
@@ -62,5 +69,130 @@ public class UserDAO extends BaseDAO<User> {
         user.setAddress_id(rs.getString("address_id"));
 
         return user;
+    }
+
+    public static void create(User c) {
+        Connection con = null;
+        try {
+            con = new ConnectionFactory().getConnection();
+        } catch (DAOException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        PreparedStatement stmt = null;
+        System.out.println("HERE IT IS" + c.getAddress_id());
+
+        try {
+            stmt = con.prepareStatement("INSERT INTO user (name, surname, email, password, cpf, phone, role, address_id  ) VALUES (?,?,?, ?,?,?, 'user', ? );");
+            stmt.setString(1, c.getName());
+            stmt.setString(2, c.getSurname());
+            stmt.setString(3, c.getEmail());
+           String pass = Security.encryptPassword(c.getPassword());
+            stmt.setString(4, pass);
+            stmt.setString(5, c.getCpf());
+            stmt.setString(6, c.getPhone());
+            stmt.setInt(7, c.getAddress_id());
+            stmt.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            new ConnectionFactory().close();
+        }
+    }
+
+    public static User readOne(int id) {
+
+        Connection con = null;
+        try {
+            con = new ConnectionFactory().getConnection();
+        } catch (DAOException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        try {
+
+            stmt = con.prepareStatement("SELECT * FROM user WHERE id = ?");
+            stmt.setInt(1, id);
+
+            rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                return new User(
+                        rs.getInt("id"),
+                        rs.getString("name"),
+                        rs.getString("surname"),
+                        rs.getString("email"),
+                        rs.getString("password"),
+                        rs.getString("cpf"),
+                        rs.getString("phone"),
+                        rs.getInt("address_id")
+//                        rs.getString("uf_cliente"),
+//                        rs.getInt("id_cidade")
+                        
+                //                check = true;
+);
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            new ConnectionFactory().close();
+        }
+//
+        return null;
+    }
+
+    public static void update(int id, User c) {
+
+        Connection con = null;
+        try {
+            con = new ConnectionFactory().getConnection();
+        } catch (DAOException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        PreparedStatement stmt = null;
+
+        try {
+            stmt = con.prepareStatement("UPDATE user SET name = ?, surname = ?, email = ?, password= ?, cpf=?,phone=? WHERE id = ?");
+            stmt.setString(1, c.getName());
+            stmt.setString(2, c.getSurname());
+            stmt.setString(3, c.getEmail());
+            stmt.setString(4, c.getPassword());
+            stmt.setString(5, c.getCpf());
+            stmt.setString(6, c.getPhone());
+            stmt.setInt(7, id);
+            stmt.executeUpdate();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+    }
+
+    public static void delete(int id) {
+
+        Connection con = null;
+        try {
+            con = new ConnectionFactory().getConnection();
+        } catch (DAOException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        PreparedStatement stmt = null;
+
+        try {
+            stmt = con.prepareStatement("DELETE FROM user WHERE id = ?");
+            stmt.setInt(1, id);
+
+            stmt.executeUpdate();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            new ConnectionFactory().close();
+        }
+
     }
 }

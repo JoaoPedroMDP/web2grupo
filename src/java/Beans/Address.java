@@ -5,7 +5,8 @@ import java.util.LinkedHashMap;
 import Interfaces.Bean;
 import Interfaces.Mappable;
 
-public class Address implements Mappable, Bean{
+public class Address implements Mappable, Bean {
+
     private Integer id;
     private String street;
     private String number;
@@ -14,7 +15,8 @@ public class Address implements Mappable, Bean{
     private Integer zip_code;
     private Integer city_id;
 
-    public Address() {}
+    public Address() {
+    }
 
     public Address(Integer id, String street, String number, String complement, String district, Integer zip_code, Integer city_id) {
         this.id = id;
@@ -35,14 +37,31 @@ public class Address implements Mappable, Bean{
         this.city_id = city_id;
     }
 
+    public Address(int id, String street, String number, String complement, String district, Integer zip_code) {
+        this.id = id;
+        this.street = street;
+        this.number = number;
+        this.complement = complement;
+        this.district = district;
+        this.zip_code = zip_code;
+    }
+    
+    public Address(String street, String number, String complement, String district, Integer zip_code) {
+        this.street = street;
+        this.number = number;
+        this.complement = complement;
+        this.district = district;
+        this.zip_code = zip_code;
+    }
+
     @Override
     public void fromMap(LinkedHashMap<String, Object> data) {
-        this.setStreet( (String) data.get("street"));
-        this.setNumber( (String) data.get("number"));
-        this.setComplement( (String) data.get("complement"));
-        this.setDistrict( (String) data.get("district"));
-        this.setZip_code( (Integer) data.get("zip_code"));
-        this.setCity_id( (Integer) data.get("city_id"));
+        this.setStreet((String) data.get("street"));
+        this.setNumber((String) data.get("number"));
+        this.setComplement((String) data.get("complement"));
+        this.setDistrict((String) data.get("district"));
+        this.setZip_code((Integer) data.get("zip_code"));
+        this.setCity_id((Integer) data.get("city_id"));
     }
 
     @Override

@@ -40,6 +40,36 @@ public class User implements Mappable, Bean{
         this.role = role;
         this.address_id = address_id;
     }
+    
+     public User(int id, String name, String surname, String email, String password, String cpf, String phone, int address_id) {
+        this.id = id;
+         this.name = name;
+        this.surname = surname;
+        this.email = email;
+        this.password = password;
+        this.cpf = cpf;
+        this.phone = phone;
+        this.address_id = address_id;
+    }
+     
+       public User(String name, String surname, String email, String password, String cpf, String phone) {
+         this.name = name;
+        this.surname = surname;
+        this.email = email;
+        this.password = password;
+        this.cpf = cpf;
+        this.phone = phone;
+    }
+       
+       public User(String name, String surname, String email, String password, String cpf, String phone, Integer address_id) {
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+        this.password = password;
+        this.cpf = cpf;
+        this.phone = phone;
+        this.address_id = address_id;
+    }
 
     public void fromMap(LinkedHashMap<String, Object> data){
         this.setName((String) data.get("name"));
@@ -130,6 +160,7 @@ public class User implements Mappable, Bean{
     }
 
     public Integer getAddress_id() {
+        System.out.println("Inside beans: "+ address_id);
         return address_id;
     }
 

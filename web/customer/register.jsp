@@ -36,47 +36,114 @@
                 <div class="mask d-flex align-items-center h-100 gradient-custom-3">
                     <div class="container h-100">
                         <div class="row d-flex justify-content-center align-items-center h-100">
-                            <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+                            <div class="col-22 col-md-18 col-lg-15 col-xl-14">
                                 <div class="card" style="border-radius: 15px;">
                                     <div class="card-body p-5">
                                         <h2 class="text-uppercase text-center mb-5">Create an account</h2>
 
-                                        <form>
+                                        <form action = "/web2grupo/UserServlet?action=new" name = "cadastroCliente" method="POST">
 
-                                            <div class="form-outline mb-4">
-                                                <input type="text" id="form3Example1cg" class="form-control form-control-lg" />
-                                                <label class="form-label" for="form3Example1cg">Your Name</label>
+                                            <div class="row mb-4">
+                                                <div class="col">
+                                                    <div class="form-outline">
+                                                        <input type="text" id="form6Example1"name="name" />
+                                                        <label class="form-label" for="form6Example1">Name</label>
+                                                    </div>
+                                                </div>  
+                                                <div class="col">
+                                                    <div class="form-outline">
+                                                        <input type="text" id="form6Example2" name="surname" />
+                                                        <label class="form-label" for="form6Example2">Surname</label>
+                                                    </div>
+                                                </div>
+                                            </div>        
+
+
+                                                   <div class="row mb-4">
+                                                <div class="col">
+                                                    <div class="form-outline">
+                                                        <input type="text" id="form6Example1"name="email" />
+                                                        <label class="form-label" for="form6Example1">Email</label>
+                                                    </div>
+                                                </div>  
+                                            </div>   
+                                            <div class="row mb-4">
+                                                <div class="col">
+                                                    <div class="form-outline">
+                                                        <input type="text" id="form6Example1"name="cpf" />
+                                                        <label class="form-label" for="form6Example1">CPF</label>
+                                                    </div>
+                                                </div>  
+                                                <div class="col">
+                                                    <div class="form-outline">
+                                                        <input type="text" id="form6Example2" name="phone" />
+                                                        <label class="form-label" for="form6Example2">Phone</label>
+                                                    </div>
+                                                </div>
                                             </div>
-
-                                            <div class="form-outline mb-4">
-                                                <input type="email" id="form3Example3cg" class="form-control form-control-lg" />
-                                                <label class="form-label" for="form3Example3cg">Your Email</label>
+                                            <div class="row mb-4">
+                                                <div class="col">
+                                                    <div class="form-outline">
+                                                        <input type="text" id="form6Example1"name="password" />
+                                                        <label class="form-label" for="form6Example1">Password</label>
+                                                    </div>
+                                                </div>  
+                                            </div>   
+                                            <div class="row mb-4">
+                                                <div class="col">
+                                                    <div class="form-outline">
+                                                        <input type="text" id="form6Example1"name="street" />
+                                                        <label class="form-label" for="form6Example1">Street</label>
+                                                    </div>
+                                                </div>  
+                                                <div class="col">
+                                                    <div class="form-outline">
+                                                        <input type="text" id="form6Example2" name="number" />
+                                                        <label class="form-label" for="form6Example2">Number</label>
+                                                    </div>
+                                                </div>
                                             </div>
-
-                                            <div class="form-outline mb-4">
-                                                <input type="password" id="form3Example4cg" class="form-control form-control-lg" />
-                                                <label class="form-label" for="form3Example4cg">Password</label>
+                                            <div class="row mb-4">
+                                                <div class="col">
+                                                    <div class="form-outline">
+                                                        <input type="text" id="form6Example1" name="complement"   />
+                                                        <label class="form-label" for="form6Example1">Complement</label>
+                                                    </div>
+                                                </div>  
+                                                <div class="col">
+                                                    <div class="form-outline">
+                                                        <input type="text" id="form6Example2" name="district" />
+                                                        <label class="form-label" for="form6Example2">District</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="form-outline">
+                                                        <input type="text" id="form6Example2" name="zip_code" />
+                                                        <label class="form-label" for="form6Example2">zip code</label>
+                                                    </div>
+                                                </div>
                                             </div>
-
-                                            <div class="form-outline mb-4">
-                                                <input type="password" id="form3Example4cdg" class="form-control form-control-lg" />
-                                                <label class="form-label" for="form3Example4cdg">Repeat your password</label>
-                                            </div>
-
-                                            <!--                                                    <div class="form-check d-flex justify-content-center mb-5">-->
-                                            <div class="col-md-9 pe-5" >
-
-                                                <input class="form-control form-control-lg" id="formFileLg" type="file" />
-                                                <label class="form-label" for="form3Example4cdg" class="small text-muted mt-2">Profile picture </label>
-                                                <div class="small text-muted "> Max file size 50 MB</div>
-
+                                            <div class="row mb-4">
+                                                <div class="col">
+                                                    <div class="form-outline">
+                                                        <input type="text" id="form6Example1"  name="city" />
+                                                        <label class="form-label" for="form6Example1">City</label>
+                                                    </div>
+                                                </div>  
+                                                <div class="col">
+                                                    <div class="form-outline">
+                                                        <input type="text" id="form6Example2" name="state" />
+                                                        <label class="form-label" for="form6Example2">State</label>
+                                                    </div>
+                                                </div>
                                             </div>
                                             <div class="d-flex justify-content-center">
-                                                <button class="btn btn-success btn-block btn-lg gradient-custom-4 text-body" type="submit" onclick="window.location = 'profile.jsp'" >Register</button>
+                                                <button class="nav-link active bg-sucess text-white" type="submit">Salvar</button>
+                                                <!--                                        <button class="btn btn-success btn-block btn-lg gradient-custom-4 text-body" type="submit" onclick="window.location = 'profile.jsp'" >Register</button>-->
                                             </div>
 
                                             <p class="text-center text-muted mt-3 mb-0">Have already an account? <a href="../login.html" class="fw-bold text-body"><u>Login here</u></a></p>
-                                            <p class="text-center text-muted mt-3 mb-0" <a href="#" ><u>Voltar</u></a></p>
+                                            <p class="text-center text-muted mt-3 mb-0" <a href="#" ><u>Back</u></a></p>
 
                                         </form>
                                     </div>

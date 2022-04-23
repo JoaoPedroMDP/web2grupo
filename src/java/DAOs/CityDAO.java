@@ -8,6 +8,9 @@ import java.util.ArrayList;
 
 import Beans.City;
 import Exceptions.DAOException;
+import Utils.ConnectionFactory;
+import java.sql.Statement;
+import java.util.List;
 
 public class CityDAO extends BaseDAO<City>{
 
@@ -25,6 +28,8 @@ public class CityDAO extends BaseDAO<City>{
         }};
     }
 
+
+       
     @Override
     protected void configureStatement(PreparedStatement stmt, City city) throws SQLException {
         stmt.setString(1, city.getName());

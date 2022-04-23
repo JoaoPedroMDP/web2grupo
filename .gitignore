@@ -1,7 +1,6 @@
 build
 .idea
 .vscode
-nbproject
 build.xml
 Config.java
 setup.bash
