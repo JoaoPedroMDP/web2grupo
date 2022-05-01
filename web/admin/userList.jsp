@@ -1,30 +1,16 @@
 <%-- Document : userList Created on : Mar 3, 2022, 8:43:49 PM Author : joao --%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="utils.frontHelpers.table.Table"%>
+<%@page import="utils.frontHelpers.table.Row"%>
+<%@page import="utils.frontHelpers.table.Column"%>
+<%@page import="utils.frontHelpers.table.Cell"%>
+<%@page import="utils.frontHelpers.table.Action"%>
+
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
-    <title>Simple Sidebar - Start Bootstrap Template</title>
-
-    <!-- Favicon-->
-    <link rel="icon" type="image/x-icon" href="../assets/favicon.ico" />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/icon?family=Material+Icons"
-    />
-
-    <!-- Core theme CSS (includes Bootstrap)-->
-    <link href="../css/styles.css" rel="stylesheet" />
-
-    <!-- Bootstrap core JS-->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../js/scripts.js"></script>
+    <%-- <title>Usuários</title> --%>
+    <%@ include file="/WEB-INF/jspf/pageHead.jspf" %>
   </head>
   <body>
     <div class="d-flex" id="wrapper">
@@ -94,115 +80,40 @@
           </div>
         </nav>
 
-        <!-- Page content (Conteúdo da página)-->
-        <div class="container-fluid">
-          <div class="container-fluid">
-            <div class="row">
-              <div class="col-10 offset-1">
-                <h1 style="text-align: center; margin: 20px">Usuários</h1>
-                <table class="table table-striped table-bordered">
-                  <thead class="table-light text-center">
-                    <tr>
-                      <th scope="col" class="col-0"></th>
-                      <th scope="col" class="col-2">Nome</th>
-                      <th scope="col" class="col-6">Cargo</th>
-                      <th scope="col" class="col-1">Ação</th>
-                    </tr>
-                  </thead>
-                  <tbody class="align-items-center">
-                    <tr class="align-text-bottom">
-                      <th scope="row" class="text-center">1</th>
-                      <td class="text-center">Fulano da Silva</td>
-                      <td>Cliente</td>
-                      <td class="text-center">
-                        <a
-                          href="../customer/profile.jsp"
-                          class="btn btn-primary btn-sm"
-                          ><span class="material-icons m-sm-0">edit</span></a
-                        >
-                        <a
-                          href="../customer/profile.jsp"
-                          class="btn btn-danger btn-sm"
-                          ><span class="material-icons m-sm-0">delete</span></a
-                        >
-                      </td>
-                    </tr>
-                    <tr class="align-text-bottom">
-                      <th scope="row" class="text-center">2</th>
-                      <td class="text-center">Fulano da Silva</td>
-                      <td>Cliente</td>
-                      <td class="text-center">
-                        <a
-                          href="../customer/profile.jsp"
-                          class="btn btn-primary btn-sm"
-                          ><span class="material-icons m-sm-0">edit</span></a
-                        >
-                        <a
-                          href="../customer/profile.jsp"
-                          class="btn btn-danger btn-sm"
-                          ><span class="material-icons m-sm-0">delete</span></a
-                        >
-                      </td>
-                    </tr>
-                    <tr class="align-text-bottom">
-                      <th scope="row" class="text-center">3</th>
-                      <td class="text-center">Fulano da Silva</td>
-                      <td>Funcionário</td>
-                      <td class="col-1 text-center">
-                        <a
-                          href="../customer/profile.jsp"
-                          class="btn btn-primary btn-sm"
-                          ><span class="material-icons m-sm-0">edit</span></a
-                        >
-                        <a
-                          href="../customer/profile.jsp"
-                          class="btn btn-danger btn-sm"
-                          ><span class="material-icons m-sm-0">delete</span></a
-                        >
-                        <!--<button type="button" class="btn btn-primary btn-sm"><span class="material-icons m-sm-0">edit</span></button>
-                            <button type="button" class="btn btn-danger btn-sm"><span class="material-icons m-sm-0">delete</span></button>-->
-                      </td>
-                    </tr>
-                    <tr class="align-text-bottom">
-                      <th scope="row" class="text-center">4</th>
-                      <td class="text-center">Fulano da Silva</td>
-                      <td>Funcionário</td>
-                      <td class="col-1 text-center">
-                        <a
-                          href="../customer/profile.jsp"
-                          class="btn btn-primary btn-sm"
-                          ><span class="material-icons m-sm-0">edit</span></a
-                        >
-                        <a
-                          href="../customer/profile.jsp"
-                          class="btn btn-danger btn-sm"
-                          ><span class="material-icons m-sm-0">delete</span></a
-                        >
-                      </td>
-                    </tr>
-                    <tr class="align-text-bottom">
-                      <th scope="row" class="text-center">5</th>
-                      <td class="text-center">Fulano da Silva</td>
-                      <td>Funcionário</td>
-                      <td class="col-1 text-center">
-                        <a
-                          href="../customer/profile.jsp"
-                          class="btn btn-primary btn-sm"
-                          ><span class="material-icons m-sm-0">edit</span></a
-                        >
-                        <a
-                          href="../customer/profile.jsp"
-                          class="btn btn-danger btn-sm"
-                          ><span class="material-icons m-sm-0">delete</span></a
-                        >
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div>
+        <%
+          Column cols[] = {
+            new Column("Primeira"),
+            new Column("Segunda"),
+            new Column("Terceira"),
+          };
+
+          Action actions[] = {
+            new Action("Editar", "edit.jsp", false),
+            new Action("Excluir", "delete.jsp", true),
+          };
+
+          Cell firstRowCells[] = {
+            new Cell("1 1", true),
+            new Cell("1 2", false),
+            new Cell("1 3", false, actions)
+          };
+
+          Cell secondRowCells[] = {
+            new Cell("2 1", true),
+            new Cell("2 2", false),
+            new Cell("2 3", false, actions)
+          };
+
+          Row rows[] = {
+            new Row(firstRowCells),
+            new Row(secondRowCells)
+          };
+
+          Table table = new Table("Tabela 1", cols, rows);
+          pageContext.setAttribute("table", table);
+        %>
+        <%@ include file="/WEB-INF/jspf/table.jspf" %>
+
       </div>
     </div>
   </body>

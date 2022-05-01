@@ -1,0 +1,10 @@
+<%@page pageEncoding="UTF-8" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<%@ include file="/WEB-INF/jspf/middlewares/mustBeLoggedMiddleware.jspf"%>
+
+<c:if test="${!sessionScope.loginBean.isAdmin}">
+    <c:set var="message" value="Você precisa ser administrador para acessar esta página" scope="request"/>
+    <c:set var="link" value="/home.jsp" scope="request"/>
+    <jsp:forward page="/error.jsp" />
+</c:if>

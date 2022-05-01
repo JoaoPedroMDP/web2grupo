@@ -10,6 +10,8 @@
 
 <link href="${pageContext.request.contextPath}/css/global.css" rel="stylesheet" />
 
+<title>TESTE</title>
+
 <!-- Favicon-->
 <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/assets/favicon.ico" />
 <link

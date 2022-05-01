@@ -5,7 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="Utils.frontHelpers.NavItem"%>
+<%@page import="utils.frontHelpers.ClickableItem"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -14,10 +14,10 @@
     </head>
     <body>
         <%
-            NavItem lateral_items[] = {
-                new NavItem("Usuários", "admin/userList.jsp"),
-                new NavItem("Produtos", "products.jsp"),
-                new NavItem("Atendimentos", "tickets.jsp")
+            ClickableItem lateral_items[] = {
+                new ClickableItem("Usuários", "admin/userList.jsp"),
+                new ClickableItem("Produtos", "products.jsp"),
+                new ClickableItem("Atendimentos", "tickets.jsp")
             };
 
             pageContext.setAttribute("lateral_items", lateral_items);

@@ -1,15 +1,16 @@
 <%@ page pageEncoding="UTF-8" %>
-<%@taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- Navbar -->
 <div class="bg-white" id="sidebar-wrapper">
 <div class="sidebar-heading bg-light">BEIBE</div>
 <div class="list-group list-group-flush">
-    <jstl:forEach var="item" items="${lateral_items}">
+    <c:forEach var="item" items="${lateral_items}">
         <a class="list-group-item list-group-item-action list-group-item-light-personalized p-3 border-bottom"
         href="${item.getUrl()}">
         ${item.getLabel()}
         </a>
-    </jstl:forEach>
+    </c:forEach>
+    ${pageContext.removeAttribute("lateral_items")}
 </div>
 <div
     class="sidebar-footer sidebar-personalized"
