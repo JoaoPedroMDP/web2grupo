@@ -10,7 +10,7 @@
     <thead class="table-light text-center">
         <tr>
         <%-- HEADERS HEADERS HEADERS HEADERS HEADERS HEADERS HEADERS HEADERS --%>
-        <c:forEach var="column" items="${table.getColumns()}">
+        <c:forEach var="column" items="${table_items.getColumns()}">
             <th scope="col" class="col-2">${ column.getName()}</th>
         </c:forEach>
         </tr>
@@ -18,7 +18,7 @@
     <tbody class="align-items-center">
     <%-- LINHAS LINHAS LINHAS LINHAS LINHAS LINHAS LINHAS LINHAS --%>
         
-        <c:forEach var="row" items="${table.getRows()}">
+        <c:forEach var="row" items="${table_items.getRows()}">
             <tr>
                 <c:forEach var="cell" items="${row.getCells()}">
                     <%@ include file="cell.jspf" %>
@@ -27,6 +27,7 @@
         </c:forEach>
     </tbody>
 </table>
+    ${pageContext.removeAttribute("table_items")}
 </div>
 </div>
 </div>
