@@ -109,7 +109,7 @@
             new Row(secondRowCells)
           };
 
-          Table table = new Table("Tabela 1", cols, rows);
+          Table table = new Table(cols, rows);
           pageContext.setAttribute("table_items", table);
         %>
         <%@ include file="/WEB-INF/jspf/tableComponent/table.jspf" %>

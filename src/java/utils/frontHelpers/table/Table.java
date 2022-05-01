@@ -3,10 +3,8 @@ package utils.frontHelpers.table;
 public class Table {
     private Row[] rows;
     private Column[] columns;
-    private String title;
 
-    public Table(String title, Column[] columns, Row[] rows) {
-        this.title = title;
+    public Table(Column[] columns, Row[] rows) {
         this.columns = columns;
         this.rows = rows;
     }
@@ -17,14 +15,6 @@ public class Table {
 
     public void setRows(Row[] rows) {
         this.rows = rows;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
     }
 
     public Column[] getColumns() {
