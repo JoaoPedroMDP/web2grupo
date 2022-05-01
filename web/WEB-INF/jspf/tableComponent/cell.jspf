@@ -1,0 +1,29 @@
+<c:if test="${cell.getHaveActions()}">
+    <td class="text-center">
+    <c:forEach var="action" items="${cell.getActions()}">
+        <a href="${action.getLink()}">${action.getText()}</a>
+    </c:forEach>
+    </td>
+</c:if>
+
+<c:if test="${!cell.getHaveActions()}">
+    <c:if test="${cell.getIsHeader()}">
+        <th class="text-center">
+    </c:if>
+
+    <c:if test="${!cell.getIsHeader()}">
+        <td class="text-center">
+    </c:if>
+
+
+    ${cell.getData()}
+
+
+    <c:if test="${!cell.getIsHeader()}">
+        </td>
+    </c:if>
+
+    <c:if test="${cell.getIsHeader()}">
+        </th>
+    </c:if>
+</c:if>

@@ -5,7 +5,7 @@ public class Action {
     private String text;
     private Boolean isIconizable;
     
-    public Action(String link, String text, Boolean isIconizable) {
+    public Action(String text, String link, Boolean isIconizable) {
         this.link = link;
         this.text = text;
         this.isIconizable = isIconizable;

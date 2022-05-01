@@ -112,7 +112,7 @@
           Table table = new Table("Tabela 1", cols, rows);
           pageContext.setAttribute("table", table);
         %>
-        <%@ include file="/WEB-INF/jspf/table.jspf" %>
+        <%@ include file="/WEB-INF/jspf/tableComponent/table.jspf" %>
 
       </div>
     </div>
