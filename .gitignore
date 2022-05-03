@@ -5,6 +5,7 @@ nbproject
 build.xml
 Config.java
 setup.bash
+nbbuild.xml
 
 # Compiled class file
 *.class

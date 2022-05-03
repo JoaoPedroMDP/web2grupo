@@ -4,8 +4,9 @@ import java.util.LinkedHashMap;
 
 import interfaces.Bean;
 import interfaces.Mappable;
+import interfaces.Tableable;
 
-public class Ticket implements Mappable, Bean{
+public class Ticket implements Mappable, Bean, Tableable{
     private Integer id;
     private String description;
     private String state;
@@ -57,6 +58,22 @@ public class Ticket implements Mappable, Bean{
         data.put("type_id", String.valueOf(this.getType_id()));
         data.put("user_id", String.valueOf(this.getUser_id()));
 
+        return data;
+    }
+
+    @Override
+    public String[] getColumns() {
+        String[] columns = {"Número", "Descrição", "Estado", "Solução"};
+        return columns;
+    }
+
+    @Override
+    public LinkedHashMap<String, Object> toTable() {
+        LinkedHashMap<String, Object> data = new LinkedHashMap<String, Object>();
+        data.put("Número", this.getId());
+        data.put("Descrição", this.getDescription());
+        data.put("Estado", this.getState().equals("open") ? "Aberto" : "Fechado");
+        data.put("Solução", this.getSolution());
         return data;
     }
 
