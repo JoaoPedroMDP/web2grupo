@@ -3,7 +3,7 @@
 
 <div class="list-group">
     <c:forEach var="item" items="${list_group_items}">
-        <a href="${item.getUrl()}" class="list-group-item list-group-item-action text-center">
+        <a href="${pageContext.request.contextPath}${item.getUrl()}" class="list-group-item list-group-item-action text-center">
             ${item.getLabel()}
         </a>
     </c:forEach>
