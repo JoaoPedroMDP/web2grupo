@@ -31,9 +31,9 @@
             <h3 class="box-title">Selecione um relatório</h3>
             <%
               ClickableItem list_group_items[] = {
-                  new ClickableItem("Atendimentos", "ReportsServlet?report=tickets"),
-                  new ClickableItem("Funcionários", "ReportsServlet?report=employees"),
-                  new ClickableItem("Produtos", "ReportsServlet?report=products"),
+                  new ClickableItem("Atendimentos", "/ReportsServlet?report=tickets"),
+                  new ClickableItem("Usuários", "/ReportsServlet?report=users"),
+                  new ClickableItem("Produtos", "/ReportsServlet?report=products"),
               };
 
               pageContext.setAttribute("list_group_items", list_group_items);
