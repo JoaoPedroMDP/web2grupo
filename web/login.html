@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Login page - Start Bootstrap Template</title>
+    <title>Login - SAC BEIBE</title>
 
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
@@ -23,20 +23,21 @@
     <div class="container-fluid body-content">
       <div class="card" id="login">
         <div class="card-body">
-          <form action="" method="post">
+          <form action="LoginServlet" method="post">
             <h1 style="text-align: center;">BEIBE</h1>
             <div class="mb-3">
               <label class="form-label" id="back-green">Usuario</label>
-              <input type="text" name="login" class="form-control" placeholder="Insira o usuario">
+              <input type="text" name="email" class="form-control" placeholder="Insira o usuario">
             </div>
 
             <div class="mb-3">
               <label class="form-label" id="back-green">Senha</label>
-              <input type="password" name="senha" class="form-control" placeholder="Insira a senha">
+              <input type="password" name="password" class="form-control" placeholder="Insira a senha">
             </div>
 
             <div class="d-grid gap-2">
-              <a href="#" id="back-green">Esqueceu a senha?</a>
+<!--              <a href="#!" id="back-green">Esqueceu a senha?</a>-->
+              <a href="index.html" id="back-green">Voltar</a>
               <div class="d-md-flex justify-content-md-end">
                 <button type="submit" class="btn btn-primary">Entrar</button>
               </div>

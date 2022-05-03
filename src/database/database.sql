@@ -53,3 +53,13 @@ CREATE TABLE IF NOT EXISTS tickets(
     user_id INTEGER UNSIGNED NOT NULL,
     FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE
 );
+
+INSERT INTO users (name, surname, email, password, cpf, phone, role, address_id) VALUES 
+  ('Bob','Brown','bob@gmail.com','senhacliente',1234567890,41999887,'customer',1),
+  ('Mary','Brown','mary@gmail.com','senhafuncionario',1234567890,41999887,'employee',2),
+  ('Peter','Brown','peter@gmail.com','senhaadmin',1234567890,41999887,'admin',3);
+  
+INSERT INTO addresses (street, number, complement, district, zip_code, city, state) VALUES 
+  ('Rua uma','123','nenhum','Centro',80000123,'Curitiba','Paraná'),
+  ('Rua duas','456','nenhum','Centro',80000123,'Florianópolis','Santa Catarina'),
+  ('Rua três','789','nenhum','Centro',80000123,'São Paulo','São Paulo');

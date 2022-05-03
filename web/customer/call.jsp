@@ -1,4 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -6,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Atendimentos</title>
+    <title>Cadastro - Atendimento</title>
 
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
@@ -29,13 +31,15 @@
 
         <!-- INSIRA NA DIV ABAIXO OS ITENS DE MENU DA TELA -->
         <div class="list-group list-group-flush">
-          <a class="list-group-item list-group-item-action list-group-item-light-personalized p-3 border-bottom" href="proile.jsp">Perfil</a>
+          <a class="list-group-item list-group-item-action list-group-item-light-personalized p-3 border-bottom" href="profile.jsp">Perfil</a>
           <a class="list-group-item list-group-item-action list-group-item-light-personalized p-3 border-bottom" href="callList.jsp">Atendimentos</a>
           <a class="list-group-item list-group-item-action list-group-item-light-personalized p-3 border-bottom" href="call.jsp">Novo Atendimento</a>
         </div>
 
         <div class="sidebar-footer sidebar-personalized" style="text-align: justify;">
-          <a class="list-group-item-light-personalized-2" href="#!">BEIBE - Beauty Embuste Indústria de Beleza e Estética Rua do Embuste, nº 1212 Curitiba-PR, CEP 12122-123 Tel.: (41) 91212-1212</a>
+          <span class="list-group-item-light-personalized-2">
+            BEIBE - Beauty Embuste Indústria de Beleza e Estética Rua do Embuste, nº 1212 Curitiba-PR, CEP 12122-123 Tel.: (41) 91212-1212
+          </span>
         </div>
       </div>
 
@@ -48,8 +52,11 @@
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
-                <li class="nav-item"><a class="nav-link" href="#!">[User]</a></li>
-                <li class="nav-item"><a class="nav-link" href="#!"><span class="material-icons">logout</span></a></li>
+                <c:if test="${empty sessionScope.login}" >
+                  <jsp:forward page="/index.html"></jsp:forward>
+                </c:if>
+                <li class="nav-item"><a class="nav-link" href="../customer/profile.jsp">${sessionScope.login.name}</a></li>
+                <li class="nav-item"><a class="nav-link" href="../LogoutServlet" role="button"><span class="material-icons">logout</span></a></li>
               </ul>
             </div>
           </div>

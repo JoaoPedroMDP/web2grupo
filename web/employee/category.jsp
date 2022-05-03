@@ -1,5 +1,6 @@
-<%-- Document : category Created on : Mar 3, 2022, 8:43:05 PM Author : joao --%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -7,17 +8,17 @@
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
+      />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Categoria</title>
+    <title>Cadastro - Categoria</title>
 
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
-    />
+      />
     <link href="../css/global.css" rel="stylesheet" />
     <link href="../css/report.css" rel="stylesheet" />
 
@@ -62,11 +63,10 @@
         <div
           class="sidebar-footer sidebar-personalized"
           style="text-align: justify"
-        >
-          <a class="list-group-item-light-personalized-2" href="#!"
-            >BEIBE - Beauty Embuste Indústria de Beleza e Estética Rua do
-            Embuste, nº 1212 Curitiba-PR, CEP 12122-123 Tel.: (41) 91212-1212</a
           >
+          <span class="list-group-item-light-personalized-2">
+            BEIBE - Beauty Embuste Indústria de Beleza e Estética Rua do Embuste, nº 1212 Curitiba-PR, CEP 12122-123 Tel.: (41) 91212-1212
+          </span>
         </div>
       </div>
 
@@ -75,7 +75,7 @@
         <!-- Top navigation-->
         <nav
           class="navbar navbar-expand-lg navbar-light bg-light border-bottom"
-        >
+          >
           <div class="container-fluid">
             <button class="btn" id="sidebarToggle">
               <span class="material-icons">reorder</span>
@@ -88,29 +88,16 @@
               aria-controls="navbarSupportedContent"
               aria-expanded="false"
               aria-label="Toggle navigation"
-            >
+              >
               <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
-                <li class="nav-item">
-                  <a class="nav-link" href="#!">[User]</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#!"
-                    ><span class="material-icons">logout</span></a
-                  >
-                </li>
-                <!--<li class="nav-item active"><a class="nav-link" href="#!">Home</a></li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#!">Action</a>
-                        <a class="dropdown-item" href="#!">Another action</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#!">Something else here</a>
-                    </div>
-                </li>-->
+                <c:if test="${empty sessionScope.login}" >
+                  <jsp:forward page="/index.html"></jsp:forward>
+                </c:if>
+                <li class="nav-item"><a class="nav-link" href="../customer/profile.jsp">${sessionScope.login.name}</a></li>
+                <li class="nav-item"><a class="nav-link" href="../LogoutServlet" role="button"><span class="material-icons">logout</span></a></li>
               </ul>
             </div>
           </div>
@@ -128,60 +115,60 @@
           <div class="container-fluid d-flex justify-content-center">
             <div
               class="report-box roundy d-flex flex-column align-items-center"
-            >
+              >
               <table>
                 <tbody>
-                  <form action="#!" method="POST">
-                    <tr>
-                      <td><h3>Nome:</h3></td>
-                      <td>
-                        <input
-                          class="input-group-text alert-light"
-                          placeholder="Praia"
-                          type="text"
+                <form action="#!" method="POST">
+                  <tr>
+                    <td><h3>Nome:</h3></td>
+                    <td>
+                      <input
+                        class="input-group-text alert-light"
+                        placeholder="Praia"
+                        type="text"
                         />
-                      </td>
-                    </tr>
+                    </td>
+                  </tr>
 
-                    <tr>
-                      <td><h3>Descrição:</h3></td>
-                    </tr>
-                    <tr></tr>
-                    <tr>
-                      <td colspan="3">
-                        <textarea
-                          rows="6"
-                          cols="45"
-                          class="input-group-text alert-light"
-                          type="text"
+                  <tr>
+                    <td><h3>Descrição:</h3></td>
+                  </tr>
+                  <tr></tr>
+                  <tr>
+                    <td colspan="3">
+                      <textarea
+                        rows="6"
+                        cols="45"
+                        class="input-group-text alert-light"
+                        type="text"
                         >
-Lorem ipsum dolor sit amet,consectetur </textarea
-                        >
-                      </td>
-                    </tr>
+                        Lorem ipsum dolor sit amet,consectetur </textarea
+                      >
+                    </td>
+                  </tr>
 
-                    <tr>
-                      <td class="report-box roundy d-flex">
-                        <button
-                          id="select-action"
-                          class="btn list-group-item-light-personalized"
-                          href="#!"
+                  <tr>
+                    <td class="report-box roundy d-flex">
+                      <button
+                        id="select-action"
+                        class="btn list-group-item-light-personalized"
+                        href="#!"
                         >
-                          Voltar
-                        </button>
-                      </td>
-                      <td></td>
-                      <td>
-                        <button
-                          id="select-action"
-                          class="btn list-group-item-light-personalized"
-                          href="#!"
+                        Voltar
+                      </button>
+                    </td>
+                    <td></td>
+                    <td>
+                      <button
+                        id="select-action"
+                        class="btn list-group-item-light-personalized"
+                        href="#!"
                         >
-                          Salvar
-                        </button>
-                      </td>
-                    </tr>
-                  </form>
+                        Salvar
+                      </button>
+                    </td>
+                  </tr>
+                </form>
                 </tbody>
               </table>
             </div>

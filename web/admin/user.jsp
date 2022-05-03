@@ -1,5 +1,6 @@
-<%-- Document : user Created on : Mar 3, 2022, 8:44:00 PM Author : joao --%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -10,7 +11,7 @@
     />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Simple Sidebar - Start Bootstrap Template</title>
+    <title>Cadastro - Usuário</title>
 
     <link href="../css/global.css" rel="stylesheet" />
 
@@ -55,10 +56,9 @@
           class="sidebar-footer sidebar-personalized"
           style="text-align: justify"
         >
-          <a class="list-group-item-light-personalized-2" href="#!"
-            >BEIBE - Beauty Embuste Indústria de Beleza e Estética Rua do
-            Embuste, nº 1212 Curitiba-PR, CEP 12122-123 Tel.: (41) 91212-1212</a
-          >
+          <span class="list-group-item-light-personalized-2">
+            BEIBE - Beauty Embuste Indústria de Beleza e Estética Rua do Embuste, nº 1212 Curitiba-PR, CEP 12122-123 Tel.: (41) 91212-1212
+          </span>
         </div>
       </div>
 
@@ -85,24 +85,11 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
-                <li class="nav-item">
-                  <a class="nav-link" href="#!">[User]</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#!"
-                    ><span class="material-icons">logout</span></a
-                  >
-                </li>
-                <!--<li class="nav-item active"><a class="nav-link" href="#!">Home</a></li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#!">Action</a>
-                                <a class="dropdown-item" href="#!">Another action</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#!">Something else here</a>
-                            </div>
-                        </li>-->
+                <c:if test="${empty sessionScope.login}" >
+                  <jsp:forward page="/index.html"></jsp:forward>
+                </c:if>
+                <li class="nav-item"><a class="nav-link" href="../customer/profile.jsp">${sessionScope.login.name}</a></li>
+                <li class="nav-item"><a class="nav-link" href="../LogoutServlet" role="button"><span class="material-icons">logout</span></a></li>
               </ul>
             </div>
           </div>
