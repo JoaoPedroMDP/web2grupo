@@ -22,11 +22,23 @@ public abstract class BaseBean implements Bean{
         return result;
     }
 
-    public LinkedHashMap<String, Object> getActions() {
+    public LinkedHashMap<String, Object> getActions(LinkedHashMap<String, String> requiredActions) {
         LinkedHashMap<String, Object> result = new LinkedHashMap<String, Object>();
-        result.put("edit", new Action("Editar", this.servlet + "?action=edit&id=" + this.getId(), false));
-        result.put("view", new Action("Visualizar", this.servlet + "?action=view&id=" + this.getId(), false));
-        result.put("delete", new Action("Remover", this.servlet + "?action=delete&id=" + this.getId(), false));
+        if(requiredActions != null){
+            for(String actionName : requiredActions.keySet()){
+                result.put(actionName, new Action(requiredActions.get(actionName), this.servlet, actionName, this.getId(), true));
+            }
+        }
+
         return result;
+    }
+
+    public LinkedHashMap<String, Object> getActions() {
+        LinkedHashMap<String, String> actions = new LinkedHashMap<String, String>(){{
+            put("edit", "Editar");
+            put("delete", "Excluir");
+            put("view", "Visualizar");
+        }};
+        return this.getActions(actions);
     }
 }

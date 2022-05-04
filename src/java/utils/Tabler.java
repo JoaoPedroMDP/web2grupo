@@ -64,22 +64,18 @@ public class Tabler<T extends Tableable> {
 
     private Action[] filterActionsByRole(LinkedHashMap<String, Object> actions) {
         String[] levels = {"view", "edit", "delete"};
-        Action[] allowedActions = new Action[levels.length];
 
-        Integer permissionLevel = 0;
-        if (this.permissionLevel.equals("admin")){
-            permissionLevel = 2;
-        }else if(this.permissionLevel.equals("employee")){
-            permissionLevel = 1;
-        }else{
-            permissionLevel = 0;
+        if (this.permissionLevel.equals("customer")){
+            actions.remove(levels[1]);
+            actions.remove(levels[2]);
+        }else if (this.permissionLevel.equals("employee")){
+            actions.remove(levels[2]);
         }
 
-        for(int i = 0; i <= permissionLevel; i++){
-            Action action = (Action) actions.get(levels[i]);
-            if(action != null){
-                allowedActions[i] = action;
-            }
+        Action[] allowedActions = new Action[actions.keySet().size()];
+        Object[] remainingActions = actions.keySet().toArray();
+        for(int i = 0; i < actions.size(); i++){
+            allowedActions[i] = (Action) actions.get(remainingActions[i]);
         }
 
          return allowedActions;   

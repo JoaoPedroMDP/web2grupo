@@ -46,10 +46,15 @@ public class Category extends BaseBean implements Mappable, Tableable{
 
     @Override
     public LinkedHashMap<String, LinkedHashMap<String, Object>> toTable() {
+        LinkedHashMap<String, String> actions = new LinkedHashMap<String, String>(){{
+            put("edit", "Editar");
+            put("delete", "Excluir");
+        }};
+
         LinkedHashMap<String, LinkedHashMap<String, Object>> data = new LinkedHashMap<String, LinkedHashMap<String, Object>>();
         data.put("Número", this.wrapData(this.getId(), false));
         data.put("Categoria", this.wrapData(this.getName(), true));
-        data.put("Ações", this.wrapData(this.getActions(), false, true));
+        data.put("Ações", this.wrapData(this.getActions(actions), false, true));
         return data;
     }
 
