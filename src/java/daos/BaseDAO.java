@@ -146,6 +146,11 @@ public abstract class BaseDAO <T extends Mappable & Bean> extends QueryFactory i
         }
     }
 
+    public void delete(String id) throws DAOException {
+        Integer intId = Integer.parseInt(id);
+        this.delete(intId);
+    }
+    
     public final List<T> select(LinkedHashMap<String, Object> filters) throws DAOException {
         List<T> results = new ArrayList<>();
         String query = mount_select(tableName, filters);
