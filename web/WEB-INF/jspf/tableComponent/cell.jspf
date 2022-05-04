@@ -1,7 +1,7 @@
 <c:if test="${cell.getHaveActions()}">
     <td class="text-center">
     <c:forEach var="action" items="${cell.getActions()}">
-        <a href="${action.getLink()}">${action.getText()}</a>
+        <a class="${action.getText()}" href="${action.getLink()}">${action.getText()}</a>
     </c:forEach>
     </td>
 </c:if>

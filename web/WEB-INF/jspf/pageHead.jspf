@@ -26,3 +26,5 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Core theme JS-->
 <script src="${pageContext.request.contextPath}/js/scripts.js"></script>
+<%-- Jquery 3.6.0 --%>
+<script src="${pageContext.request.contextPath}/js/jquery3.6.0.min.js"></script>

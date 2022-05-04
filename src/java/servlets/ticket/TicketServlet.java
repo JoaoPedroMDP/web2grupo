@@ -42,6 +42,8 @@ public class TicketServlet extends HttpServlet {
             switch(action){
                 case "listTickets":
                     this.listTickets(request, response);
+                case "delete":
+                    this.deleteTicket(request, response);
             }
         } catch (DAOException e) {
             System.out.println(e.getMessage());
@@ -50,11 +52,18 @@ public class TicketServlet extends HttpServlet {
 
     private void listTickets(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, DAOException {
         TicketFacade ticketFacade = new TicketFacade();
-        // LoginBean loginBean = (LoginBean) request.getSession().getAttribute("loginBean");
-        Table ticketTable = ticketFacade.listTickets("employee"); // TODO: trocar para o role do usuario logado
+        // Login loginBean = (Login) request.getSession().getAttribute("login");
+        Table ticketTable = ticketFacade.listTickets("admin"); // TODO: trocar para o role do usuario logado
         request.setAttribute("table_items", ticketTable);
         RequestDispatcher rd = request.getRequestDispatcher("/customer/callList.jsp");
         rd.forward(request, response);
+    }
+
+    private void deleteTicket(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, DAOException {
+        TicketFacade ticketFacade = new TicketFacade();
+        String id = (String) request.getParameter("id");
+        ticketFacade.deleteTicket(id);
+        this.listTickets(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

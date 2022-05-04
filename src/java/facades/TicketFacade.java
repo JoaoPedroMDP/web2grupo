@@ -20,4 +20,9 @@ public class TicketFacade {
         
         return ticketTable.tablefy();
     }
+
+    public void deleteTicket(String id) throws DAOException{
+        TicketDAO tDao = new TicketDAO(new ConnectionFactory().getConnection());
+        tDao.delete(id);
+    }
 }
