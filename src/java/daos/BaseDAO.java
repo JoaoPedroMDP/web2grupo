@@ -189,7 +189,11 @@ public abstract class BaseDAO <T extends Mappable & Bean> extends QueryFactory i
             stmt.setString(replacementePosition, (String) item);
         }else if(item instanceof Float){
             stmt.setFloat(replacementePosition, (Float) item);
-        }else {
+        }else if(item instanceof Double){
+            stmt.setDouble(replacementePosition, (Double) item);
+        }else if(item instanceof Boolean){
+            stmt.setBoolean(replacementePosition, (Boolean) item);
+        }else{
             throw new DAOException("Tipo não suportado: " + item.getClass().getName());
         }
     }

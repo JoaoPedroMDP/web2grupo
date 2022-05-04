@@ -2,38 +2,28 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package servlets.admin;
+package servlets.ticket;
 
 import java.io.IOException;
-import java.io.OutputStream;
-import java.net.URL;
-import java.sql.Connection;
-import java.util.HashMap;
+import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperRunManager;
-import utils.ConnectionFactory;
+
+import exceptions.DAOException;
+import facades.TicketFacade;
+import utils.frontHelpers.table.Table;
 
 /**
  *
  * @author joao
  */
-@WebServlet(name = "ReportsServlet", urlPatterns = {"/ReportsServlet"})
-public class ReportsServlet extends HttpServlet {
-    private HashMap<String, String> availableReports;
-
-    public void init(){
-        this.availableReports = new HashMap<String, String>(){{
-            put("users", "Users");
-            put("tickets", "Tickets");
-            put("products", "Products");
-        }};
-    }
+@WebServlet(name = "TicketServlet", urlPatterns = {"/TicketServlet"})
+public class TicketServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -44,37 +34,27 @@ public class ReportsServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            String action = (String) request.getParameter("action");
 
-        String report = (String) request.getParameter("report");
-        Connection conn = new ConnectionFactory().getConnection();
-        String host = "http://" + request.getServerName() + ":" + request.getServerPort();
-
-        String jasperReportName = this.availableReports.get(report);
-
-        if(jasperReportName != null){
-            String jasper = request.getContextPath() + "/admin/reports/" + jasperReportName + ".jasper";
-            String today = new java.text.SimpleDateFormat("dd/MM/yyyy").format(new java.util.Date());
-            URL jasperURL = new URL(host + jasper);
-            HashMap<String, Object> params = new HashMap<String, Object>(){{
-                put("today", today);
-            }};
-
-            byte[] bytes = JasperRunManager.runReportToPdf(
-                    jasperURL.openStream(),
-                    params,
-                    conn);
-            
-            if (bytes != null) {
-                response.setContentType("application/pdf");
-                OutputStream ops = response.getOutputStream();
-                ops.write(bytes);
+            switch(action){
+                case "listTickets":
+                    this.listTickets(request, response);
             }
-        }else{
-            response.sendError(HttpServletResponse.SC_NOT_FOUND);
+        } catch (DAOException e) {
+            System.out.println(e.getMessage());
         }
+    }
+
+    private void listTickets(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, DAOException {
+        TicketFacade ticketFacade = new TicketFacade();
+        // LoginBean loginBean = (LoginBean) request.getSession().getAttribute("loginBean");
+        Table ticketTable = ticketFacade.listTickets("employee"); // TODO: trocar para o role do usuario logado
+        request.setAttribute("table_items", ticketTable);
+        RequestDispatcher rd = request.getRequestDispatcher("/customer/callList.jsp");
+        rd.forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

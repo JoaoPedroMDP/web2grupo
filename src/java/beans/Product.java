@@ -2,17 +2,19 @@ package beans;
 
 import java.util.LinkedHashMap;
 
-import interfaces.Bean;
 import interfaces.Mappable;
+import interfaces.Tableable;
 
-public class Product implements Mappable, Bean{
+public class Product extends BaseBean implements Mappable, Tableable{
     private Integer id;
     private String name;
     private String image;
     private Float weight;
     private Integer category_id;
 
-    public Product() {}
+    public Product() {
+        this.servlet = "ProductServlet";
+    }
 
     public Product(Integer id, String name, String image, Float weight, Integer category_id) {
         this.id = id;
@@ -20,6 +22,7 @@ public class Product implements Mappable, Bean{
         this.image = image;
         this.weight = weight;
         this.category_id = category_id;
+        this.servlet = "ProductServlet";
     }
 
     public Product(String name, String image, Float weight, Integer category_id) {
@@ -27,6 +30,7 @@ public class Product implements Mappable, Bean{
         this.image = image;
         this.weight = weight;
         this.category_id = category_id;
+        this.servlet = "ProductServlet";
     }
 
     @Override
@@ -44,6 +48,22 @@ public class Product implements Mappable, Bean{
         data.put("image", this.getImage());
         data.put("weight", String.valueOf(this.getWeight()));
         data.put("category_id", String.valueOf(this.getCategory_id()));
+        return data;
+    }
+
+    @Override
+    public String[] getColumns() {
+        String[] columns = {"Número", "Nome", "Peso", "Ações"};
+        return columns;
+    }
+
+    @Override
+    public LinkedHashMap<String, LinkedHashMap<String, Object>> toTable() {
+        LinkedHashMap<String, LinkedHashMap<String, Object>> data = new LinkedHashMap<String, LinkedHashMap<String, Object>>();
+        data.put("Número", this.wrapData(this.getId(), false));
+        data.put("Nome", this.wrapData(this.getName(), true));
+        data.put("Peso", this.wrapData(this.getWeight(), true));
+        data.put("Ações", this.wrapData(this.getActions(), false, true));
         return data;
     }
 
