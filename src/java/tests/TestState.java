@@ -66,4 +66,12 @@ public class TestState implements Tests{
         StateDAO dao = new StateDAO(new ConnectionFactory().getConnection());
         dao.delete(idToDelete);
     }
+
+    public void testSelection() throws DAOException {
+        StateDAO dao = new StateDAO(new ConnectionFactory().getConnection());
+        LinkedHashMap<String, Object> filters = new LinkedHashMap<String, Object>();
+        filters.put("name", "Estado Alterado");
+        List<State> filtered = dao.select(filters);
+        System.out.println(filtered);
+    }
 }

@@ -71,4 +71,12 @@ public class TestAddress implements Tests{
         AddressDAO dao = new AddressDAO(new ConnectionFactory().getConnection());
         dao.delete(idToDelete);
     }
+
+    public void testSelection() throws DAOException {
+        AddressDAO dao = new AddressDAO(new ConnectionFactory().getConnection());
+        LinkedHashMap<String, Object> filters = new LinkedHashMap<String, Object>();
+        filters.put("city_id", 1);
+        List<Address> filtered = dao.select(filters);
+        System.out.println(filtered);
+    }
 }
