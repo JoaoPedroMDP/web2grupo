@@ -24,48 +24,6 @@
           <div class="row">
             <div class="col-10 offset-1">
               <h1 style="text-align:center;margin:20px;">Atendimentos</h1>
-                <%-- <%
-                  Column cols[] = {
-                    new Column(""),
-                    new Column("Data de abertura"),
-                    new Column("Título"),
-                    new Column("Status"),
-                    new Column("Avaliação"),
-                    new Column("Ações")
-                  };
-
-                  Action actions[] = {
-                    new Action("Editar", "editCall.jsp", false),
-                    new Action("Excluir", "deleteCall.jsp", true),
-                    new Action("Visualizar", "viewCall.jsp", true),
-                  };
-
-                  Cell firstRowCells[] = {
-                    new Cell("1", true),
-                    new Cell("06/03/2022 13:15", false),
-                    new Cell("Problema com a entrega do produto B-2145", false),
-                    new Cell("Pendente", false),
-                    new Cell("-", false),
-                    new Cell("-", false, actions)
-                  };
-
-                  Cell secondRowCells[] = {
-                    new Cell("1", true),
-                    new Cell("06/03/2022 13:15", false),
-                    new Cell("Problema com a entrega do produto B-2145", false),
-                    new Cell("Pendente", false),
-                    new Cell("8", false),
-                    new Cell("-", false, actions)
-                  };
-
-                  Row rows[] = {
-                    new Row(firstRowCells),
-                    new Row(secondRowCells)
-                  };
-
-                  Table table = new Table(cols, rows);
-                  pageContext.setAttribute("table_items", table);
-                %> --%>
                 <%@ include file="/WEB-INF/jspf/tableComponent/table.jspf" %>
             </div>
           </div>
