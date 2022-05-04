@@ -62,7 +62,7 @@ public class AddressDAO extends BaseDAO<Address> {
         return address;
     }
 
-    public static void create(Address c) {
+    public static void create(Address c) throws DAOException {
         Connection con = null;
         try {
             con = new ConnectionFactory().getConnection();
@@ -85,7 +85,7 @@ public class AddressDAO extends BaseDAO<Address> {
         }
     }
 
-    public static Address readOne(int id) {
+    public static Address readOne(int id) throws DAOException {
 
         Connection con = null;
         try {
@@ -127,8 +127,8 @@ public class AddressDAO extends BaseDAO<Address> {
 //
         return null;
     }
-    
-        public static Address readZipCode(int zip_code) {
+
+    public static Address readZipCode(int zip_code, String number) throws DAOException {
 
         Connection con = null;
         try {
@@ -141,9 +141,10 @@ public class AddressDAO extends BaseDAO<Address> {
 
         try {
 
-            stmt = con.prepareStatement("SELECT * FROM address WHERE zip_code = ?");
+            stmt = con.prepareStatement("SELECT * FROM address WHERE zip_code = ? and number = ?");
             stmt.setInt(1, zip_code);
-
+            stmt.setString(2, number);
+            
             rs = stmt.executeQuery();
 
             if (rs.next()) {
@@ -171,8 +172,7 @@ public class AddressDAO extends BaseDAO<Address> {
         return null;
     }
 
-
-    public static void update(int id, Address c) {
+    public static void update(int id, Address c) throws DAOException {
 
         Connection con = null;
         try {
@@ -199,7 +199,7 @@ public class AddressDAO extends BaseDAO<Address> {
 
     }
 
-    public static void delete(int id) {
+    public static void delete(int id) throws DAOException {
 
         Connection con = null;
         try {

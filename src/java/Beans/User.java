@@ -61,6 +61,13 @@ public class User implements Mappable, Bean{
         this.phone = phone;
     }
        
+       public User(String name, String surname, String password, String phone) {
+         this.name = name;
+        this.surname = surname;
+        this.password = password;
+        this.phone = phone;
+    }
+       
        public User(String name, String surname, String email, String password, String cpf, String phone, Integer address_id) {
         this.name = name;
         this.surname = surname;

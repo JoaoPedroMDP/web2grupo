@@ -18,10 +18,7 @@
 
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-        <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/icon?family=Material+Icons"
-            />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
 
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="./../css/styles.css" rel="stylesheet" />
@@ -71,9 +68,7 @@
             <!-- Page content wrapper-->
             <div id="page-content-wrapper">
                 <!-- Top navigation-->
-                <nav
-                    class="navbar navbar-expand-lg navbar-light bg-light border-bottom"
-                    >
+                <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
                     <div class="container-fluid">
                         <button class="btn" id="sidebarToggle">
                             <span class="material-icons">reorder</span>
@@ -96,8 +91,7 @@
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="#!"
-                                       ><span class="material-icons">logout</span></a
-                                    >
+                                       ><span class="material-icons">logout</span></a>
                                 </li>
                             </ul>
                         </div>
@@ -167,7 +161,7 @@
                                                         <div class="col-sm-4">
                                                             <p class="m-b-10 f-w-600">Street</p>
                                                             <h6 class="text-muted f-w-400">
-                                                                   ${address.street}
+                                                                ${address.street}
                                                             </h6>
                                                         </div>
 
@@ -211,16 +205,17 @@
                                                             </h6>
                                                         </div>
                                                     </div>
-
-
                                                     <div>
-                                                        <button
+<!--                                                        <button
                                                             class="edit_button"
                                                             type="submit"
                                                             onclick="window.location = 'register.jsp'"
                                                             >
                                                             Edit profile
-                                                        </button>
+                                                        </button>-->
+
+                                                        <a class="edit_button" type="submit" href="${pageContext.request.contextPath}/UserServlet?action=formUpdate&id=12">Edit Profile</a>
+                                                        </a>
                                                     </div>
                                                 </div>
                                             </div>

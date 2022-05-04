@@ -3,7 +3,7 @@
     Created on : Mar 3, 2022, 8:42:03 PM
     Author     : Ludimilla
 --%>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -41,110 +41,117 @@
                                     <div class="card-body p-5">
                                         <h2 class="text-uppercase text-center mb-5">Create an account</h2>
 
-                                        <form action = "/web2grupo/UserServlet?action=new" name = "cadastroCliente" method="POST">
+                                        <form action="/web2grupo/UserServlet?id=12&action=${requestScope.action}" name = "cadastroCliente" method="POST">
 
                                             <div class="row mb-4">
                                                 <div class="col">
                                                     <div class="form-outline">
-                                                        <input type="text" id="form6Example1"name="name" />
-                                                        <label class="form-label" for="form6Example1">Name</label>
+                                                        <input type="text" id="form6Example1"name="name" value="<c:if test="${requestScope.action == 'update'}"><c:out value="${user.name}"/></c:if>" />
+                                                            <label class="form-label" for="form6Example1">Name</label>
+                                                        </div>
+                                                    </div>  
+                                                    <div class="col">
+                                                        <div class="form-outline">
+                                                            <input type="text" id="form6Example2" name="surname" value="<c:if test="${requestScope.action == 'update'}"><c:out value="${user.surname}"/></c:if>"/>
+                                                            <label class="form-label" for="form6Example2">Surname</label>
+                                                        </div>
                                                     </div>
-                                                </div>  
-                                                <div class="col">
-                                                    <div class="form-outline">
-                                                        <input type="text" id="form6Example2" name="surname" />
-                                                        <label class="form-label" for="form6Example2">Surname</label>
-                                                    </div>
-                                                </div>
-                                            </div>        
+                                                </div>        
 
+                                            <c:if test="${requestScope.action == 'new'}">
+                                                <div class="row mb-4">
+                                                    <div class="col">
+                                                        <div class="form-outline">
+                                                            <input type="text" id="form6Example1"name="email" value="<c:if test="${requestScope.action == 'update'}"><c:out value="${user.email}"/></c:if>" />
+                                                                <label class="form-label" for="form6Example1">Email</label>
+                                                            </div>
+                                                        </div>  
+                                                    </div>   
+                                            </c:if> 
+                                            <div class="row mb-4">
+                                                <c:if test="${requestScope.action == 'new'}">
+                                                    <div class="col">
+                                                        <div class="form-outline">
+                                                            <input type="text" id="form6Example1"name="cpf" value="<c:if test="${requestScope.action == 'update'}"><c:out value="${user.cpf}"/></c:if>"/>
+                                                                <label class="form-label" for="form6Example1">CPF</label>
+                                                            </div>
+                                                        </div>  
+                                                </c:if> 
+                                                <div class="col">
+                                                    <div class="form-outline">
+                                                        <input type="text" id="form6Example2" name="phone" value="<c:if test="${requestScope.action == 'update'}"><c:out value="${user.phone}"/></c:if>"/>
+                                                            <label class="form-label" for="form6Example2">Phone</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-4">
+                                                    <div class="col">
+                                                        <div class="form-outline">
+                                                            <input type="text" id="form6Example1"name="password" value="<c:if test="${requestScope.action == 'update'}"><c:out value="${user.password}"/></c:if>" />
+                                                            <label class="form-label" for="form6Example1">Password</label>
+                                                        </div>
+                                                    </div>  
+                                                </div>   
+                                                <div class="row mb-4">
+                                                    <div class="col">
+                                                        <div class="form-outline">
+                                                            <input type="text" id="form6Example1"name="street" value="<c:if test="${requestScope.action == 'update'}"><c:out value="${address.number}"/></c:if>"/>
+                                                            <label class="form-label" for="form6Example1">Street</label>
+                                                        </div>
+                                                    </div>  
+                                                    <div class="col">
+                                                        <div class="form-outline">
+                                                            <input type="text" id="form6Example2" name="number" value="<c:if test="${requestScope.action == 'update'}"><c:out value="${address.number}"/></c:if>" />
+                                                            <label class="form-label" for="form6Example2">Number</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-4">
+                                                    <div class="col">
+                                                        <div class="form-outline">
+                                                            <input type="text" id="form6Example1" name="complement"  value="<c:if test="${requestScope.action == 'update'}"><c:out value="${address.complement}"/></c:if>" />
+                                                            <label class="form-label" for="form6Example1">Complement</label>
+                                                        </div>
+                                                    </div>  
+                                                    <div class="col">
+                                                        <div class="form-outline">
+                                                            <input type="text" id="form6Example2" name="district" value="<c:if test="${requestScope.action == 'update'}"><c:out value="${address.district}"/></c:if>"  />
+                                                            <label class="form-label" for="form6Example2">District</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="form-outline">
+                                                            <input type="text" id="form6Example2" name="zip_code" value="<c:if test="${requestScope.action == 'update'}"><c:out value="${address.zip_code}"/></c:if>" />
+                                                            <label class="form-label" for="form6Example2">zip code</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-4">
+                                                    <div class="col">
+                                                        <div class="form-outline">
+                                                            <input type="text" id="form6Example1"  name="city"/>
+                                                            <label class="form-label" for="form6Example1">City</label>
+                                                        </div>
+                                                    </div>  
+                                                    <div class="col">
+                                                        <div class="form-outline">
+                                                            <input type="text" id="form6Example2" name="state"/>
+                                                            <label class="form-label" for="form6Example2">State</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            <c:if test="${requestScope.action == 'new'}">
+                                                <div class="d-flex justify-content-center">
+                                                    <button class="nav-link active bg-sucess text-white" type="submit">Salvar</button>
+                                                    <!--                                        <button class="btn btn-success btn-block btn-lg gradient-custom-4 text-body" type="submit" onclick="window.location = 'profile.jsp'" >Register</button>-->
+                                                </div>
 
-                                                   <div class="row mb-4">
-                                                <div class="col">
-                                                    <div class="form-outline">
-                                                        <input type="text" id="form6Example1"name="email" />
-                                                        <label class="form-label" for="form6Example1">Email</label>
-                                                    </div>
-                                                </div>  
-                                            </div>   
-                                            <div class="row mb-4">
-                                                <div class="col">
-                                                    <div class="form-outline">
-                                                        <input type="text" id="form6Example1"name="cpf" />
-                                                        <label class="form-label" for="form6Example1">CPF</label>
-                                                    </div>
-                                                </div>  
-                                                <div class="col">
-                                                    <div class="form-outline">
-                                                        <input type="text" id="form6Example2" name="phone" />
-                                                        <label class="form-label" for="form6Example2">Phone</label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row mb-4">
-                                                <div class="col">
-                                                    <div class="form-outline">
-                                                        <input type="text" id="form6Example1"name="password" />
-                                                        <label class="form-label" for="form6Example1">Password</label>
-                                                    </div>
-                                                </div>  
-                                            </div>   
-                                            <div class="row mb-4">
-                                                <div class="col">
-                                                    <div class="form-outline">
-                                                        <input type="text" id="form6Example1"name="street" />
-                                                        <label class="form-label" for="form6Example1">Street</label>
-                                                    </div>
-                                                </div>  
-                                                <div class="col">
-                                                    <div class="form-outline">
-                                                        <input type="text" id="form6Example2" name="number" />
-                                                        <label class="form-label" for="form6Example2">Number</label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row mb-4">
-                                                <div class="col">
-                                                    <div class="form-outline">
-                                                        <input type="text" id="form6Example1" name="complement"   />
-                                                        <label class="form-label" for="form6Example1">Complement</label>
-                                                    </div>
-                                                </div>  
-                                                <div class="col">
-                                                    <div class="form-outline">
-                                                        <input type="text" id="form6Example2" name="district" />
-                                                        <label class="form-label" for="form6Example2">District</label>
-                                                    </div>
-                                                </div>
-                                                <div class="col">
-                                                    <div class="form-outline">
-                                                        <input type="text" id="form6Example2" name="zip_code" />
-                                                        <label class="form-label" for="form6Example2">zip code</label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row mb-4">
-                                                <div class="col">
-                                                    <div class="form-outline">
-                                                        <input type="text" id="form6Example1"  name="city" />
-                                                        <label class="form-label" for="form6Example1">City</label>
-                                                    </div>
-                                                </div>  
-                                                <div class="col">
-                                                    <div class="form-outline">
-                                                        <input type="text" id="form6Example2" name="state" />
-                                                        <label class="form-label" for="form6Example2">State</label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="d-flex justify-content-center">
-                                                <button class="nav-link active bg-sucess text-white" type="submit">Salvar</button>
-                                                <!--                                        <button class="btn btn-success btn-block btn-lg gradient-custom-4 text-body" type="submit" onclick="window.location = 'profile.jsp'" >Register</button>-->
-                                            </div>
-
-                                            <p class="text-center text-muted mt-3 mb-0">Have already an account? <a href="../login.html" class="fw-bold text-body"><u>Login here</u></a></p>
-                                            <p class="text-center text-muted mt-3 mb-0" <a href="#" ><u>Back</u></a></p>
-
+                                                <p class="text-center text-muted mt-3 mb-0">Have already an account? <a href="../login.html" class="fw-bold text-body"><u>Login here</u></a></p>
+                                                <p class="text-center text-muted mt-3 mb-0" <a href="#" ><u>Back</u></a></p>
+                                                    </c:if>
+                                                    <c:if test="${requestScope.action == 'update'}">
+                                                <button class="nav-link active bg-sucess text-white" type="submit">Alterar</button>
+                                            </c:if>  
                                         </form>
                                     </div>
                                 </div>

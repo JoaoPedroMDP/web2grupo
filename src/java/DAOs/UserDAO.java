@@ -10,7 +10,6 @@ import Beans.User;
 import Exceptions.DAOException;
 import Utils.ConnectionFactory;
 import Utils.Security;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -71,7 +70,7 @@ public class UserDAO extends BaseDAO<User> {
         return user;
     }
 
-    public static void create(User c) {
+    public static void create(User c) throws DAOException {
         Connection con = null;
         try {
             con = new ConnectionFactory().getConnection();
@@ -82,7 +81,7 @@ public class UserDAO extends BaseDAO<User> {
         System.out.println("HERE IT IS" + c.getAddress_id());
 
         try {
-            stmt = con.prepareStatement("INSERT INTO user (name, surname, email, password, cpf, phone, role, address_id  ) VALUES (?,?,?, ?,?,?, 'user', ? );");
+            stmt = con.prepareStatement("INSERT INTO user (name, surname, email, password, cpf, phone, role, address_id  ) VALUES (?,?,?, ?,?,?, 'Cliente', ? );");
             stmt.setString(1, c.getName());
             stmt.setString(2, c.getSurname());
             stmt.setString(3, c.getEmail());
@@ -99,7 +98,7 @@ public class UserDAO extends BaseDAO<User> {
         }
     }
 
-    public static User readOne(int id) {
+    public static User readOne(int id) throws DAOException {
 
         Connection con = null;
         try {
@@ -143,7 +142,7 @@ public class UserDAO extends BaseDAO<User> {
         return null;
     }
 
-    public static void update(int id, User c) {
+    public static void update (int id, User c) throws DAOException {
 
         Connection con = null;
         try {
@@ -155,14 +154,12 @@ public class UserDAO extends BaseDAO<User> {
         PreparedStatement stmt = null;
 
         try {
-            stmt = con.prepareStatement("UPDATE user SET name = ?, surname = ?, email = ?, password= ?, cpf=?,phone=? WHERE id = ?");
+            stmt = con.prepareStatement("UPDATE user SET name = ?, surname = ?, password= ?, phone=? WHERE id = ?");
             stmt.setString(1, c.getName());
             stmt.setString(2, c.getSurname());
-            stmt.setString(3, c.getEmail());
-            stmt.setString(4, c.getPassword());
-            stmt.setString(5, c.getCpf());
-            stmt.setString(6, c.getPhone());
-            stmt.setInt(7, id);
+            stmt.setString(3, c.getPassword());
+            stmt.setString(4, c.getPhone());
+            stmt.setInt(5, id);
             stmt.executeUpdate();
 
         } catch (SQLException ex) {
@@ -171,7 +168,7 @@ public class UserDAO extends BaseDAO<User> {
 
     }
 
-    public static void delete(int id) {
+    public static void delete(int id) throws DAOException {
 
         Connection con = null;
         try {

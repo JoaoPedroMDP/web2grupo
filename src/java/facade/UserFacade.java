@@ -21,20 +21,20 @@ import java.util.logging.Logger;
  * @author Ludimilla
  */
 public class UserFacade {
-      public static void CreateUser(User user){
+      public static void CreateUser(User user) throws DAOException{
           UserDAO.create(user);
     }
     
-    public static void UpdateUser(int id, User user) {
+    public static void UpdateUser(int id, User user) throws DAOException {
         UserDAO.update(id, user);
     }
     
-    public static User serchUser(int id){
+    public static User serchUser(int id) throws DAOException{
         return UserDAO.readOne(id);
     }
 
     
-    public static void DeleteUser(int id) {
+    public static void DeleteUser(int id) throws DAOException {
         UserDAO.delete(id);
     }
 }
