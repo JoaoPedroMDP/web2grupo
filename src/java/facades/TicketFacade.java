@@ -5,6 +5,9 @@ import java.util.List;
 import beans.Ticket;
 import daos.TicketDAO;
 import exceptions.DAOException;
+import exceptions.NotFound;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import utils.ConnectionFactory;
 import utils.Tabler;
 import utils.frontHelpers.table.Table;
@@ -24,5 +27,22 @@ public class TicketFacade {
     public void deleteTicket(String id) throws DAOException{
         TicketDAO tDao = new TicketDAO(new ConnectionFactory().getConnection());
         tDao.delete(id);
+    }
+
+    public Ticket getTicket(int id) throws DAOException{
+        TicketDAO tDao = new TicketDAO(new ConnectionFactory().getConnection());
+        Ticket ticket = null;
+        try {
+            ticket = tDao.get(id);
+        } catch (NotFound ex) {
+            Logger.getLogger(TicketFacade.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return ticket;
+    }
+    
+    public boolean updateTicket(Ticket ticketUpdate)throws DAOException{
+        TicketDAO tDao = new TicketDAO(new ConnectionFactory().getConnection());
+        tDao.update(ticketUpdate);
+        return true;
     }
 }

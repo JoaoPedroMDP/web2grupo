@@ -4,6 +4,7 @@
  */
 package servlets.ticket;
 
+import beans.Ticket;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -44,6 +45,10 @@ public class TicketServlet extends HttpServlet {
                     this.listTickets(request, response);
                 case "delete":
                     this.deleteTicket(request, response);
+                case "edit" :
+                    this.editTicket(request,response);
+                case "update" :
+                    this.updateTicket(request,response);
             }
         } catch (DAOException e) {
             System.out.println(e.getMessage());
@@ -57,6 +62,32 @@ public class TicketServlet extends HttpServlet {
         request.setAttribute("table_items", ticketTable);
         RequestDispatcher rd = request.getRequestDispatcher("/customer/callList.jsp");
         rd.forward(request, response);
+    }
+
+    private void editTicket(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, DAOException {
+        TicketFacade ticketFacade = new TicketFacade();
+        int i;
+        int id = Integer.parseInt((String) request.getParameter("id"));
+        Ticket ticket = ticketFacade.getTicket(id);  
+        request.setAttribute("ticket", ticket);
+        RequestDispatcher rd = request.getRequestDispatcher("/employee/callEdit.jsp");
+        rd.forward(request, response);
+    }
+
+    private void updateTicket(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, DAOException {
+       TicketFacade ticketFacade = new TicketFacade();
+       Ticket ticket = new Ticket();
+       ticket.setDescription(((String)request.getParameter("description")));
+       ticket.setId(Integer.parseInt((String)request.getParameter("id")));
+       ticket.setProduct_id(Integer.parseInt((String) request.getParameter("product_id")));
+       ticket.setSolution(((String)request.getParameter("solution")));
+       ticket.setState(((String)request.getParameter("state")));
+       ticket.setType_id(Integer.parseInt((String) request.getParameter("type_id")));
+       ticket.setUser_id(Integer.parseInt((String) request.getParameter("user_id")));
+       ticketFacade.updateTicket(ticket);
+       request.setAttribute("ticket", ticket);
+       RequestDispatcher rd = request.getRequestDispatcher("/employee/callEdit.jsp");
+       rd.forward(request, response);
     }
 
     private void deleteTicket(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, DAOException {

@@ -31,10 +31,11 @@ public class TestProduct implements Tests{
             product.setImage("Imagem");
             product.setWeight(Float.valueOf("45.3"));
             product.setCategory_id(1);
-
             dao.insert(product);
         }
     }
+    // 
+    // fazer as funções debaixo dele. 
 
     public void testGet() throws DAOException, NotFound {
         Product product = new ProductDAO(new ConnectionFactory().getConnection()).get(this.idToRetrieve);

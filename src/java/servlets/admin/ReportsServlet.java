@@ -4,11 +4,14 @@
  */
 package servlets.admin;
 
+import exceptions.DAOException;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URL;
 import java.sql.Connection;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -49,7 +52,12 @@ public class ReportsServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
 
         String report = (String) request.getParameter("report");
-        Connection conn = new ConnectionFactory().getConnection();
+        Connection conn = null;
+        try {
+            conn = new ConnectionFactory().getConnection();
+        } catch (DAOException ex) {
+            Logger.getLogger(ReportsServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
         String host = "http://" + request.getServerName() + ":" + request.getServerPort();
 
         String jasperReportName = this.availableReports.get(report);
@@ -62,10 +70,15 @@ public class ReportsServlet extends HttpServlet {
                 put("today", today);
             }};
 
-            byte[] bytes = JasperRunManager.runReportToPdf(
-                    jasperURL.openStream(),
-                    params,
-                    conn);
+            byte[] bytes = null;
+            try {
+                bytes = JasperRunManager.runReportToPdf(
+                        jasperURL.openStream(),
+                        params,
+                        conn);
+            } catch (JRException ex) {
+                Logger.getLogger(ReportsServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
             
             if (bytes != null) {
                 response.setContentType("application/pdf");
