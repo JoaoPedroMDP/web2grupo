@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import exceptions.DAOException;
 import facades.TicketFacade;
 import utils.frontHelpers.table.Table;
 
@@ -42,15 +43,17 @@ public class TicketServlet extends HttpServlet {
                 case "listTickets":
                     this.listTickets(request, response);
             }
+        } catch (DAOException e) {
+            System.out.println(e.getMessage());
         }
     }
 
-    private void listTickets(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void listTickets(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, DAOException {
         TicketFacade ticketFacade = new TicketFacade();
-        Table ticketTable = ticketFacade.listTickets();
+        // LoginBean loginBean = (LoginBean) request.getSession().getAttribute("loginBean");
+        Table ticketTable = ticketFacade.listTickets("employee"); // TODO: trocar para o role do usuario logado
         request.setAttribute("table_items", ticketTable);
         RequestDispatcher rd = request.getRequestDispatcher("/customer/callList.jsp");
-        System.out.println(request.getContextPath() + "/customer/callList.jsp");
         rd.forward(request, response);
     }
 

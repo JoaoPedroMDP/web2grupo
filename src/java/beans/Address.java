@@ -2,10 +2,10 @@ package beans;
 
 import java.util.LinkedHashMap;
 
-import interfaces.Bean;
 import interfaces.Mappable;
+import interfaces.Tableable;
 
-public class Address implements Mappable, Bean{
+public class Address extends BaseBean implements Mappable, Tableable{
     private Integer id;
     private String street;
     private String number;
@@ -14,7 +14,9 @@ public class Address implements Mappable, Bean{
     private Integer zip_code;
     private Integer city_id;
 
-    public Address() {}
+    public Address() {
+        this.servlet = "AddressServlet";
+    }
 
     public Address(Integer id, String street, String number, String complement, String district, Integer zip_code, Integer city_id) {
         this.id = id;
@@ -24,6 +26,7 @@ public class Address implements Mappable, Bean{
         this.district = district;
         this.zip_code = zip_code;
         this.city_id = city_id;
+        this.servlet = "AddressServlet";
     }
 
     public Address(String street, String number, String complement, String district, Integer zip_code, Integer city_id) {
@@ -33,6 +36,7 @@ public class Address implements Mappable, Bean{
         this.district = district;
         this.zip_code = zip_code;
         this.city_id = city_id;
+        this.servlet = "AddressServlet";
     }
 
     @Override
@@ -54,6 +58,23 @@ public class Address implements Mappable, Bean{
         data.put("district", this.getDistrict());
         data.put("zip_code", String.valueOf(this.getZip_code()));
         data.put("city_id", this.getCity_id());
+        return data;
+    }
+
+    @Override
+    public String[] getColumns() {
+        String[] columns = {"Rua", "Número", "Bairro", "CEP", "Ações"};
+        return columns;
+    }
+
+    @Override
+    public LinkedHashMap<String, LinkedHashMap<String, Object>> toTable() {
+        LinkedHashMap<String, LinkedHashMap<String, Object>> data = new LinkedHashMap<String, LinkedHashMap<String, Object>>();
+        data.put("Rua", this.wrapData(this.getStreet(), true));
+        data.put("Número", this.wrapData(this.getNumber(), false));
+        data.put("Bairro", this.wrapData(this.getDistrict(), false));
+        data.put("CEP", this.wrapData(this.getZip_code(), false));
+        data.put("Ações", this.wrapData(this.getActions(), false, true));
         return data;
     }
 

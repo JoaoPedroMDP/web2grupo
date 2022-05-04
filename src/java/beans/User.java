@@ -2,10 +2,10 @@ package beans;
 
 import java.util.LinkedHashMap;
 
-import interfaces.Bean;
 import interfaces.Mappable;
+import interfaces.Tableable;
 
-public class User implements Mappable, Bean{
+public class User extends BaseBean implements Mappable, Tableable{
     private Integer id;
     private String name;
     private String surname;
@@ -16,7 +16,9 @@ public class User implements Mappable, Bean{
     private String role;
     private Integer address_id;
 
-    public User() {}
+    public User() {
+        this.servlet = "UserServlet";
+    }
 
     public User(Integer id, String name, String surname, String email, String password, String cpf, String phone, String role, Integer address_id) {
         this.id = id;
@@ -28,6 +30,7 @@ public class User implements Mappable, Bean{
         this.phone = phone;
         this.role = role;
         this.address_id = address_id;
+        this.servlet = "UserServlet";
     }
 
     public User(String name, String surname, String email, String password, String cpf, String phone, String role, Integer address_id) {
@@ -39,6 +42,7 @@ public class User implements Mappable, Bean{
         this.phone = phone;
         this.role = role;
         this.address_id = address_id;
+        this.servlet = "UserServlet";
     }
 
     public void fromMap(LinkedHashMap<String, Object> data){
@@ -62,6 +66,25 @@ public class User implements Mappable, Bean{
         data.put("phone", this.getPhone());
         data.put("role", this.getRole());
         data.put("address_id", String.valueOf(getAddress_id()));
+        return data;
+    }
+
+    @Override
+    public String[] getColumns() {
+        String[] columns = {"Número", "Nome", "Sobrenome", "Email", "Telefone", "Cargo", "Ações"};
+        return columns;
+    }
+
+    @Override
+    public LinkedHashMap<String, LinkedHashMap<String, Object>> toTable() {
+        LinkedHashMap<String, LinkedHashMap<String, Object>> data = new LinkedHashMap<String, LinkedHashMap<String, Object>>();
+        data.put("Número", this.wrapData(this.getId(), true));
+        data.put("Nome", this.wrapData(this.getName(), false));
+        data.put("Sobrenome", this.wrapData(this.getSurname(), false));
+        data.put("Email", this.wrapData(this.getEmail(), false));
+        data.put("Telefone", this.wrapData(this.getPhone(), false));
+        data.put("Cargo", this.wrapData(this.getRole(), false));
+        data.put("Ações", this.wrapData(this.getActions(), false, true));
         return data;
     }
 

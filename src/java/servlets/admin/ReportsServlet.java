@@ -55,7 +55,6 @@ public class ReportsServlet extends HttpServlet {
         String jasperReportName = this.availableReports.get(report);
 
         if(jasperReportName != null){
-            System.out.println(jasperReportName);
             String jasper = request.getContextPath() + "/admin/reports/" + jasperReportName + ".jasper";
             String today = new java.text.SimpleDateFormat("dd/MM/yyyy").format(new java.util.Date());
             URL jasperURL = new URL(host + jasper);

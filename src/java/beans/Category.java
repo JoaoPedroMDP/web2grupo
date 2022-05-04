@@ -2,22 +2,26 @@ package beans;
 
 import java.util.LinkedHashMap;
 
-import interfaces.Bean;
 import interfaces.Mappable;
+import interfaces.Tableable;
 
-public class Category implements Mappable, Bean{
+public class Category extends BaseBean implements Mappable, Tableable{
     private Integer id;
     private String name;
 
-    public Category() {}
+    public Category() {
+        this.servlet = "CategoryServlet";
+    }
 
     public Category(Integer id, String name) {
         this.setId(id);
         this.setName(name);
+        this.servlet = "CategoryServlet";
     }
 
     public Category(String name) {
         this.setName(name);
+        this.servlet = "CategoryServlet";
     }
 
     @Override
@@ -31,6 +35,21 @@ public class Category implements Mappable, Bean{
         LinkedHashMap<String, Object> data = new LinkedHashMap<String, Object>();
         data.put("name", this.getName());
 
+        return data;
+    }
+
+    @Override
+    public String[] getColumns() {
+        String[] columns = {"Número", "Categoria", "Ações"};
+        return columns;
+    }
+
+    @Override
+    public LinkedHashMap<String, LinkedHashMap<String, Object>> toTable() {
+        LinkedHashMap<String, LinkedHashMap<String, Object>> data = new LinkedHashMap<String, LinkedHashMap<String, Object>>();
+        data.put("Número", this.wrapData(this.getId(), false));
+        data.put("Categoria", this.wrapData(this.getName(), true));
+        data.put("Ações", this.wrapData(this.getActions(), false, true));
         return data;
     }
 

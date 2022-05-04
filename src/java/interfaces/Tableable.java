@@ -4,5 +4,5 @@ import java.util.LinkedHashMap;
 
 public interface Tableable {
     public String[] getColumns();
-    public LinkedHashMap<String, Object> toTable();
+    public LinkedHashMap<String, LinkedHashMap<String, Object>> toTable();
 }

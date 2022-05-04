@@ -2,11 +2,10 @@ package beans;
 
 import java.util.LinkedHashMap;
 
-import interfaces.Bean;
 import interfaces.Mappable;
 import interfaces.Tableable;
 
-public class Ticket implements Mappable, Bean, Tableable{
+public class Ticket extends BaseBean implements Mappable, Tableable{
     private Integer id;
     private String description;
     private String state;
@@ -15,7 +14,9 @@ public class Ticket implements Mappable, Bean, Tableable{
     private Integer type_id;
     private Integer user_id;
     
-    public Ticket() {}
+    public Ticket() {
+        this.servlet = "TicketServlet";
+    }
 
     public Ticket(Integer id, String description, String state, String solution, Integer product_id, Integer type_id,
             Integer user_id) {
@@ -26,6 +27,7 @@ public class Ticket implements Mappable, Bean, Tableable{
         this.setProduct_id(product_id);
         this.setType_id(type_id);
         this.setUser_id(user_id);
+        this.servlet = "TicketServlet";
     }
 
     public Ticket(String description, String state, String solution, Integer product_id, Integer type_id,
@@ -36,6 +38,7 @@ public class Ticket implements Mappable, Bean, Tableable{
         this.setProduct_id(product_id);
         this.setType_id(type_id);
         this.setUser_id(user_id);
+        this.servlet = "TicketServlet";
     }  
 
     @Override
@@ -63,17 +66,22 @@ public class Ticket implements Mappable, Bean, Tableable{
 
     @Override
     public String[] getColumns() {
-        String[] columns = {"Número", "Descrição", "Estado", "Solução"};
+        String[] columns = {"Número", "Descrição", "Estado", "Solução", "Ações"};
         return columns;
     }
 
     @Override
-    public LinkedHashMap<String, Object> toTable() {
-        LinkedHashMap<String, Object> data = new LinkedHashMap<String, Object>();
-        data.put("Número", this.getId());
-        data.put("Descrição", this.getDescription());
-        data.put("Estado", this.getState().equals("open") ? "Aberto" : "Fechado");
-        data.put("Solução", this.getSolution());
+    public LinkedHashMap<String, LinkedHashMap<String, Object>> toTable() {
+        LinkedHashMap<String, LinkedHashMap<String, Object>> data = new LinkedHashMap<String, LinkedHashMap<String, Object>>();
+        data.put("Número", this.wrapData(this.getId(), true));
+        data.put("Descrição", this.wrapData(this.getDescription(), false));
+        data.put("Estado", this.wrapData(
+            this.getState().equals("open") ? "Aberto" : "Fechado",
+            false
+            )
+        );
+        data.put("Solução", this.wrapData(this.getSolution(), false));
+        data.put("Ações", this.wrapData(this.getActions(), false, true));
         return data;
     }
 
