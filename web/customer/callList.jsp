@@ -1,9 +1,4 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="utils.frontHelpers.table.Table"%>
-<%@page import="utils.frontHelpers.table.Row"%>
-<%@page import="utils.frontHelpers.table.Column"%>
-<%@page import="utils.frontHelpers.table.Cell"%>
-<%@page import="utils.frontHelpers.table.Action"%>
 <!DOCTYPE html>
 <html>
   <head>

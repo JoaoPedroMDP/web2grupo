@@ -32,7 +32,7 @@ public class User extends BaseBean implements Mappable, Tableable{
         this.address_id = address_id;
         this.servlet = "UserServlet";
     }
-
+    
     public User(String name, String surname, String email, String password, String cpf, String phone, String role, Integer address_id) {
         this.name = name;
         this.surname = surname;
@@ -44,6 +44,39 @@ public class User extends BaseBean implements Mappable, Tableable{
         this.address_id = address_id;
         this.servlet = "UserServlet";
     }
+
+    public User(int id, String name, String surname, String email, String password, String cpf, String phone, int address_id) {
+        this.id = id;
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+        this.password = password;
+        this.cpf = cpf;
+        this.phone = phone;
+        this.address_id = address_id;
+        this.servlet = "UserServlet";
+    }
+
+    public User(String name, String surname, String email, String password, String cpf, String phone) {
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+        this.password = password;
+        this.cpf = cpf;
+        this.phone = phone;
+        this.servlet = "UserServlet";
+    }
+
+    public User(String name, String surname, String email, String password, String cpf, String phone, Integer address_id) {
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+        this.password = password;
+        this.cpf = cpf;
+        this.phone = phone;
+        this.address_id = address_id;
+        this.servlet = "UserServlet";
+    }    
 
     public void fromMap(LinkedHashMap<String, Object> data){
         this.setName((String) data.get("name"));

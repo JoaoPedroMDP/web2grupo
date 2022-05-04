@@ -39,6 +39,25 @@ public class Address extends BaseBean implements Mappable, Tableable{
         this.servlet = "AddressServlet";
     }
 
+    public Address(int id, String street, String number, String complement, String district, Integer zip_code) {
+        this.id = id;
+        this.street = street;
+        this.number = number;
+        this.complement = complement;
+        this.district = district;
+        this.zip_code = zip_code;
+        this.servlet = "AddressServlet";
+    }
+    
+      public Address(String street, String number, String complement, String district, Integer zip_code) {
+        this.street = street;
+        this.number = number;
+        this.complement = complement;
+        this.district = district;
+        this.zip_code = zip_code;
+        this.servlet = "AddressServlet";
+    }
+
     @Override
     public void fromMap(LinkedHashMap<String, Object> data) {
         this.setStreet( (String) data.get("street"));

@@ -3,7 +3,7 @@
 
 <%@ include file="/WEB-INF/jspf/middlewares/mustBeLoggedMiddleware.jspf"%>
 
-<c:if test="${!sessionScope.loginBean.isAdmin}">
+<c:if test="${!sessionScope.login.role.equals("admin")}">
     <c:set var="message" value="Você precisa ser administrador para acessar esta página" scope="request"/>
     <c:set var="link" value="/home.jsp" scope="request"/>
     <jsp:forward page="/error.jsp" />
