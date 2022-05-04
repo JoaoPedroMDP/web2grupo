@@ -66,16 +66,20 @@ public class Tabler<T extends Tableable> {
         String[] levels = {"view", "edit", "delete"};
         Action[] allowedActions = new Action[levels.length];
 
-        for(int i = 0; i < 2; i++){
+        Integer permissionLevel = 0;
+        if (this.permissionLevel.equals("admin")){
+            permissionLevel = 2;
+        }else if(this.permissionLevel.equals("employee")){
+            permissionLevel = 1;
+        }else{
+            permissionLevel = 0;
+        }
+
+        for(int i = 0; i <= permissionLevel; i++){
             Action action = (Action) actions.get(levels[i]);
             if(action != null){
                 allowedActions[i] = action;
             }
-        }
-
-        if(this.permissionLevel.equals("admin")){
-            Integer lastAction = levels.length - 1;
-            allowedActions[lastAction] = (Action) actions.get(levels[lastAction]);
         }
 
          return allowedActions;   
