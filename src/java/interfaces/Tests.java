@@ -9,4 +9,5 @@ public interface Tests {
     void testIndex() throws DAOException ;
     void testDeletion() throws DAOException, NotFound ;
     void testUpdate() throws DAOException, NotFound ;
+    void testSelection() throws DAOException, NotFound ;
 }

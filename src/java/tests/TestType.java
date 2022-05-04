@@ -66,4 +66,12 @@ public class TestType implements Tests{
         TypeDAO dao = new TypeDAO(new ConnectionFactory().getConnection());
         dao.delete(idToDelete);
     }
+
+    public void testSelection() throws DAOException {
+        TypeDAO dao = new TypeDAO(new ConnectionFactory().getConnection());
+        LinkedHashMap<String, Object> filters = new LinkedHashMap<String, Object>();
+        filters.put("name", "Tipo Alterado");
+        List<Type> filtered = dao.select(filters);
+        System.out.println(filtered);
+    }
 }

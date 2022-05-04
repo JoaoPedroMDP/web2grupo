@@ -36,6 +36,7 @@ public class TestServlet extends HttpServlet {
             testSubject.testIndex();
             testSubject.testDeletion();
             testSubject.testUpdate();
+            testSubject.testSelection();
         }catch(Exception e){
             out.println("<p>Erro " + subject + ": " + e.getMessage() + "</p>");
             throw e;

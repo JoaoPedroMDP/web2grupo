@@ -73,4 +73,12 @@ public class TestUser implements Tests {
         UserDAO dao = new UserDAO(new ConnectionFactory().getConnection());
         dao.delete(idToDelete);
     }
+
+    public void testSelection() throws DAOException {
+        UserDAO dao = new UserDAO(new ConnectionFactory().getConnection());
+        LinkedHashMap<String, Object> filters = new LinkedHashMap<String, Object>();
+        filters.put("role", "customer");
+        List<User> filtered = dao.select(filters);
+        System.out.println(filtered);
+    }
 }

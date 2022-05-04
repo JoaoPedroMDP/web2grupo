@@ -71,4 +71,12 @@ public class TestTicket implements Tests{
         TicketDAO dao = new TicketDAO(new ConnectionFactory().getConnection());
         dao.delete(idToDelete);
     }
+
+    public void testSelection() throws DAOException {
+        TicketDAO dao = new TicketDAO(new ConnectionFactory().getConnection());
+        LinkedHashMap<String, Object> filters = new LinkedHashMap<String, Object>();
+        filters.put("state", "open");
+        List<Ticket> filtered = dao.select(filters);
+        System.out.println(filtered);
+    }
 }

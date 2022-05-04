@@ -146,6 +146,23 @@ public abstract class BaseDAO <T extends Mappable & Bean> extends QueryFactory i
         }
     }
 
+    public final List<T> select(LinkedHashMap<String, Object> filters) throws DAOException {
+        List<T> results = new ArrayList<>();
+        String query = mount_select(tableName, filters);
+        try (PreparedStatement stmt = con.prepareStatement(query)){
+            Integer nextReplacement = 1;
+            this.configureStatement(stmt, nextReplacement, filters);
+            ResultSet rs = stmt.executeQuery();
+            
+            while(rs.next()){
+                results.add(this.fillFromResultSet(rs));
+            }
+        }catch(SQLException e){
+            throw new DAOException("Erro ao selecionar " + this.subject + ": " + e.getMessage(), e);
+        }
+        return results;
+    }
+
     protected Integer configureStatement(PreparedStatement stmt, Integer nextReplacement, LinkedHashMap<String, Object> data) throws DAOException {
         Object keys[] = data.keySet().toArray();
         for( Integer i = 0; i < data.size(); i++){

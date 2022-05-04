@@ -67,4 +67,12 @@ public class TestCity implements Tests{
         CityDAO dao = new CityDAO(new ConnectionFactory().getConnection());
         dao.delete(idToDelete);
     }
+
+    public void testSelection() throws DAOException {
+        CityDAO dao = new CityDAO(new ConnectionFactory().getConnection());
+        LinkedHashMap<String, Object> filters = new LinkedHashMap<String, Object>();
+        filters.put("state_id", 1);
+        List<City> filtered = dao.select(filters);
+        System.out.println(filtered);
+    }
 }
