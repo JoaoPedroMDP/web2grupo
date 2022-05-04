@@ -1,0 +1,14 @@
+<%@ page pageEncoding="UTF-8" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page import="utils.frontHelpers.ClickableItem"%>
+
+<%
+    ClickableItem lateral_items[] = {
+        new ClickableItem("Usuários", "userList.jsp"),
+        new ClickableItem("Produtos", "products.jsp"),
+        new ClickableItem("Atendimentos", "tickets.jsp")
+    };
+
+    pageContext.setAttribute("lateral_items", lateral_items);
+%>
+<%@ include file="/WEB-INF/jspf/lateralMenu.jspf"%>

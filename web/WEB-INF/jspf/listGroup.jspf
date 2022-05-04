@@ -1,0 +1,11 @@
+<%@ page pageEncoding="UTF-8" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<div class="list-group">
+    <c:forEach var="item" items="${list_group_items}">
+        <a href="${pageContext.request.contextPath}${item.getUrl()}" class="list-group-item list-group-item-action text-center">
+            ${item.getLabel()}
+        </a>
+    </c:forEach>
+    ${pageContext.removeAttribute("list_group_items")}
+</div>
