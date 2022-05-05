@@ -1,5 +1,3 @@
-<%-- Document : report Created on : Mar 3, 2022, 8:44:11 PM Author : joao --%>
-
 <%-- <%@include file="/WEB-INF/jspf/middlewares/mustBeAdminMiddleware.jspf" %> --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -9,7 +7,7 @@
 <html>
   <head>
     <%@ include file="/WEB-INF/jspf/pageHead.jspf" %>
-    <title>Relatórios</title>
+    <title>Relatório de funcionários</title>
     <script src="../js/admin/report.js"></script>
     <link href="../css/global.css" rel="stylesheet" />
     <link href="../css/admin/report.css" rel="stylesheet" />
@@ -28,17 +26,10 @@
         </div>
         <div class="container-fluid d-flex justify-content-center">
           <div class="report-box roundy d-flex flex-column">
-            <h3 class="box-title">Selecione um relatório</h3>
-            <%
-              ClickableItem list_group_items[] = {
-                  new ClickableItem("Atendimentos", "/admin/reports/ticketReport.jsp"),
-                  new ClickableItem("Funcionários", "/admin/reports/employeeReport.jsp"),
-                  new ClickableItem("Produtos", "/admin/reports/productsReport.jsp"),
-              };
-
-              pageContext.setAttribute("list_group_items", list_group_items);
-            %>
-            <%@ include file="/WEB-INF/jspf/listGroup.jspf"%>
+            <div class="d-flex flex-column align-items-center">
+                <h2>Funcionários</h2>
+                <a href="${pageContext.request.contextPath}/ReportsServlet?report=employee"><button class="btn btn-primary">Gerar relatório</button></a>
+            </div>
           </div>
         </div>
       </div>
