@@ -67,7 +67,7 @@ public abstract class BaseDAO <T extends Mappable & Bean> extends QueryFactory i
 
         return results;
     }
-
+    
     public void insert(T t) throws DAOException {
         String query = mount_insert(tableName, columns);
 
