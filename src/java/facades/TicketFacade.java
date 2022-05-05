@@ -24,7 +24,7 @@ public class TicketFacade {
             List<Ticket> tickets = tDao.select(filters);
             Tabler<Ticket> ticketTable = new Tabler<Ticket>(tickets.get(0).getColumns(), role);
             ticketTable.wrapData(tickets.toArray(new Ticket[tickets.size()]));
-            
+
             return ticketTable.tablefy();
         }else{
             List<Ticket> tickets = tDao.getAll();
@@ -33,7 +33,6 @@ public class TicketFacade {
             
             return ticketTable.tablefy();
         }
-
     }
 
     public void deleteTicket(String id) throws DAOException{
@@ -51,7 +50,7 @@ public class TicketFacade {
         }
         return ticket;
     }
-    
+
     public boolean updateTicket(Ticket ticketUpdate)throws DAOException{
         TicketDAO tDao = new TicketDAO(new ConnectionFactory().getConnection());
         tDao.update(ticketUpdate);
