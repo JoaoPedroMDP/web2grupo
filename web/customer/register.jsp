@@ -25,6 +25,43 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
         <script src="js/scripts.js"></script>
+        <script src="https://code.jquery.com/jquery-1.9.1.js"></script>
+        <script type="text/javascript" >
+            $(document).ready(function () {
+                $("#state").change(function () {
+                    $("#city").prop("disabled", false);
+                    getCidades();
+                });
+                $('.cpf').mask('000.000.000-00', {reverse: true});
+                $('.zip_code').mask('00000-000', {reverse: true});
+
+            });
+
+            function getCidades() {
+                var estadoId = $("#state").val();
+                var url = "AJAXServlet";
+                $.ajax({
+                    url: url,
+                    // URL da sua Servlet
+                    data: {
+                        estadoId: estadoId
+                    },
+                    // ParÃĒmetro passado para a Servlet
+                    dataType: 'json',
+                    success: function (data) {
+                        //             Se sucesso, limpa e preenche a combo de cidade  
+                        $("#city").empty();
+                        $.each(data, function (i, obj) {
+                            $("#city").append('<option value=' + obj.name + '>' + obj.name + '</option>');
+                        });
+                    },
+                    error: function (request, textStatus, errorThrown) {
+                        alert(request.status + ', Error: ' + request.statusText);
+                    }
+                });
+            }
+        </script>
+
     </head>
     <body>
         <!-- Page content (Conteúdo da página)-->
@@ -39,8 +76,13 @@
                             <div class="col-22 col-md-18 col-lg-15 col-xl-14">
                                 <div class="card" style="border-radius: 15px;">
                                     <div class="card-body p-5">
-                                        <h2 class="text-uppercase text-center mb-5">Create an account</h2>
-
+                                       
+                                        <c:if test="${requestScope.action == 'update'}">
+                                            <h2 class="text-uppercase text-center mb-5">Update account</h2>
+                                        </c:if> 
+                                        <c:if test="${requestScope.action == 'new'}">
+                                            <h2 class="text-uppercase text-center mb-5">Create an account</h2>
+                                        </c:if>     
                                         <form action="/web2grupo/UserServlet?id=12&action=${requestScope.action}" name = "cadastroCliente" method="POST">
 
                                             <div class="row mb-4">
@@ -72,7 +114,7 @@
                                                 <c:if test="${requestScope.action == 'new'}">
                                                     <div class="col">
                                                         <div class="form-outline">
-                                                            <input type="text" id="form6Example1"name="cpf" value="<c:if test="${requestScope.action == 'update'}"><c:out value="${user.cpf}"/></c:if>"/>
+                                                            <input type="text" id="form6Example1"name="cpf"   maxlength="11"type="text" class="form-control cpf" placeholder="Ex.: 000.000.000-00"  value="<c:if test="${requestScope.action == 'update'}"><c:out value="${user.cpf}"/></c:if>"/>
                                                                 <label class="form-label" for="form6Example1">CPF</label>
                                                             </div>
                                                         </div>  
@@ -121,24 +163,34 @@
                                                     </div>
                                                     <div class="col">
                                                         <div class="form-outline">
-                                                            <input type="text" id="form6Example2" name="zip_code" value="<c:if test="${requestScope.action == 'update'}"><c:out value="${address.zip_code}"/></c:if>" />
+                                                            <input type="text" id="form6Example2" name="zip_code" maxlength="8" type="text" class="form-control cep" placeholder="Ex.: 00000-000" value="<c:if test="${requestScope.action == 'update'}"><c:out value="${address.zip_code}"/></c:if>" />
                                                             <label class="form-label" for="form6Example2">zip code</label>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="row mb-4">
                                                     <div class="col">
-                                                        <div class="form-outline">
-                                                            <input type="text" id="form6Example1"  name="city"/>
-                                                            <label class="form-label" for="form6Example1">City</label>
-                                                        </div>
-                                                    </div>  
-                                                    <div class="col">
-                                                        <div class="form-outline">
-                                                            <input type="text" id="form6Example2" name="state"/>
-                                                            <label class="form-label" for="form6Example2">State</label>
-                                                        </div>
-                                                    </div>
+                                                        <select name="state" id="state" type="text" class="form-control" form="form" required>
+                                                        <c:choose> 
+                                                            <c:when test="${requestScope.action == 'update'}">
+                                                                <option selected> <c:out value="${state.name}"/></option>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <option  selected>Selecionar Estado</option>
+                                                            </c:otherwise>
+                                                        </c:choose>
+                                                        <c:forEach items="${states}" var="state">
+                                                            <option value="${state.id}"><c:out value="${state.name}"/></option>
+                                                        </c:forEach>
+                                                    </select>
+                                                    <label for="state" class="form-label">State</label> 
+                                                </div>
+                                                <div class="col">
+                                                    <select name="city" id="city" type="text" class="form-control" form="form" required <c:if test="${requestScope.action == 'new'}"> disabled </c:if>>
+                                                        <option selected value="<c:if test="${requestScope.action == 'update'}">${city.name}</c:if>"><c:choose> <c:when test="${requestScope.action == 'update'}"><c:out value="${changes.cidade}"/></c:when> <c:otherwise>Selecionar Cidade</c:otherwise></c:choose></option>
+                                                        </select>
+                                                        <label for="city" class="form-label">Cidade</label>
+                                                    </div> 
                                                 </div>
                                             <c:if test="${requestScope.action == 'new'}">
                                                 <div class="d-flex justify-content-center">

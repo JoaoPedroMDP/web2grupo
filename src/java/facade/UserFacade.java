@@ -4,9 +4,10 @@
  */
 package facade;
 
-import Beans.User;
-import DAOs.UserDAO;
-import Exceptions.DAOException;
+import beans.User;
+import daos.UserDAO;
+import exceptions.DAOException;
+import daos.UserDAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -31,6 +32,10 @@ public class UserFacade {
     
     public static User serchUser(int id) throws DAOException{
         return UserDAO.readOne(id);
+    }
+    
+    public static User serchUserByCpf(String cpf) throws DAOException{
+        return UserDAO.readByCpf(cpf);
     }
 
     

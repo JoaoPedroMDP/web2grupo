@@ -4,9 +4,9 @@
  */
 package facade;
 
-import Beans.Address;
-import DAOs.AddressDAO;
-import Exceptions.DAOException;
+import beans.Address;
+import daos.AddressDAO;
+import exceptions.DAOException;
 
 /**
  *

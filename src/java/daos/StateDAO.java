@@ -17,8 +17,8 @@ public class StateDAO extends BaseDAO<State>{
         }
         
         this.con = con;
-        this.tableName = "states";
-        this.subject = "estado";
+        this.tableName = "tb_estado";
+        this.subject = "nome_estado";
         this.columns = new ArrayList<String>(){{
             add("name");
         }};
@@ -33,12 +33,12 @@ public class StateDAO extends BaseDAO<State>{
     protected State fillFromResultSet(ResultSet rs)
      throws SQLException {
         State state = new State();
-        Integer id = rs.getInt("id");
+        Integer id = rs.getInt("id_estado");
         if(id != 0){
             state.setId(id);
         }
 
-        state.setName(rs.getString("name"));
+        state.setName(rs.getString("nome_estado"));
 
         return state;
     }

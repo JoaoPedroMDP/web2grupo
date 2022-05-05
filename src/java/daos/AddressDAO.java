@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import beans.Address;
 import beans.User;
 import exceptions.DAOException;
-import Utils.ConnectionFactory;
+import utils.ConnectionFactory;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 

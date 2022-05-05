@@ -1,8 +1,9 @@
+
 <%-- Document : profile Created on : Mar 3, 2022, 8:41:51 PM Author : Ludimilla
 
 --%> 
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html>
@@ -14,20 +15,23 @@
             />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Simple Sidebar - Start Bootstrap Template</title>
+        <title>Perfil - Usuário</title>
 
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
+        <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/icon?family=Material+Icons"
+            />
 
         <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="./../css/styles.css" rel="stylesheet" />
-        <link href="./../css/profile.css" rel="stylesheet" />
+        <link href="${pageContext.request.contextPath}" rel="stylesheet" type="text/css" />
+        <link href="${pageContext.request.contextPath}" rel="stylesheet" type="text/css" />
 
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
-        <script src="js/scripts.js"></script>
+        <script src="${pageContext.request.contextPath}"></script>
     </head>
     <body>
         <div class="d-flex" id="wrapper">
@@ -86,13 +90,11 @@
                         </button>
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#!">${user.name}</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#!"
-                                       ><span class="material-icons">logout</span></a>
-                                </li>
+                                <c:if test="${empty sessionScope.login}" >
+                                    <c:redirect url="http://localhost:8080/beibe/login.html"></c:redirect>
+                                </c:if>
+                                <li class="nav-item"><a class="nav-link" href="../customer/profile.jsp">${sessionScope.login.name}</a></li>
+                                <li class="nav-item"><a class="nav-link" href="LogoutServlet" role="button"><span class="material-icons">logout</span></a></li>
                             </ul>
                         </div>
                     </div>
@@ -206,13 +208,13 @@
                                                         </div>
                                                     </div>
                                                     <div>
-<!--                                                        <button
-                                                            class="edit_button"
-                                                            type="submit"
-                                                            onclick="window.location = 'register.jsp'"
-                                                            >
-                                                            Edit profile
-                                                        </button>-->
+                                                        <!--                                                        <button
+                                                                                                                    class="edit_button"
+                                                                                                                    type="submit"
+                                                                                                                    onclick="window.location = 'register.jsp'"
+                                                                                                                    >
+                                                                                                                    Edit profile
+                                                                                                                </button>-->
 
                                                         <a class="edit_button" type="submit" href="${pageContext.request.contextPath}/UserServlet?action=formUpdate&id=12">Edit Profile</a>
                                                         </a>
