@@ -2,10 +2,10 @@ package beans;
 
 import java.util.LinkedHashMap;
 
+import interfaces.Bean;
 import interfaces.Mappable;
-import interfaces.Tableable;
 
-public class User extends BaseBean implements Mappable, Tableable{
+public class User implements Mappable, Bean{
     private Integer id;
     private String name;
     private String surname;
@@ -16,9 +16,7 @@ public class User extends BaseBean implements Mappable, Tableable{
     private String role;
     private Integer address_id;
 
-    public User() {
-        this.servlet = "UserServlet";
-    }
+    public User() {}
 
     public User(Integer id, String name, String surname, String email, String password, String cpf, String phone, String role, Integer address_id) {
         this.id = id;
@@ -30,7 +28,6 @@ public class User extends BaseBean implements Mappable, Tableable{
         this.phone = phone;
         this.role = role;
         this.address_id = address_id;
-        this.servlet = "UserServlet";
     }
 
     public User(String name, String surname, String email, String password, String cpf, String phone, String role, Integer address_id) {
@@ -42,7 +39,43 @@ public class User extends BaseBean implements Mappable, Tableable{
         this.phone = phone;
         this.role = role;
         this.address_id = address_id;
-        this.servlet = "UserServlet";
+    }
+    
+     public User(int id, String name, String surname, String email, String password, String cpf, String phone, int address_id) {
+        this.id = id;
+         this.name = name;
+        this.surname = surname;
+        this.email = email;
+        this.password = password;
+        this.cpf = cpf;
+        this.phone = phone;
+        this.address_id = address_id;
+    }
+     
+       public User(String name, String surname, String email, String password, String cpf, String phone) {
+         this.name = name;
+        this.surname = surname;
+        this.email = email;
+        this.password = password;
+        this.cpf = cpf;
+        this.phone = phone;
+    }
+       
+       public User(String name, String surname, String password, String phone) {
+         this.name = name;
+        this.surname = surname;
+        this.password = password;
+        this.phone = phone;
+    }
+       
+       public User(String name, String surname, String email, String password, String cpf, String phone, Integer address_id) {
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+        this.password = password;
+        this.cpf = cpf;
+        this.phone = phone;
+        this.address_id = address_id;
     }
 
     public void fromMap(LinkedHashMap<String, Object> data){
@@ -66,25 +99,6 @@ public class User extends BaseBean implements Mappable, Tableable{
         data.put("phone", this.getPhone());
         data.put("role", this.getRole());
         data.put("address_id", String.valueOf(getAddress_id()));
-        return data;
-    }
-
-    @Override
-    public String[] getColumns() {
-        String[] columns = {"Número", "Nome", "Sobrenome", "Email", "Telefone", "Cargo", "Ações"};
-        return columns;
-    }
-
-    @Override
-    public LinkedHashMap<String, LinkedHashMap<String, Object>> toTable() {
-        LinkedHashMap<String, LinkedHashMap<String, Object>> data = new LinkedHashMap<String, LinkedHashMap<String, Object>>();
-        data.put("Número", this.wrapData(this.getId(), true));
-        data.put("Nome", this.wrapData(this.getName(), false));
-        data.put("Sobrenome", this.wrapData(this.getSurname(), false));
-        data.put("Email", this.wrapData(this.getEmail(), false));
-        data.put("Telefone", this.wrapData(this.getPhone(), false));
-        data.put("Cargo", this.wrapData(this.getRole(), false));
-        data.put("Ações", this.wrapData(this.getActions(), false, true));
         return data;
     }
 
@@ -153,6 +167,7 @@ public class User extends BaseBean implements Mappable, Tableable{
     }
 
     public Integer getAddress_id() {
+        System.out.println("Inside beans: "+ address_id);
         return address_id;
     }
 
