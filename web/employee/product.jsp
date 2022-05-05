@@ -36,12 +36,12 @@
             <!-- Sidebar-->
             <%
                 ClickableItem lateral_items[] = {
-                    new ClickableItem("Perfil","profile.jsp"),
-                    new ClickableItem("Atendimentos","TicketServlet?action=listTickets"),
-                    new ClickableItem("Categorias","CategoryServlet?action=list"),
-                    new ClickableItem("Produtos","/ProductsServlet?action=list")         
+                    new ClickableItem("Perfil", "profile.jsp"),
+                    new ClickableItem("Atendimentos", "TicketServlet?action=listTickets"),
+                    new ClickableItem("Categorias", "CategoryServlet?action=list"),
+                    new ClickableItem("Produtos", "/ProductsServlet?action=list")
                 };
-                pageContext.setAttribute("lateral_items",lateral_items);
+                pageContext.setAttribute("lateral_items", lateral_items);
             %>
             <%@ include file="/WEB-INF/jspf/lateralMenu.jspf" %>
 
@@ -96,10 +96,13 @@
 
                                 </form>
 
-                                <div class="col-12">
-                                    <c:out value="${msg}"/>
-
-                                </div>
+                                <c:if test="${!empty msg}">
+                        <div class="mt-3" style="display:flex; justify-content: center; flex-direction: column; align-items: center">
+                            <p>
+                                <c:out value="${requestScope.msg}"/>
+                            </p>
+                        </div>
+                    </c:if>
 
                             </div>
                         </div>

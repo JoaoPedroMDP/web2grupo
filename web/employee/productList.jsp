@@ -64,6 +64,13 @@
                             <input class="btn btn-dark" type="submit" value="Voltar">
                         </form>
                     </div>
+                    <c:if test="${!empty msg}">
+                        <div class="mt-3" style="display:flex; justify-content: center; flex-direction: column; align-items: center">
+                            <p>
+                                <c:out value="${requestScope.msg}"/>
+                            </p>
+                        </div>
+                    </c:if>
                 </div>
             </div>
         </div>
