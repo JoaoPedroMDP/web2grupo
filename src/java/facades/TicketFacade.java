@@ -18,7 +18,7 @@ public class TicketFacade {
 
     public Table listTickets(String role) throws DAOException{
         TicketDAO tDao = new TicketDAO(new ConnectionFactory().getConnection());
-        if(role.equals("admin")){
+        if(role.equals("admin") || role.equals("employee")){
             LinkedHashMap<String, Object> filters = new LinkedHashMap<String, Object>();
             filters.put("state", "open");
             List<Ticket> tickets = tDao.select(filters);
