@@ -4,9 +4,9 @@
 
 <%
     ClickableItem lateral_items[] = {
-        new ClickableItem("Usuários", "userList.jsp"),
-        new ClickableItem("Produtos", "products.jsp"),
-        new ClickableItem("Atendimentos", "tickets.jsp")
+        new ClickableItem("Atendimentos", "/TicketServlet?action=listTickets"),
+        new ClickableItem("Produtos", "/admin/products.jsp"),
+        new ClickableItem("Atendimentos", "/admin/tickets.jsp")
     };
 
     pageContext.setAttribute("lateral_items", lateral_items);

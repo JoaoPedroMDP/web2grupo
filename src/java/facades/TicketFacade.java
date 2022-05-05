@@ -1,5 +1,6 @@
 package facades;
 
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import beans.Ticket;
@@ -17,11 +18,22 @@ public class TicketFacade {
 
     public Table listTickets(String role) throws DAOException{
         TicketDAO tDao = new TicketDAO(new ConnectionFactory().getConnection());
-        List<Ticket> tickets = tDao.getAll();
-        Tabler<Ticket> ticketTable = new Tabler<Ticket>(tickets.get(0).getColumns(), role);
-        ticketTable.wrapData(tickets.toArray(new Ticket[tickets.size()]));
-        
-        return ticketTable.tablefy();
+        if(role.equals("admin")){
+            LinkedHashMap<String, Object> filters = new LinkedHashMap<String, Object>();
+            filters.put("state", "open");
+            List<Ticket> tickets = tDao.select(filters);
+            Tabler<Ticket> ticketTable = new Tabler<Ticket>(tickets.get(0).getColumns(), role);
+            ticketTable.wrapData(tickets.toArray(new Ticket[tickets.size()]));
+            
+            return ticketTable.tablefy();
+        }else{
+            List<Ticket> tickets = tDao.getAll();
+            Tabler<Ticket> ticketTable = new Tabler<Ticket>(tickets.get(0).getColumns(), role);
+            ticketTable.wrapData(tickets.toArray(new Ticket[tickets.size()]));
+            
+            return ticketTable.tablefy();
+        }
+
     }
 
     public void deleteTicket(String id) throws DAOException{
