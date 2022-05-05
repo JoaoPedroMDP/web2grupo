@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URL;
 import java.sql.Connection;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -32,7 +34,7 @@ public class ReportsServlet extends HttpServlet {
 
     public void init(){
         this.availableReports = new HashMap<String, String>(){{
-            put("users", "Users");
+            put("employee", "Employee");
             put("tickets", "Tickets");
             put("products", "Products");
         }};
@@ -70,8 +72,24 @@ public class ReportsServlet extends HttpServlet {
                 put("today", today);
             }};
 
+            if(report.equals("tickets")){
+                System.out.println("OI"+request.getParameter("from_date"));
+                System.out.println("OI"+request.getParameter("to_date"));
+
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
+                Date fromDate = sdf.parse(request.getParameter("from_date"));
+                Date toDate = sdf.parse(request.getParameter("to_date"));
+
+                java.sql.Timestamp from = new java.sql.Timestamp(fromDate.getTime());
+                java.sql.Timestamp to = new java.sql.Timestamp(toDate.getTime());
+
+                params.put("from_date", from);
+                params.put("to_date", to);
+            }
+
             byte[] bytes = null;
             try {
+                // System.out.println(params.toString());
                 bytes = JasperRunManager.runReportToPdf(
                         jasperURL.openStream(),
                         params,
@@ -79,7 +97,7 @@ public class ReportsServlet extends HttpServlet {
             } catch (JRException ex) {
                 Logger.getLogger(ReportsServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
+
             if (bytes != null) {
                 response.setContentType("application/pdf");
                 OutputStream ops = response.getOutputStream();
